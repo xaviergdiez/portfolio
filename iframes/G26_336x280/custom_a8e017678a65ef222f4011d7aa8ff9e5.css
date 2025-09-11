@@ -1,0 +1,1 @@
+.cta{height:32px;line-height:32px;font-size:13px}.disclaimer--default{min-height:7px}.ctaDisclaimerBox{bottom:23px;gap:8px}.ctaDisclaimerBox:has(>.cta+.disclaimer--default){bottom:8px}

@@ -1,0 +1,270 @@
+{
+  "banners": [
+    {
+      "name": "F65",
+      "width": 300,
+      "height": 600,
+      "version": null,
+      "folder": "F65_300x600",
+      "path": "iframes/F65_300x600/index.html"
+    },
+    {
+      "name": "F65",
+      "width": 320,
+      "height": 100,
+      "version": null,
+      "folder": "F65_320x100",
+      "path": "iframes/F65_320x100/index.html"
+    },
+    {
+      "name": "F66",
+      "width": 300,
+      "height": 600,
+      "version": null,
+      "folder": "F66_300x600",
+      "path": "iframes/F66_300x600/index.html"
+    },
+    {
+      "name": "F66",
+      "width": 800,
+      "height": 250,
+      "version": null,
+      "folder": "F66_800x250",
+      "path": "iframes/F66_800x250/index.html"
+    },
+    {
+      "name": "F67",
+      "width": 300,
+      "height": 250,
+      "version": null,
+      "folder": "F67_300x250",
+      "path": "iframes/F67_300x250/index.html"
+    },
+    {
+      "name": "F67",
+      "width": 320,
+      "height": 480,
+      "version": null,
+      "folder": "F67_320x480",
+      "path": "iframes/F67_320x480/index.html"
+    },
+    {
+      "name": "F67",
+      "width": 970,
+      "height": 250,
+      "version": null,
+      "folder": "F67_970x250",
+      "path": "iframes/F67_970x250/index.html"
+    },
+    {
+      "name": "F70",
+      "width": 120,
+      "height": 600,
+      "version": null,
+      "folder": "F70_120x600",
+      "path": "iframes/F70_120x600/index.html"
+    },
+    {
+      "name": "F70",
+      "width": 160,
+      "height": 600,
+      "version": null,
+      "folder": "F70_160x600",
+      "path": "iframes/F70_160x600/index.html"
+    },
+    {
+      "name": "F70",
+      "width": 300,
+      "height": 250,
+      "version": null,
+      "folder": "F70_300x250",
+      "path": "iframes/F70_300x250/index.html"
+    },
+    {
+      "name": "F70",
+      "width": 300,
+      "height": 600,
+      "version": null,
+      "folder": "F70_300x600",
+      "path": "iframes/F70_300x600/index.html"
+    },
+    {
+      "name": "F70",
+      "width": 320,
+      "height": 50,
+      "version": null,
+      "folder": "F70_320x50",
+      "path": "iframes/F70_320x50/index.html"
+    },
+    {
+      "name": "F70",
+      "width": 728,
+      "height": 90,
+      "version": null,
+      "folder": "F70_728x90",
+      "path": "iframes/F70_728x90/index.html"
+    },
+    {
+      "name": "F70",
+      "width": 970,
+      "height": 250,
+      "version": null,
+      "folder": "F70_970x250",
+      "path": "iframes/F70_970x250/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 160,
+      "height": 600,
+      "version": null,
+      "folder": "G26_160x600",
+      "path": "iframes/G26_160x600/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 250,
+      "version": null,
+      "folder": "G26_300x250",
+      "path": "iframes/G26_300x250/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 600,
+      "version": null,
+      "folder": "G26_300x600",
+      "path": "iframes/G26_300x600/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 600,
+      "version": "V2",
+      "folder": "G26_300x600_V2",
+      "path": "iframes/G26_300x600_V2/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 600,
+      "version": "V3",
+      "folder": "G26_300x600_V3",
+      "path": "iframes/G26_300x600_V3/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 600,
+      "version": "V4",
+      "folder": "G26_300x600_V4",
+      "path": "iframes/G26_300x600_V4/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 600,
+      "version": "V5",
+      "folder": "G26_300x600_V5",
+      "path": "iframes/G26_300x600_V5/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 600,
+      "version": "V6",
+      "folder": "G26_300x600_V6",
+      "path": "iframes/G26_300x600_V6/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 300,
+      "height": 600,
+      "version": "V7",
+      "folder": "G26_300x600_V7",
+      "path": "iframes/G26_300x600_V7/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 320,
+      "height": 50,
+      "version": null,
+      "folder": "G26_320x50",
+      "path": "iframes/G26_320x50/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 336,
+      "height": 280,
+      "version": null,
+      "folder": "G26_336x280",
+      "path": "iframes/G26_336x280/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 728,
+      "height": 90,
+      "version": null,
+      "folder": "G26_728x90",
+      "path": "iframes/G26_728x90/index.html"
+    },
+    {
+      "name": "G26",
+      "width": 970,
+      "height": 250,
+      "version": null,
+      "folder": "G26_970x250",
+      "path": "iframes/G26_970x250/index.html"
+    },
+    {
+      "name": "J01",
+      "width": 300,
+      "height": 250,
+      "version": null,
+      "folder": "J01_300x250",
+      "path": "iframes/J01_300x250/index.html"
+    },
+    {
+      "name": "J01",
+      "width": 320,
+      "height": 100,
+      "version": null,
+      "folder": "J01_320x100",
+      "path": "iframes/J01_320x100/index.html"
+    },
+    {
+      "name": "J01",
+      "width": 970,
+      "height": 250,
+      "version": null,
+      "folder": "J01_970x250",
+      "path": "iframes/J01_970x250/index.html"
+    },
+    {
+      "name": "J05",
+      "width": 320,
+      "height": 320,
+      "version": null,
+      "folder": "J05_320x320",
+      "path": "iframes/J05_320x320/index.html"
+    },
+    {
+      "name": "J05",
+      "width": 728,
+      "height": 90,
+      "version": null,
+      "folder": "J05_728x90",
+      "path": "iframes/J05_728x90/index.html"
+    }
+  ],
+  "metadata": {
+    "totalBanners": 39,
+    "campaigns": ["F65", "F66", "F67", "F70", "G26", "J01", "J05"],
+    "dimensions": [
+      "120x600", "160x600", "300x250", "300x600", "320x50", "320x100", 
+      "320x320", "320x480", "336x280", "728x90", "800x250", "970x250"
+    ],
+    "versioned": ["G26_300x600"],
+    "generated": "2025-09-11"
+  }
+}
