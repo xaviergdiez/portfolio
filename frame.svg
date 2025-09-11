@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 858 506">
+  <path id="corner-top" class="corner" d="M812.07,2.81h42.96v42.07l-42.96-42.07Z" fill="transparent" stroke="#3acffc" stroke-miterlimit="10" stroke-width="5"/>
+  <path id="frame" class="frame-stroke" d="M855.04,66.75v436.44H149.52L2.96,356.63V2.81h788.14l63.94,63.94Z" fill="transparent" stroke="#3acffc" stroke-miterlimit="10" stroke-width="5"/>
+  <path id="corner-bottom" class="corner" d="M2.96,408.9l94.29,94.29H2.96v-94.29Z" fill="transparent" stroke="#3acffc" stroke-miterlimit="10" stroke-width="5"/>
+</svg>
