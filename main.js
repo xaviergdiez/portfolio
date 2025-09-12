@@ -347,12 +347,12 @@ function layoutMasonryGrid() {
   grid.style.position = 'relative';
   
   // Row-based masonry layout inspired by reference image
-  const gap = 12; // Smaller gap for tighter layout
+  const gap = 8; // Smaller gap for tighter layout
   const gridRect = grid.getBoundingClientRect();
   
   // Create a 2D array to track occupied spaces
   const gridCells = [];
-  const cellSize = 50; // Size of each grid cell for collision detection
+  const cellSize = 40; // Size of each grid cell for collision detection
   const gridRows = Math.ceil(2000 / cellSize); // Enough rows for all banners
   const gridCols = Math.ceil((gridRect.width * 2) / cellSize); // Extra width for rotation
   

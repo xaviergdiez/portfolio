@@ -180,7 +180,7 @@ body {
 }
 
 .masonry-grid {
-    transform: rotate(-30deg);
+    transform: rotate(-30deg) translate(5%, 5%);
     position: relative;
     min-width: 2000px;
     min-height: 2000px;
