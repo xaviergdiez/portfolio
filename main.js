@@ -347,7 +347,7 @@ function layoutMasonryGrid() {
   grid.style.position = 'relative';
   
   // Row-based masonry layout inspired by reference image
-  const gap = 16; // Smaller gap for tighter layout
+  const gap = 12; // Smaller gap for tighter layout
   const gridRect = grid.getBoundingClientRect();
   
   // Create a 2D array to track occupied spaces
