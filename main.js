@@ -186,264 +186,317 @@ function updateWindowSize() {
       });
       gsap.to('.skills-footer', { duration: 0.5, autoAlpha: 1, ease: 'power2.out', delay: skillLevels.length * 0.1 + 0.5, repeat: -1, yoyo: true })
     });
+    
+    // Initialize masonry grid after hero animation completes
+    setTimeout(() => {
+      loadMasonryGrid();
+    }, 3000);
   }
   
 }
 
 // Masonry Grid for Case Study Banners
+let iframeReloadInterval = null;
+let isCaseStudyVisible = false;
+
 async function loadMasonryGrid() {
   try {
     const response = await fetch('./manifest.json');
     const data = await response.json();
     const banners = data.banners;
     
-    // Shuffle and separate banners for variety
-    const arrangedBanners = arrangeBannersForVariety(banners);
+    // Sort banners deterministically to avoid shuffling - NO RANDOMIZATION
+    const sortedBanners = banners.sort((a, b) => {
+      // Sort by area first (largest first), then by name for consistency
+      const areaA = a.width * a.height;
+      const areaB = b.width * b.height;
+      if (areaA !== areaB) return areaB - areaA;
+      return a.name.localeCompare(b.name);
+    });
     
     const masonryGrid = document.getElementById('masonry-grid');
     masonryGrid.innerHTML = ''; // Clear existing content
     
-    arrangedBanners.forEach((banner, index) => {
-      const bannerItem = createBannerElement(banner, index);
+    // Ensure grid is hidden during loading
+    masonryGrid.classList.remove('loaded');
+    
+    // Create banner elements with placeholders and calculate positions
+    const bannerElements = sortedBanners.map((banner, index) => 
+      createBannerElementWithPlaceholder(banner, index)
+    );
+    
+    // Calculate optimal positions using masonry algorithm
+    const positions = calculateMasonryPositions(sortedBanners);
+    
+    // Position and append all banners
+    bannerElements.forEach((bannerItem, index) => {
+      const position = positions[index];
+      bannerItem.style.left = `${position.x}px`;
+      bannerItem.style.top = `${position.y}px`;
+      bannerItem.style.width = `${position.width}px`;
+      bannerItem.style.height = `${position.height}px`;
       masonryGrid.appendChild(bannerItem);
     });
     
-    // Initialize masonry layout after images load
-    initializeMasonryLayout();
+    // Wait for all placeholders to be positioned, then show grid
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        masonryGrid.classList.add('loaded');
+        
+        // Load actual iframes after grid is visible
+        loadIframesProgressively(sortedBanners);
+        
+        // Setup iframe reloading and viewport detection
+        setupIframeReloading();
+        setupViewportObserver();
+      });
+    });
     
   } catch (error) {
     console.error('Error loading banner manifest:', error);
   }
 }
 
-function arrangeBannersForVariety(banners) {
-  // Create a copy to avoid mutating original
-  const shuffled = [...banners];
+function calculateMasonryPositions(banners) {
+  const positions = [];
+  const gridWidth = 1800;
+  const gridHeight = 1800;
+  const gap = 30;
+  const occupiedAreas = [];
   
-  // Shuffle the array first
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  // Simple deterministic pseudo-random function
+  function deterministicRandom(seed) {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
   }
   
-  // Separate banners to avoid same name/size clustering
-  const arranged = [];
-  const used = new Set();
+  // Helper function to check if two rectangles overlap with gap
+  function rectanglesOverlap(x1, y1, w1, h1, x2, y2, w2, h2) {
+    return !(x1 + w1 + gap <= x2 || x2 + w2 + gap <= x1 || 
+             y1 + h1 + gap <= y2 || y2 + h2 + gap <= y1);
+  }
   
-  // First pass: add variety by avoiding consecutive same names/sizes
-  shuffled.forEach(banner => {
-    const lastBanner = arranged[arranged.length - 1];
-    const sameAsLast = lastBanner && (
-      lastBanner.name === banner.name || 
-      (lastBanner.width === banner.width && lastBanner.height === banner.height)
-    );
+  // Helper function to find a valid position using scattered zones
+  function findValidPosition(width, height, bannerIndex) {
+    // Create zones for more scattered placement
+    const zones = [
+      { x: 0, y: 0, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+      { x: gridWidth * 0.6, y: 0, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+      { x: 0, y: gridHeight * 0.6, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+      { x: gridWidth * 0.6, y: gridHeight * 0.6, w: gridWidth * 0.4, h: gridHeight * 0.4 },
+      { x: gridWidth * 0.2, y: gridHeight * 0.2, w: gridWidth * 0.6, h: gridHeight * 0.6 }
+    ];
     
-    if (!sameAsLast || arranged.length === 0) {
-      arranged.push(banner);
-      used.add(shuffled.indexOf(banner));
-    }
-  });
-  
-  // Second pass: add remaining banners
-  shuffled.forEach((banner, index) => {
-    if (!used.has(index)) {
-      // Find best position to insert (avoid clustering)
-      let bestPosition = arranged.length;
-      for (let i = 0; i < arranged.length; i++) {
-        const prevBanner = arranged[i - 1];
-        const nextBanner = arranged[i];
+    // Try zones in a different order based on banner index for variety
+    const preferredZone = zones[bannerIndex % zones.length];
+    const otherZones = zones.filter((_, i) => i !== (bannerIndex % zones.length));
+    const zonesToTry = [preferredZone, ...otherZones];
+    
+    for (const zone of zonesToTry) {
+      const stepSize = 60;
+      const startX = Math.max(0, zone.x);
+      const endX = Math.min(gridWidth - width, zone.x + zone.w - width);
+      const startY = Math.max(0, zone.y);
+      const endY = Math.min(gridHeight - height, zone.y + zone.h - height);
+      
+      // Try multiple deterministic positions within the zone
+      for (let attempt = 0; attempt < 20; attempt++) {
+        const randomX = deterministicRandom(bannerIndex * 100 + attempt * 7);
+        const randomY = deterministicRandom(bannerIndex * 150 + attempt * 11);
         
-        const conflictPrev = prevBanner && (
-          prevBanner.name === banner.name || 
-          (prevBanner.width === banner.width && prevBanner.height === banner.height)
-        );
+        const x = startX + (randomX * (endX - startX));
+        const y = startY + (randomY * (endY - startY));
         
-        const conflictNext = nextBanner && (
-          nextBanner.name === banner.name || 
-          (nextBanner.width === banner.width && nextBanner.height === banner.height)
-        );
+        // Round to step size for cleaner positioning
+        const roundedX = Math.round(x / stepSize) * stepSize;
+        const roundedY = Math.round(y / stepSize) * stepSize;
         
-        if (!conflictPrev && !conflictNext) {
-          bestPosition = i;
-          break;
+        if (roundedX >= 0 && roundedY >= 0 && 
+            roundedX + width <= gridWidth && roundedY + height <= gridHeight) {
+          
+          let overlaps = false;
+          for (const area of occupiedAreas) {
+            if (rectanglesOverlap(roundedX, roundedY, width, height, area.x, area.y, area.w, area.h)) {
+              overlaps = true;
+              break;
+            }
+          }
+          
+          if (!overlaps) {
+            return { x: roundedX, y: roundedY };
+          }
         }
       }
-      
-      arranged.splice(bestPosition, 0, banner);
     }
+    
+    // If all zones failed, do systematic scan as fallback
+    const stepSize = 50;
+    for (let y = 0; y <= gridHeight - height; y += stepSize) {
+      for (let x = 0; x <= gridWidth - width; x += stepSize) {
+        let overlaps = false;
+        for (const area of occupiedAreas) {
+          if (rectanglesOverlap(x, y, width, height, area.x, area.y, area.w, area.h)) {
+            overlaps = true;
+            break;
+          }
+        }
+        
+        if (!overlaps) {
+          return { x, y };
+        }
+      }
+    }
+    
+    // Final fallback: place in next available row
+    const fallbackY = occupiedAreas.length > 0 
+      ? Math.max(...occupiedAreas.map(area => area.y + area.h)) + gap
+      : 0;
+    
+    return { 
+      x: Math.min(bannerIndex * 100, gridWidth - width), 
+      y: Math.min(fallbackY, gridHeight - height)
+    };
+  }
+  
+  // Place banners one by one using their actual dimensions
+  banners.forEach((banner, index) => {
+    const position = findValidPosition(banner.width, banner.height, index);
+    
+    positions.push({
+      x: position.x,
+      y: position.y,
+      width: banner.width,
+      height: banner.height
+    });
+    
+    occupiedAreas.push({
+      x: position.x,
+      y: position.y,
+      w: banner.width,
+      h: banner.height
+    });
   });
   
-  return arranged;
+  return positions;
 }
 
-function createBannerElement(banner, index) {
+function createBannerElementWithPlaceholder(banner, index) {
   const bannerItem = document.createElement('div');
   bannerItem.className = 'banner-item';
-  
-  // Use actual banner dimensions
-  bannerItem.style.width = `${banner.width}px`;
-  bannerItem.style.height = `${banner.height}px`;
   bannerItem.style.position = 'absolute';
-  bannerItem.style.setProperty('--aspect-ratio', banner.width / banner.height);
+  bannerItem.dataset.bannerIndex = index;
+  bannerItem.dataset.bannerPath = banner.path;
   
   // Add campaign class for styling variety
   bannerItem.classList.add(`campaign-${banner.name.toLowerCase()}`);
   
-  // Add size class for responsive behavior
-  const sizeClass = getBannerSizeClass(banner.width, banner.height);
-  bannerItem.classList.add(sizeClass);
+  // Create placeholder (black rectangle with subtle styling)
+  const placeholder = document.createElement('div');
+  placeholder.className = 'banner-placeholder';
+  placeholder.style.width = '100%';
+  placeholder.style.height = '100%';
+  placeholder.style.backgroundColor = '#1a1a1a';
+  placeholder.style.border = '1px solid #333';
+  placeholder.style.borderRadius = '6px';
+  placeholder.style.display = 'flex';
+  placeholder.style.alignItems = 'center';
+  placeholder.style.justifyContent = 'center';
+  placeholder.style.color = '#666';
+  placeholder.style.fontSize = '11px';
+  placeholder.style.fontFamily = 'system-ui, -apple-system, sans-serif';
+  placeholder.style.flexDirection = 'column';
+  placeholder.style.textAlign = 'center';
+  placeholder.style.lineHeight = '1.3';
+  placeholder.style.transition = 'all 0.3s ease';
+  placeholder.style.cursor = 'pointer';
+  placeholder.innerHTML = `
+    <div style="font-weight: 500; margin-bottom: 4px;">${banner.name}</div>
+    <div style="font-size: 9px; opacity: 0.7;">${banner.width}×${banner.height}</div>
+  `;
   
-  const iframe = document.createElement('iframe');
-  iframe.src = banner.path;
-  iframe.width = banner.width;
-  iframe.height = banner.height;
-  iframe.style.width = '100%';
-  iframe.style.height = '100%';
-  iframe.style.border = 'none';
-  iframe.loading = 'lazy';
-  iframe.title = `${banner.name} - ${banner.width}x${banner.height}${banner.version ? ` ${banner.version}` : ''}`;
+  // Add hover effect
+  placeholder.addEventListener('mouseenter', () => {
+    placeholder.style.backgroundColor = '#252525';
+    placeholder.style.borderColor = '#444';
+  });
   
-  bannerItem.appendChild(iframe);
+  placeholder.addEventListener('mouseleave', () => {
+    placeholder.style.backgroundColor = '#1a1a1a';
+    placeholder.style.borderColor = '#333';
+  });
   
-  // Add entrance animation delay
-  bannerItem.style.animationDelay = `${index * 0.05}s`;
-  
+  bannerItem.appendChild(placeholder);
   return bannerItem;
 }
 
-function getBannerSizeClass(width, height) {
-  const area = width * height;
-  const aspectRatio = width / height;
-  
-  if (area > 500000) return 'banner-xl';
-  if (area > 200000) return 'banner-lg';
-  if (area > 100000) return 'banner-md';
-  if (aspectRatio > 3) return 'banner-wide';
-  if (aspectRatio < 0.5) return 'banner-tall';
-  return 'banner-sm';
+function loadIframesProgressively(banners) {
+  // Load iframes with staggered timing to avoid overwhelming the browser
+  banners.forEach((banner, index) => {
+    setTimeout(() => {
+      const bannerItem = document.querySelector(`[data-banner-index="${index}"]`);
+      if (bannerItem) {
+        const placeholder = bannerItem.querySelector('.banner-placeholder');
+        
+        const iframe = document.createElement('iframe');
+        iframe.src = banner.path;
+        iframe.style.border = 'none';
+        iframe.style.borderRadius = '4px';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.display = 'block';
+        
+        iframe.onload = () => {
+          if (placeholder && placeholder.parentNode) {
+            placeholder.parentNode.removeChild(placeholder);
+          }
+        };
+        
+        bannerItem.appendChild(iframe);
+      }
+    }, index * 20); // Stagger by 0ms
+  });
 }
 
-function initializeMasonryLayout() {
-  const grid = document.getElementById('masonry-grid');
+// Helper functions for iframe reloading and viewport detection
+function setupIframeReloading() {
+  if (iframeReloadInterval) {
+    clearInterval(iframeReloadInterval);
+  }
   
-  // Simple masonry-like layout using CSS Grid
-  const resizeObserver = new ResizeObserver(() => {
-    layoutMasonryGrid();
-  });
-  
-  resizeObserver.observe(grid);
-  
-  // Initial layout
-  setTimeout(layoutMasonryGrid, 100);
+  iframeReloadInterval = setInterval(() => {
+    if (isCaseStudyVisible) {
+      reloadAllIframes();
+    }
+  }, 20000);
 }
 
-function layoutMasonryGrid() {
-  const grid = document.getElementById('masonry-grid');
-  const items = grid.querySelectorAll('.banner-item');
-  
-  if (items.length === 0) return;
-  
-  // Set grid to relative positioning for absolute positioned items
-  grid.style.position = 'relative';
-  
-  // Row-based masonry layout inspired by reference image
-  const gap = 8; // Smaller gap for tighter layout
-  const gridRect = grid.getBoundingClientRect();
-  
-  // Create a 2D array to track occupied spaces
-  const gridCells = [];
-  const cellSize = 40; // Size of each grid cell for collision detection
-  const gridRows = Math.ceil(2000 / cellSize); // Enough rows for all banners
-  const gridCols = Math.ceil((gridRect.width * 2) / cellSize); // Extra width for rotation
-  
-  // Initialize grid
-  for (let i = 0; i < gridRows; i++) {
-    gridCells[i] = new Array(gridCols).fill(false);
-  }
-  
-  // Function to check if a position is available
-  function isPositionAvailable(x, y, width, height) {
-    const startCol = Math.floor(x / cellSize);
-    const endCol = Math.floor((x + width) / cellSize);
-    const startRow = Math.floor(y / cellSize);
-    const endRow = Math.floor((y + height) / cellSize);
-    
-    for (let row = startRow; row <= endRow && row < gridRows; row++) {
-      for (let col = startCol; col <= endCol && col < gridCols; col++) {
-        if (row >= 0 && col >= 0 && gridCells[row][col]) {
-          return false;
-        }
+function setupViewportObserver() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.target.classList.contains('case-study')) {
+        isCaseStudyVisible = entry.isIntersecting;
       }
-    }
-    return true;
-  }
-  
-  // Function to mark position as occupied
-  function markPositionOccupied(x, y, width, height) {
-    const startCol = Math.floor(x / cellSize);
-    const endCol = Math.floor((x + width) / cellSize);
-    const startRow = Math.floor(y / cellSize);
-    const endRow = Math.floor((y + height) / cellSize);
-    
-    for (let row = startRow; row <= endRow && row < gridRows; row++) {
-      for (let col = startCol; col <= endCol && col < gridCols; col++) {
-        if (row >= 0 && col >= 0) {
-          gridCells[row][col] = true;
-        }
-      }
-    }
-  }
-  
-  items.forEach((item, index) => {
-    const itemWidth = parseInt(item.style.width);
-    const itemHeight = parseInt(item.style.height);
-    
-    let placed = false;
-    let attempts = 0;
-    const maxAttempts = 1000;
-    
-    // Try to find a position for the item
-    while (!placed && attempts < maxAttempts) {
-      // Start from top-left and scan row by row
-      const row = Math.floor(attempts / 20) * cellSize;
-      const col = (attempts % 20) * (cellSize * 2);
-      
-      // Add some randomness to make it more natural
-      const randomX = col + Math.random() * cellSize;
-      const randomY = row + Math.random() * cellSize;
-      
-      if (isPositionAvailable(randomX, randomY, itemWidth + gap, itemHeight + gap)) {
-        item.style.left = `${randomX}px`;
-        item.style.top = `${randomY}px`;
-        markPositionOccupied(randomX, randomY, itemWidth + gap, itemHeight + gap);
-        placed = true;
-      }
-      
-      attempts++;
-    }
-    
-    // Fallback positioning if no space found
-    if (!placed) {
-      const fallbackY = index * 100;
-      const fallbackX = (index % 6) * 200;
-      item.style.left = `${fallbackX}px`;
-      item.style.top = `${fallbackY}px`;
-    }
+    });
+  }, {
+    threshold: 0.1
   });
   
-  // Calculate grid dimensions
-  let maxX = 0;
-  let maxY = 0;
-  
-  items.forEach(item => {
-    const x = parseInt(item.style.left) + parseInt(item.style.width);
-    const y = parseInt(item.style.top) + parseInt(item.style.height);
-    maxX = Math.max(maxX, x);
-    maxY = Math.max(maxY, y);
-  });
-  
-  // Set grid dimensions with extra space for rotation
-  grid.style.width = `${maxX + 400}px`;
-  grid.style.height = `${maxY + 400}px`;
+  const caseStudy = document.querySelector('.case-study');
+  if (caseStudy) {
+    observer.observe(caseStudy);
+  }
 }
+
+function reloadAllIframes() {
+  const iframes = document.querySelectorAll('#masonry-grid iframe');
+  iframes.forEach(iframe => {
+    const currentSrc = iframe.src;
+    iframe.src = '';
+    setTimeout(() => {
+      iframe.src = currentSrc;
+    }, 50);
+  });
+}
+
+// Note: init() is called from HTML's window.onload event
 
