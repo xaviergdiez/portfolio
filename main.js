@@ -511,28 +511,8 @@ function setupIframeReloading() {
 }
 
 function setupViewportObserver() {
-  // Use ScrollTrigger instead of IntersectionObserver for better control
-  ScrollTrigger.create({
-    trigger: ".case-study",
-    start: "top 90%",
-    end: "bottom 10%",
-    onEnter: () => {
-      isCaseStudyVisible = true;
-      console.log("Case study entered viewport");
-    },
-    onLeave: () => {
-      isCaseStudyVisible = false;
-      console.log("Case study left viewport");
-    },
-    onEnterBack: () => {
-      isCaseStudyVisible = true;
-      console.log("Case study re-entered viewport from bottom");
-    },
-    onLeaveBack: () => {
-      isCaseStudyVisible = false;
-      console.log("Case study left viewport going up");
-    }
-  });
+  // Note: Removed .case-study ScrollTrigger - only tracking for iframe reloading
+  // The GTECH section has its own ScrollTrigger with timeline completion logic
 }
 
 function reloadAllIframes() {
@@ -609,6 +589,9 @@ function enableScrolling() {
 }
 
 // GTECH Animation Functions
+let gtechTimelineCompleted = false; // Track if main timeline has completed
+let gtechTl = null; // Global timeline reference
+
 function initGtechAnimation() {
   // ScrollTrigger animation for GTECH case study
   ScrollTrigger.create({
@@ -617,56 +600,47 @@ function initGtechAnimation() {
     end: "bottom 20%",
     onEnter: () => {
       console.log("GTECH section entered");
-      startGtechAnimations();
+      // First time entering - start the animation
+      if (!gtechTl) {
+        startGtechAnimations();
+      } else if (!gtechTimelineCompleted) {
+        // Timeline exists but was paused - resume it
+        gtechTl.play();
+      }
     },
     onLeave: () => {
       console.log("GTECH section left");
-      pauseGtechAnimations();
+      // Only pause if timeline hasn't completed yet
+      if (!gtechTimelineCompleted && gtechTl) {
+        gtechTl.pause();
+      }
     },
     onEnterBack: () => {
       console.log("GTECH section entered from bottom");
-      resumeGtechAnimations();
+      // Only resume if timeline hasn't completed yet
+      if (!gtechTimelineCompleted && gtechTl) {
+        gtechTl.play();
+      }
     },
     onLeaveBack: () => {
       console.log("GTECH section left going up");
-      pauseGtechAnimations();
+      // Only pause if timeline hasn't completed yet
+      if (!gtechTimelineCompleted && gtechTl) {
+        gtechTl.pause();
+      }
     }
   });
 }
 
 function startGtechAnimations() {
-  // Debug: Check if elements exist
-  console.log("data-icon-user element:", document.getElementById('data-icon-user'));
-  console.log("data-icon-location element:", document.getElementById('data-icon-location'));
-  console.log("data-icon-behavior element:", document.getElementById('data-icon-behavior'));
-  console.log("data-icon-trending element:", document.getElementById('data-icon-trending'));
   
-  // Debug: Check initial computed styles
-  const userIcon = document.getElementById('data-icon-user');
-  const locationIcon = document.getElementById('data-icon-location');
-  const behaviorIcon = document.getElementById('data-icon-behavior');
-  const trendingIcon = document.getElementById('data-icon-trending');
-  
-  if (userIcon) {
-    const userStyle = getComputedStyle(userIcon);
-    console.log("User icon initial opacity:", userStyle.opacity, "visibility:", userStyle.visibility);
-  }
-  if (locationIcon) {
-    const locationStyle = getComputedStyle(locationIcon);
-    console.log("Location icon initial opacity:", locationStyle.opacity, "visibility:", locationStyle.visibility);
-  }
-  if (behaviorIcon) {
-    const behaviorStyle = getComputedStyle(behaviorIcon);
-    console.log("Behavior icon initial opacity:", behaviorStyle.opacity, "visibility:", behaviorStyle.visibility);
-  }
-  if (trendingIcon) {
-    const trendingStyle = getComputedStyle(trendingIcon);
-    console.log("Trending icon initial opacity:", trendingStyle.opacity, "visibility:", trendingStyle.visibility);
-  }
-  
-  let gtechTl = gsap.timeline({ 
+  gtechTl = gsap.timeline({ 
     gtechAnimation: true,
     onComplete: () => {
+      // Mark timeline as completed
+      gtechTimelineCompleted = true;
+      console.log("GTECH main timeline completed - disabling ScrollTrigger pause/resume");
+      
       // Enable icon interactions only after timeline completes
       setupGtechIconInteractions();
     }
@@ -692,91 +666,66 @@ function startGtechAnimations() {
     .addLabel('trendsIn', 8.5)
     .addLabel('complete', 11)
     // Data icons animate in sequence
-    .to('#data-icon-user', {
-      duration: 0.5, 
-      opacity: 1,
-      visibility: 'visible',
-      scale: 1, 
-      rotation: 0, 
-      ease: "back.out(1.7)",
-      onStart: () => console.log("User icon animation started"),
-      onComplete: () => console.log("User icon animation completed")
-    }, 'userIn')
+    .fromTo('#interactive-ad-container', {duration: 0, autoAlpha: 0, immediateRender: true}, {duration: 0.5, autoAlpha: 1})
+    .fromTo('#data-icon-user', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'userIn')
     .from("#ad-bg", {duration: 0.7, autoAlpha: 0, scale: 0, transformOrigin:"center center",ease: "back.out(1.7)"}, 'userIn')
     .from('#user-product', {duration: 0.5, y: 30, autoAlpha: 0, ease: "power2.out"}, 'userIn+=0.3')
     .from('#user-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'userIn+=0.5')
     .from('#user-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'userIn+=0.8')
     .to(['#user-product', '#user-txt', '#user-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'userOut')
-    .to('#data-icon-location', {
-      duration: 0.5, 
-      opacity: 1,
-      visibility: 'visible',
-      scale: 1, 
-      rotation: 0, 
-      ease: "back.out(1.7)",
-      onStart: () => console.log("Location icon animation started"),
-      onComplete: () => console.log("Location icon animation completed")
-    }, 'locationIn')
+    .fromTo('#data-icon-location', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'locationIn')
     .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#location-bg", type: "rotational"}, fill:gRed, ease: "back.out(1.7)"}, 'locationIn')
     .from('#location-product', {duration: 0.5, y: 30, autoAlpha: 0, ease: "power2.out"}, 'locationIn+=0.3')
     .from('#location-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'locationIn+=0.5')
     .from('.star', {duration: 0.3, scale: 0, rotation: 180, stagger: 0.15, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'locationIn+=0.6')
     .from('#location-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'locationIn+=0.8')
     .to(['#location-product', '#location-txt', '.star', '#location-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'locationOut')
-    .to('#data-icon-behavior', {
-      duration: 0.5, 
-      opacity: 1,
-      visibility: 'visible',
-      scale: 1, 
-      rotation: 0, 
-      ease: "back.out(1.7)",
-      onStart: () => console.log("Behavior icon animation started"),
-      onComplete: () => console.log("Behavior icon animation completed")
-    }, 'behaviourIn')
+    .fromTo('#data-icon-behavior', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'behaviourIn')
     .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#behaviour-bg", type: "rotational"}, fill:gGreen, ease: "back.out(1.7)"}, 'behaviourIn')
     .from('.behaviour-product', {duration: 0.5, y: 30, autoAlpha: 0, stagger: 0.2, ease: "power2.out"}, 'behaviourIn+=0.3')
     .from('.behaviour-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", stagger: 0.2, ease: "power2.out"}, 'behaviourIn+=0.5')
     .from('.behaviour-cta', {duration: 0.5, scale: 0, autoAlpha: 0, stagger: 0.2,ease: "power2.out"}, 'behaviourIn+=0.8')
     .to(['.behaviour-product', '.behaviour-txt', '.behaviour-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'behaviourOut')
-    .to('#data-icon-trending', {
-      duration: 0.5, 
-      opacity: 1,
-      visibility: 'visible',
-      scale: 1, 
-      rotation: 0, 
-      ease: "back.out(1.7)",
-      onStart: () => console.log("Trending icon animation started"),
-      onComplete: () => console.log("Trending icon animation completed")
-    }, 'trendsIn')
+    .fromTo('#data-icon-trending', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'trendsIn')
     .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#trending-bg", type: "rotational"}, fill:gYellow, ease: "back.out(1.7)"}, 'trendsIn')
-    .from('#trending-screen', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'trendsIn+=0.3')
+    .from('#trending-screen', {duration: 0.5, scale: 0, autoAlpha: 0, transformOrigin: "0% 50%", ease: "power2.out"}, 'trendsIn+=0.3')
     .from('#trending-icon', {duration: 0.5, scale: 0, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'trendsIn+=0.4')
     .from('#trending-title', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'trendsIn+=0.5')
-    .from('#trending-product', {duration: 0.5, scaleY: 0, transformOrigin: "top center", ease: "power2.out"}, 'trendsIn+=0.5')
+    .from('#trending-product', {duration: 0.5, scaleY: 0, transformOrigin: "50% 0%", ease: "power2.out"}, 'trendsIn+=0.5')
     .from('#trending-play', {duration: 0.5, scale: 0, rotation: 180, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'trendsIn+=0.6')
     .from('#trending-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'trendsIn+=0.5')
     .from('#trending-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'trendsIn+=0.8');
     
-  // Store timeline reference for use in animateAdElements
+  // Store timeline reference for use in animateAdElements (keeping for compatibility)
   window.gtechMainTimeline = gtechTl;
 }
 
 function pauseGtechAnimations() {
-  // Pause all GTECH animations when out of view
-  gsap.globalTimeline.getChildren().forEach(tween => {
-    if (tween.vars.gtechAnimation) {
-      tween.pause();
-    }
-  });
+  // Only pause if the main timeline hasn't completed yet
+  if (gtechTimelineCompleted) {
+    console.log("GTECH timeline completed - skipping pause");
+    return;
+  }
+  
+  // Use native GSAP timeline pause method
+  if (gtechTl) {
+    gtechTl.pause();
+    console.log("GTECH timeline paused");
+  }
 }
 
 function resumeGtechAnimations() {
-  // Resume all GTECH animations when back in view
-  gsap.globalTimeline.getChildren().forEach(tween => {
-    if (tween.vars.gtechAnimation) {
-      tween.resume();
-    }
-  });
+  // Only resume if the main timeline hasn't completed yet
+  if (gtechTimelineCompleted) {
+    console.log("GTECH timeline completed - skipping resume");
+    return;
+  }
+  
+  // Use native GSAP timeline play method to resume
+  if (gtechTl) {
+    gtechTl.play();
+    console.log("GTECH timeline resumed");
+  }
 }
 
 function setupGtechIconInteractions() {
@@ -788,14 +737,41 @@ function setupGtechIconInteractions() {
     'trends': '#fbbc04'
   };
   
+  // Animation state tracking
+  let isAnimating = false;
+  
+  // Function to disable all buttons
+  function disableButtons() {
+    isAnimating = true;
+    iconButtons.forEach(btn => {
+      btn.style.pointerEvents = 'none';
+      btn.style.opacity = '0.6';
+    });
+  }
+  
+  // Function to enable all buttons
+  function enableButtons() {
+    isAnimating = false;
+    iconButtons.forEach(btn => {
+      btn.style.pointerEvents = 'auto';
+      btn.style.opacity = '1';
+    });
+  }
+  
   iconButtons.forEach(button => {
     // Set initial button color
     const type = button.dataset.type;
     button.style.backgroundColor = colors[type];
     
     button.addEventListener('click', () => {
-      // Trigger appropriate animation using timeline labels
-      animateAdElements(type);
+      // Prevent rapid clicking
+      if (isAnimating) return;
+      
+      // Disable buttons during animation
+      disableButtons();
+      
+      // Trigger appropriate animation and pass callback to re-enable buttons
+      animateAdElements(type, enableButtons);
       
       // Update button states
       iconButtons.forEach(btn => {
@@ -807,15 +783,15 @@ function setupGtechIconInteractions() {
       gsap.to(button, { scale: 1.1, duration: 0.2 });
     });
     
-    // Hover effects
+    // Hover effects (only when not animating)
     button.addEventListener('mouseenter', () => {
-      if (!button.classList.contains('active')) {
+      if (!button.classList.contains('active') && !isAnimating) {
         gsap.to(button, { scale: 1.05, duration: 0.2 });
       }
     });
     
     button.addEventListener('mouseleave', () => {
-      if (!button.classList.contains('active')) {
+      if (!button.classList.contains('active') && !isAnimating) {
         gsap.to(button, { scale: 1, duration: 0.2 });
       }
     });
@@ -829,67 +805,148 @@ function setupGtechIconInteractions() {
   }
 }
 
-function animateAdElements(type) {
-  // Get reference to the main timeline
-  const mainTimeline = window.gtechMainTimeline;
-  if (!mainTimeline) return;
+function animateAdElements(type, onComplete) {
+  // Define Google brand colors
+  const gBlue = "#4285f4";
+  const gRed = "#ea4335";
+  const gYellow = "#fbbc04";
+  const gGreen = "#34a853";
   
-  // Map types to their corresponding timeline labels
-  const labelMap = {
-    'user': 'userIn',
-    'location': 'locationIn', 
-    'behaviour': 'behaviourIn',
-    'trends': 'trendsIn'
-  };
-  
-  const targetLabel = labelMap[type];
-  if (!targetLabel) return;
-  
-  // Seek to the appropriate label in the timeline
-  mainTimeline.seek(targetLabel);
-  
-  // Reset all ad groups visibility first
-  gsap.set(['#user-ad', '#location-ad', '#behaviour-ad', '#trending-ad'], { 
-    display: 'none', 
-    autoAlpha: 0 
-  });
-  
-  // Show and animate the target ad group based on type
+  // Trigger the appropriate case animation
   switch(type) {
     case 'user':
-      gsap.set('#user-ad', { display: 'block' });
-      gsap.to('#user-ad', { autoAlpha: 1, duration: 0.3 });
-      // Play from userIn label
-      mainTimeline.play(targetLabel);
+      triggerUserCase(onComplete);
       break;
       
     case 'location':
-      gsap.set('#location-ad', { display: 'block' });
-      gsap.to('#location-ad', { autoAlpha: 1, duration: 0.3 });
-      // Play from locationIn label  
-      mainTimeline.play(targetLabel);
+      triggerLocationCase(onComplete);
       break;
       
     case 'behaviour':
-      gsap.set('#behaviour-ad', { display: 'block' });
-      gsap.to('#behaviour-ad', { autoAlpha: 1, duration: 0.3 });
-      // Play from behaviourIn label
-      mainTimeline.play(targetLabel);
+      triggerBehaviourCase(onComplete);
       break;
       
     case 'trends':
-      gsap.set('#trending-ad', { display: 'block' });
-      gsap.to('#trending-ad', { autoAlpha: 1, duration: 0.3 });
-      // Play from trendsIn label
-      mainTimeline.play(targetLabel);
+      triggerTrendsCase(onComplete);
       break;
       
     default:
-      // Default to user animation
-      gsap.set('#user-ad', { display: 'block' });
-      gsap.to('#user-ad', { autoAlpha: 1, duration: 0.3 });
-      mainTimeline.play('userIn');
+      triggerUserCase(onComplete);
       break;
+  }
+  
+  function triggerUserCase(onComplete) {
+    console.log("Triggering User case animation");
+    
+    // Kill any existing animations on user elements for faster reset
+    gsap.killTweensOf(['#user-product', '#user-txt', '#user-cta']);
+    
+    // Hide all non-user elements immediately
+    gsap.to(['#location-product', '#location-txt', '.star', '#location-cta',
+              '.behaviour-product', '.behaviour-txt', '.behaviour-cta',
+              '#trending-screen', '#trending-icon', '#trending-title', 
+              '#trending-product', '#trending-play', '#trending-txt', '#trending-cta'], { 
+      duration: 0,
+      autoAlpha: 0,
+      immediateRender: true
+    });
+    
+    let userTL = gsap.timeline({
+      onComplete: onComplete // Call the callback when animation completes
+    });
+    userTL
+      .to('#ad-bg', {
+        duration: 0.5, 
+        morphSVG: {shape:"path[d='M857.24,867.75h-486.4c-8.84,0-16-7.16-16-16V124.79c0-8.84,7.16-16,16-16h486.4c8.84,0,16,7.16,16,16v726.96c0,8.84-7.16,16-16,16Z']", type: "rotational"}, 
+        fill: gBlue, 
+        ease: "back.out(1.7)"
+      }, 0)
+      .fromTo('#user-product', {y: 30, autoAlpha: 0}, {duration: 0.5, y: 0, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.3)
+      .fromTo('#user-txt', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.5)
+      .fromTo('#user-cta', {scale: 0, autoAlpha: 0}, {duration: 0.5, scale: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.8);
+  }
+  
+  function triggerLocationCase(onComplete) {
+    console.log("Triggering Location case animation");
+    
+    // Kill any existing animations on location elements for faster reset
+    gsap.killTweensOf(['#location-product', '#location-txt', '.star', '#location-cta']);
+    
+    // Hide all non-location elements immediately
+    gsap.to(['#user-product', '#user-txt', '#user-cta',
+              '.behaviour-product', '.behaviour-txt', '.behaviour-cta',
+              '#trending-screen', '#trending-icon', '#trending-title', 
+              '#trending-product', '#trending-play', '#trending-txt', '#trending-cta'], { 
+      autoAlpha: 0,
+      duration: 0,
+      immediateRender: true
+    });
+    
+    let locationTL = gsap.timeline({
+      onComplete: onComplete // Call the callback when animation completes
+    });
+    locationTL
+      .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#location-bg", type: "rotational"}, fill: gRed, ease: "back.out(1.7)"}, 0)
+      .fromTo('#location-product', {y: 30, autoAlpha: 0}, {duration: 0.5, y: 0, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.3)
+      .fromTo('#location-txt', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.5)
+      .fromTo('.star', {scale: 0, rotation: 180, transformOrigin: "50% 50%"}, {duration: 0.3, scale: 1, rotation: 0, autoAlpha: 1, stagger: 0.15, ease: "back.out(1.7)", immediateRender: true}, 0.6)
+      .fromTo('#location-cta', {scale: 0, autoAlpha: 0}, {duration: 0.5, scale: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.8);
+  }
+  
+  function triggerBehaviourCase(onComplete) {
+    console.log("Triggering Behaviour case animation");
+    
+    // Kill any existing animations on behaviour elements for faster reset
+    gsap.killTweensOf(['.behaviour-product', '.behaviour-txt', '.behaviour-cta']);
+    
+    // Hide all non-behaviour elements immediately
+    gsap.to(['#user-product', '#user-txt', '#user-cta',
+              '#location-product', '#location-txt', '.star', '#location-cta',
+              '#trending-screen', '#trending-icon', '#trending-title', 
+              '#trending-product', '#trending-play', '#trending-txt', '#trending-cta'], { 
+      duration: 0,
+      autoAlpha: 0,
+      immediateRender: true
+    });
+    
+    let behaviourTL = gsap.timeline({
+      onComplete: onComplete // Call the callback when animation completes
+    });
+    behaviourTL
+      .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#behaviour-bg", type: "rotational"}, fill: gGreen, ease: "back.out(1.7)"}, 0)
+      .fromTo('.behaviour-product', {y: 30, autoAlpha: 0}, {duration: 0.5, y: 0, autoAlpha: 1, stagger: 0.2, ease: "power2.out", immediateRender: true}, 0.3)
+      .fromTo('.behaviour-txt', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, stagger: 0.2, ease: "power2.out", immediateRender: true}, 0.5)
+      .fromTo('.behaviour-cta', {scale: 0, autoAlpha: 0}, {duration: 0.5, scale: 1, autoAlpha: 1, stagger: 0.2, ease: "power2.out", immediateRender: true}, 0.8);
+  }
+  
+  function triggerTrendsCase(onComplete) {
+    console.log("Triggering Trends case animation");
+    
+    // Kill any existing animations on trending elements for faster reset
+    gsap.killTweensOf(['#trending-screen', '#trending-icon', '#trending-title', 
+                       '#trending-product', '#trending-play', '#trending-txt', '#trending-cta']);
+    
+    // Hide all non-trends elements immediately
+    gsap.to(['#user-product', '#user-txt', '#user-cta',
+              '#location-product', '#location-txt', '.star', '#location-cta',
+              '.behaviour-product', '.behaviour-txt', '.behaviour-cta'], { 
+      duration: 0,
+      autoAlpha: 0,
+      immediateRender: true
+    });
+    
+    let trendsTL = gsap.timeline({
+      onComplete: onComplete // Call the callback when animation completes
+    });
+    trendsTL
+      .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#trending-bg", type: "rotational"}, fill: gYellow, ease: "back.out(1.7)"}, 0)
+      .fromTo('#trending-screen', {scale: 0, autoAlpha: 0, transformOrigin: "50% 0%" }, {duration: 0.5, scale: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.3)
+      .fromTo('#trending-icon', {scale: 0, autoAlpha: 0, transformOrigin: "50% 50%"}, {duration: 0.5, scale: 1, autoAlpha: 1, ease: "back.out(1.7)", immediateRender: true}, 0.4)
+      .fromTo('#trending-title', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.5)
+      .fromTo('#trending-product', {autoAlpha: 0, scaleY: 0, transformOrigin: "50% 0%"}, {duration: 0.5, scaleY: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.5)
+      .fromTo('#trending-play', {autoAlpha: 0, scale: 0, rotation: 180, transformOrigin: "50% 50%"}, {duration: 0.5, scale: 1, autoAlpha: 1, rotation: 0, ease: "back.out(1.7)", immediateRender: true}, 0.6)
+      .fromTo('#trending-txt', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.5)
+      .fromTo('#trending-cta', {scale: 0, autoAlpha: 0}, {duration: 0.5, scale: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.8);
   }
 }
 
