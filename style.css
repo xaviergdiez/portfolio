@@ -564,6 +564,29 @@ body {
     z-index: 0;
 }
 
+/* GTECH Background Particles */
+.gtech-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.gtech-particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.gtech-particle:hover {
+    opacity: 0.6;
+}
+
 .data-pipeline {
     position: absolute;
     width: 100%;
@@ -889,8 +912,8 @@ body {
 }
 
 .ad-unit {
-  width: clamp(400px, 45vw, 600px);
-  height: clamp(300px, 35vw, 450px);
+  width: clamp(25cqi, 45cqi, 50cqi);
+  height: clamp(20cqi, 35cqi, 40cqi);
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 24px;
   padding: 2rem;
@@ -1041,17 +1064,17 @@ body {
 .gtech-data-icons {
   position: absolute;
   left: 50%;
-  top: 8%;
+  top: clamp(1rem, 5vh, 3rem);
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: clamp(1rem, 3vw, 2rem);
   z-index: 5;
 }
 
 .data-icon-btn {
-  width: clamp(4rem, 6vw, 5rem);
-  height: clamp(4rem, 6vw, 5rem);
+  width: clamp(2.5cqi, 5cqi, 7cqi);
+  height: clamp(2.5cqi, 5cqi, 7cqi);
   border-radius: 50%;
   border: 3px solid;
   background: rgba(255, 255, 255, 0.1);
@@ -1066,8 +1089,8 @@ body {
 }
 
 .data-icon-btn svg {
-  width: clamp(1.5rem, 3vw, 2rem);
-  height: clamp(1.5rem, 3vw, 2rem);
+  width: clamp(1.2cqi, 3cqi, 4cqi);
+  height: clamp(1.2cqi, 3cqi, 4cqi);
   transition: transform 0.3s ease;
 }
 
@@ -1129,38 +1152,116 @@ body {
   box-shadow: 0 8px 32px rgba(251, 188, 4, 0.6);
 }
 
-/* GTECH Data Icons */
+.interactive-ad-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#ads {
+  position: relative;
+  container-type: inline-size;
+  height: clamp(300px, 60vh, 70vh);
+  width: clamp(300px, 80vw, 90vw);
+  max-width: 1200px;
+  margin: clamp(2rem, 10vh, 8rem) auto clamp(8rem, 15vh, 12rem);
+  /* Ensure SVG displays correctly */
+  display: block;
+  overflow: visible;
+}
 
 
-/* Responsive adjustments for interactive ad unit */
-@media (max-width: 1024px) {
-  .interactive-ad-container {
-    left: 50%;
-    top: 45%;
-  }
-  
+/* Container-based responsive adjustments for interactive ad unit */
+@container (max-width: 800px) {
   .ad-unit {
-    width: clamp(280px, 40vw, 350px);
-    height: clamp(200px, 28vw, 260px);
+    width: clamp(20cqi, 40cqi, 35cqi);
+    height: clamp(15cqi, 28cqi, 25cqi);
     padding: 1.2rem;
   }
 }
 
+@container (max-width: 500px) {
+  .ad-unit {
+    width: clamp(18cqi, 35cqi, 30cqi);
+    height: auto;
+    min-height: 20cqi;
+    padding: 1rem;
+  }
+}
+
+/* Media queries for layout changes */
 @media (max-width: 768px) {
+  #ads {
+    height: clamp(250px, 50vh, 60vh);
+    width: clamp(280px, 90vw, 95vw);
+    margin: clamp(1rem, 8vh, 6rem) auto clamp(6rem, 12vh, 10rem);
+    /* Ensure SVG displays correctly on tablet */
+    display: block;
+    overflow: visible;
+  }
+  
   .interactive-ad-container {
     position: static;
     transform: none;
     margin: 2rem auto;
     max-width: 90vw;
+    /* Ensure container doesn't interfere with SVG display */
+    z-index: 3;
   }
   
-  .ad-unit {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    min-height: 280px;
-    margin: 0 auto;
+  /* Increase icon sizes on tablet */
+  .data-icon-btn {
+    width: clamp(3rem, 8vw, 4rem);
+    height: clamp(3rem, 8vw, 4rem);
+    border: 3px solid;
   }
+  
+  .data-icon-btn svg {
+    width: clamp(1.5rem, 4vw, 2rem);
+    height: clamp(1.5rem, 4vw, 2rem);
+  }
+  
+  .gtech-data-icons {
+    top: clamp(0.5rem, 3vh, 2rem);
+    gap: clamp(0.5rem, 2vw, 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  #ads {
+    height: clamp(200px, 45vh, 50vh);
+    width: clamp(250px, 95vw, 100vw);
+    margin: clamp(0.5rem, 6vh, 4rem) auto clamp(4rem, 10vh, 8rem);
+    /* Ensure SVG displays correctly on mobile */
+    display: block;
+    overflow: visible;
+  }
+  
+  .gtech-data-icons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  /* Increase icon sizes on mobile */
+  .data-icon-btn {
+    width: clamp(3.5rem, 12vw, 5rem);
+    height: clamp(3.5rem, 12vw, 5rem);
+    border: 4px solid;
+  }
+  
+  .data-icon-btn svg {
+    width: clamp(1.8rem, 6vw, 2.5rem);
+    height: clamp(1.8rem, 6vw, 2.5rem);
+  }
+}
   
   .gtech-data-icons {
     position: static;
@@ -1172,6 +1273,142 @@ body {
     flex-direction: row;
     gap: 1rem;
   }
+
+  /* GTECH Data Icons */
+.gtech-data-icons {
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  transform: translateX(-50%) ;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  z-index: 5;
+}
+
+.data-icon-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  opacity: 1;
+  transform: translateX(0);
+  font: inherit;
+  color: inherit;
+}
+
+.data-icon-item:hover {
+  transform: translateX(0) scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.data-icon-item:active {
+  transform: translateX(0) scale(0.95);
+}
+
+.data-icon-item.active {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Ensure icons are always visible */
+.gtech-data-icons .data-icon-item {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure data icon buttons are visible by default */
+.data-icon-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Initial state for GTECH animations - hide icons initially */
+.gtech-case-study .data-icon-btn {
+  opacity: 0;
+  transform: scale(0) rotate(180deg);
+  visibility: hidden;
+}
+
+.data-icon-circle {
+  width: clamp(3rem, 5vw, 4rem);
+  height: clamp(3rem, 5vw, 4rem);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  border: clamp(2px, 0.3vw, 4px) solid;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.data-icon-circle svg {
+  width: clamp(1.5rem, 2.5vw, 2rem);
+  height: clamp(1.5rem, 2.5vw, 2rem);
+  transition: transform 0.3s ease;
+}
+
+.data-icon-item:hover .data-icon-circle svg {
+  transform: scale(1.1);
+}
+
+.data-icon-label {
+  font-family: 'Google Sans', var(--font-family-base);
+  font-weight: 500;
+  font-size: 1rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.025em;
+}
+
+/* Google Brand Colors for each icon */
+.data-icon-item[data-type="user"] .data-icon-circle {
+  border-color: #4285f4;
+  box-shadow: 0 0 15px rgba(66, 133, 244, 0.4);
+}
+
+.data-icon-item[data-type="location"] .data-icon-circle {
+  border-color: #ea4335;
+  box-shadow: 0 0 15px rgba(234, 67, 53, 0.4);
+}
+
+.data-icon-item[data-type="behaviour"] .data-icon-circle {
+  border-color: #34a853;
+  box-shadow: 0 0 15px rgba(52, 168, 83, 0.4);
+}
+
+.data-icon-item[data-type="trends"] .data-icon-circle {
+  border-color: #fbbc04;
+  box-shadow: 0 0 15px rgba(251, 188, 4, 0.4);
+}
+
+.data-icon-item[data-type="user"]:hover .data-icon-circle {
+  background: rgba(66, 133, 244, 1);
+  box-shadow: 0 0 25px rgba(66, 133, 244, 0.6);
+}
+
+
+.data-icon-item[data-type="location"]:hover .data-icon-circle {
+  background: rgba(234, 67, 53, 1);
+  box-shadow: 0 0 25px rgba(234, 67, 53, 0.6);
+}
+
+.data-icon-item[data-type="behaviour"]:hover .data-icon-circle {
+  background: rgba(52, 168, 83, 1);
+  box-shadow: 0 0 25px rgba(52, 168, 83, 0.6);
+}
+
+.data-icon-item[data-type="trends"]:hover .data-icon-circle {
+  background: rgba(251, 188, 4, 1);
+  box-shadow: 0 0 25px rgba(251, 188, 4, 0.6);
 }
 
 /* Responsive adjustments for data icons */

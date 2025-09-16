@@ -2,7 +2,7 @@ function init() {
    let avatar = document.querySelector('.avatar-container');
    let hero = document.querySelector('.hero-container');
    let tl = gsap.timeline();
-   gsap.registerPlugin(DrawSVGPlugin);
+   gsap.registerPlugin(DrawSVGPlugin,MorphSVGPlugin,ScrollTrigger)
    
   //  let userInteracted = false;
   //  let autoResumeTimeout;
@@ -511,20 +511,28 @@ function setupIframeReloading() {
 }
 
 function setupViewportObserver() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.target.classList.contains('case-study')) {
-        isCaseStudyVisible = entry.isIntersecting;
-      }
-    });
-  }, {
-    threshold: 0.1
+  // Use ScrollTrigger instead of IntersectionObserver for better control
+  ScrollTrigger.create({
+    trigger: ".case-study",
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: () => {
+      isCaseStudyVisible = true;
+      console.log("Case study entered viewport");
+    },
+    onLeave: () => {
+      isCaseStudyVisible = false;
+      console.log("Case study left viewport");
+    },
+    onEnterBack: () => {
+      isCaseStudyVisible = true;
+      console.log("Case study re-entered viewport from bottom");
+    },
+    onLeaveBack: () => {
+      isCaseStudyVisible = false;
+      console.log("Case study left viewport going up");
+    }
   });
-  
-  const caseStudy = document.querySelector('.case-study');
-  if (caseStudy) {
-    observer.observe(caseStudy);
-  }
 }
 
 function reloadAllIframes() {
@@ -602,230 +610,295 @@ function enableScrolling() {
 
 // GTECH Animation Functions
 function initGtechAnimation() {
-  // Set up intersection observer for GTECH case study
-  const gtechSection = document.getElementById('gtech-case');
-  if (!gtechSection) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateGtechDataIcons();
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.3
+  // ScrollTrigger animation for GTECH case study
+  ScrollTrigger.create({
+    trigger: "#gtech-case",
+    start: "top 80%",
+    end: "bottom 20%",
+    onEnter: () => {
+      console.log("GTECH section entered");
+      startGtechAnimations();
+    },
+    onLeave: () => {
+      console.log("GTECH section left");
+      pauseGtechAnimations();
+    },
+    onEnterBack: () => {
+      console.log("GTECH section entered from bottom");
+      resumeGtechAnimations();
+    },
+    onLeaveBack: () => {
+      console.log("GTECH section left going up");
+      pauseGtechAnimations();
+    }
   });
-
-  observer.observe(gtechSection);
 }
 
-// Interactive GTECH Ad Unit
-function animateGtechDataIcons() {
-  const dataIcons = document.querySelectorAll('.data-icon-btn');
-  const adUnit = document.getElementById('morphing-ad');
+function startGtechAnimations() {
+  // Debug: Check if elements exist
+  console.log("data-icon-user element:", document.getElementById('data-icon-user'));
+  console.log("data-icon-location element:", document.getElementById('data-icon-location'));
+  console.log("data-icon-behavior element:", document.getElementById('data-icon-behavior'));
+  console.log("data-icon-trending element:", document.getElementById('data-icon-trending'));
   
-  if (dataIcons.length === 0 || !adUnit) return;
-
-  // Product data for each variant with improved illustrations
-  const productData = {
-    demographics: {
-      title: "Smart Fitness Tracker",
-      description: "Perfect for health-conscious millennials",
-      price: "$149.99",
-      image: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><defs><linearGradient id='fitnessBg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%234285f4'/><stop offset='100%' stop-color='%231a73e8'/></linearGradient></defs><rect width='300' height='200' fill='url(%23fitnessBg)'/><ellipse cx='150' cy='100' rx='80' ry='50' fill='white' opacity='0.9'/><rect x='120' y='80' width='60' height='40' rx='20' fill='%234285f4'/><circle cx='130' cy='90' r='3' fill='white'/><circle cx='140' cy='90' r='3' fill='white'/><circle cx='150' cy='90' r='3' fill='white'/><text x='150' y='130' font-family='Arial,sans-serif' font-size='14' text-anchor='middle' fill='%234285f4' font-weight='bold'>FITNESS TRACKER</text></svg>"
-    },
-    location: {
-      title: "Winter Jacket - NYC",
-      description: "Stay warm in the concrete jungle",
-      price: "$89.99",
-      image: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><defs><linearGradient id='jacketBg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23ea4335'/><stop offset='100%' stop-color='%23d32f2f'/></linearGradient></defs><rect width='300' height='200' fill='url(%23jacketBg)'/><path d='M120 60 Q150 50 180 60 L185 140 Q150 150 115 140 Z' fill='white' opacity='0.9'/><rect x='140' y='70' width='20' height='30' rx='10' fill='%23ea4335'/><rect x='140' y='105' width='20' height='30' rx='10' fill='%23ea4335'/><text x='150' y='165' font-family='Arial,sans-serif' font-size='14' text-anchor='middle' fill='%23ea4335' font-weight='bold'>WINTER JACKET</text></svg>"
-    },
-    behavior: {
-      title: "Eco-Friendly Water Bottle",
-      description: "For environmentally conscious shoppers",
-      price: "$24.99",
-      image: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><defs><linearGradient id='ecoBg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2334a853'/><stop offset='100%' stop-color='%231e8e3e'/></linearGradient></defs><rect width='300' height='200' fill='url(%23ecoBg)'/><ellipse cx='150' cy='120' rx='25' ry='60' fill='white' opacity='0.9'/><rect x='140' y='50' width='20' height='15' rx='3' fill='%2334a853'/><path d='M150 80 Q155 85 150 90 Q145 85 150 80' fill='%2334a853'/><text x='150' y='165' font-family='Arial,sans-serif' font-size='12' text-anchor='middle' fill='%2334a853' font-weight='bold'>ECO BOTTLE</text></svg>"
-    },
-    trends: {
-      title: "Trending Gaming Headset",
-      description: "Top-rated by gamers worldwide",
-      price: "$199.99",
-      image: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'><defs><linearGradient id='gamingBg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23fbbc04'/><stop offset='100%' stop-color='%23f9ab00'/></linearGradient></defs><rect width='300' height='200' fill='url(%23gamingBg)'/><path d='M80 80 Q150 60 220 80 Q220 120 150 120 Q80 120 80 80' fill='white' opacity='0.9'/><circle cx='110' cy='100' r='15' fill='%23fbbc04'/><circle cx='190' cy='100' r='15' fill='%23fbbc04'/><rect x='140' y='90' width='20' height='8' rx='4' fill='%23fbbc04'/><text x='150' y='150' font-family='Arial,sans-serif' font-size='12' text-anchor='middle' fill='%23fbbc04' font-weight='bold'>GAMING HEADSET</text></svg>"
+  // Debug: Check initial computed styles
+  const userIcon = document.getElementById('data-icon-user');
+  const locationIcon = document.getElementById('data-icon-location');
+  const behaviorIcon = document.getElementById('data-icon-behavior');
+  const trendingIcon = document.getElementById('data-icon-trending');
+  
+  if (userIcon) {
+    const userStyle = getComputedStyle(userIcon);
+    console.log("User icon initial opacity:", userStyle.opacity, "visibility:", userStyle.visibility);
+  }
+  if (locationIcon) {
+    const locationStyle = getComputedStyle(locationIcon);
+    console.log("Location icon initial opacity:", locationStyle.opacity, "visibility:", locationStyle.visibility);
+  }
+  if (behaviorIcon) {
+    const behaviorStyle = getComputedStyle(behaviorIcon);
+    console.log("Behavior icon initial opacity:", behaviorStyle.opacity, "visibility:", behaviorStyle.visibility);
+  }
+  if (trendingIcon) {
+    const trendingStyle = getComputedStyle(trendingIcon);
+    console.log("Trending icon initial opacity:", trendingStyle.opacity, "visibility:", trendingStyle.visibility);
+  }
+  
+  let gtechTl = gsap.timeline({ 
+    gtechAnimation: true,
+    onComplete: () => {
+      // Enable icon interactions only after timeline completes
+      setupGtechIconInteractions();
     }
+  });
+  let gBlue = "#4285f4";
+  let gRed = "#ea4335";
+  let gYellow = "#fbbc04";
+  let gGreen = "#34a853";
+  
+  // Start the background particles
+  addGtechBackgroundParticles();
+  
+  
+  
+  // Animate SVG wireframes entrance
+  gtechTl
+    .addLabel('userIn', 0)
+    .addLabel('userOut', 2.5)
+    .addLabel('locationIn', 3)
+    .addLabel('locationOut', 5)
+    .addLabel('behaviourIn', 5.5)
+    .addLabel('behaviourOut', 8)
+    .addLabel('trendsIn', 8.5)
+    .addLabel('complete', 11)
+    // Data icons animate in sequence
+    .to('#data-icon-user', {
+      duration: 0.5, 
+      opacity: 1,
+      visibility: 'visible',
+      scale: 1, 
+      rotation: 0, 
+      ease: "back.out(1.7)",
+      onStart: () => console.log("User icon animation started"),
+      onComplete: () => console.log("User icon animation completed")
+    }, 'userIn')
+    .from("#ad-bg", {duration: 0.7, autoAlpha: 0, scale: 0, transformOrigin:"center center",ease: "back.out(1.7)"}, 'userIn')
+    .from('#user-product', {duration: 0.5, y: 30, autoAlpha: 0, ease: "power2.out"}, 'userIn+=0.3')
+    .from('#user-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'userIn+=0.5')
+    .from('#user-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'userIn+=0.8')
+    .to(['#user-product', '#user-txt', '#user-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'userOut')
+    .to('#data-icon-location', {
+      duration: 0.5, 
+      opacity: 1,
+      visibility: 'visible',
+      scale: 1, 
+      rotation: 0, 
+      ease: "back.out(1.7)",
+      onStart: () => console.log("Location icon animation started"),
+      onComplete: () => console.log("Location icon animation completed")
+    }, 'locationIn')
+    .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#location-bg", type: "rotational"}, fill:gRed, ease: "back.out(1.7)"}, 'locationIn')
+    .from('#location-product', {duration: 0.5, y: 30, autoAlpha: 0, ease: "power2.out"}, 'locationIn+=0.3')
+    .from('#location-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'locationIn+=0.5')
+    .from('.star', {duration: 0.3, scale: 0, rotation: 180, stagger: 0.15, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'locationIn+=0.6')
+    .from('#location-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'locationIn+=0.8')
+    .to(['#location-product', '#location-txt', '.star', '#location-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'locationOut')
+    .to('#data-icon-behavior', {
+      duration: 0.5, 
+      opacity: 1,
+      visibility: 'visible',
+      scale: 1, 
+      rotation: 0, 
+      ease: "back.out(1.7)",
+      onStart: () => console.log("Behavior icon animation started"),
+      onComplete: () => console.log("Behavior icon animation completed")
+    }, 'behaviourIn')
+    .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#behaviour-bg", type: "rotational"}, fill:gGreen, ease: "back.out(1.7)"}, 'behaviourIn')
+    .from('.behaviour-product', {duration: 0.5, y: 30, autoAlpha: 0, stagger: 0.2, ease: "power2.out"}, 'behaviourIn+=0.3')
+    .from('.behaviour-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", stagger: 0.2, ease: "power2.out"}, 'behaviourIn+=0.5')
+    .from('.behaviour-cta', {duration: 0.5, scale: 0, autoAlpha: 0, stagger: 0.2,ease: "power2.out"}, 'behaviourIn+=0.8')
+    .to(['.behaviour-product', '.behaviour-txt', '.behaviour-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'behaviourOut')
+    .to('#data-icon-trending', {
+      duration: 0.5, 
+      opacity: 1,
+      visibility: 'visible',
+      scale: 1, 
+      rotation: 0, 
+      ease: "back.out(1.7)",
+      onStart: () => console.log("Trending icon animation started"),
+      onComplete: () => console.log("Trending icon animation completed")
+    }, 'trendsIn')
+    .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#trending-bg", type: "rotational"}, fill:gYellow, ease: "back.out(1.7)"}, 'trendsIn')
+    .from('#trending-screen', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'trendsIn+=0.3')
+    .from('#trending-icon', {duration: 0.5, scale: 0, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'trendsIn+=0.4')
+    .from('#trending-title', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'trendsIn+=0.5')
+    .from('#trending-product', {duration: 0.5, scaleY: 0, transformOrigin: "top center", ease: "power2.out"}, 'trendsIn+=0.5')
+    .from('#trending-play', {duration: 0.5, scale: 0, rotation: 180, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'trendsIn+=0.6')
+    .from('#trending-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'trendsIn+=0.5')
+    .from('#trending-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'trendsIn+=0.8');
+    
+  // Store timeline reference for use in animateAdElements
+  window.gtechMainTimeline = gtechTl;
+}
+
+function pauseGtechAnimations() {
+  // Pause all GTECH animations when out of view
+  gsap.globalTimeline.getChildren().forEach(tween => {
+    if (tween.vars.gtechAnimation) {
+      tween.pause();
+    }
+  });
+}
+
+function resumeGtechAnimations() {
+  // Resume all GTECH animations when back in view
+  gsap.globalTimeline.getChildren().forEach(tween => {
+    if (tween.vars.gtechAnimation) {
+      tween.resume();
+    }
+  });
+}
+
+function setupGtechIconInteractions() {
+  const iconButtons = document.querySelectorAll('.data-icon-btn');
+  const colors = {
+    'user': '#4285f4',
+    'location': '#ea4335',
+    'behaviour': '#34a853', 
+    'trends': '#fbbc04'
   };
-
-  // Set initial states
-  gsap.set(dataIcons, {
-    opacity: 1,
-    scale: 1
-  });
-
-  // Animate icons with stagger entrance
-  const tl = gsap.timeline();
-  tl.from(dataIcons, {
-    duration: 0.8,
-    autoAlpha: 0,
-    y: -30,
-    scale: 0.5,
-    ease: "back.out(1.7)",
-    stagger: {
-      amount: 0.4,
-      from: "start"
-    }
-  })
-
-  // Initial showcase animation
-  setTimeout(() => {
-    showcaseAdFunctionality();
-  }, 2000);
-
-  // Add click interactions
-  dataIcons.forEach((icon, index) => {
-    icon.addEventListener('click', () => {
-      const targetType = icon.dataset.target;
-      morphAdUnit(targetType, productData[targetType]);
+  
+  iconButtons.forEach(button => {
+    // Set initial button color
+    const type = button.dataset.type;
+    button.style.backgroundColor = colors[type];
+    
+    button.addEventListener('click', () => {
+      // Trigger appropriate animation using timeline labels
+      animateAdElements(type);
       
-      // Update active state
-      dataIcons.forEach(i => i.classList.remove('active'));
-      icon.classList.add('active');
+      // Update button states
+      iconButtons.forEach(btn => {
+        btn.classList.remove('active');
+        gsap.to(btn, { scale: 1, duration: 0.2 });
+      });
+      
+      button.classList.add('active');
+      gsap.to(button, { scale: 1.1, duration: 0.2 });
     });
-  });
-
-  function morphAdUnit(targetType, data) {
-    const adUnit = document.getElementById('morphing-ad');
     
-    // Add morphing class for animation
-    adUnit.classList.add('morphing');
-    
-    // Animate out current content
-    gsap.to(['.ad-title', '.ad-description', '.ad-price'], {
-      duration: 0.3,
-      opacity: 0,
-      y: -20,
-      ease: "power2.out"
-    });
-
-    gsap.to('.ad-product-image', {
-      duration: 0.3,
-      scale: 0.8,
-      opacity: 0.5,
-      ease: "power2.out",
-      onComplete: () => {
-        // Update content
-        document.querySelector('.ad-title').textContent = data.title;
-        document.querySelector('.ad-description').textContent = data.description;
-        document.querySelector('.ad-price').textContent = data.price;
-        document.querySelector('.ad-product-image img').src = data.image;
-        
-        // Update theme
-        adUnit.className = `ad-unit ${targetType}`;
-        
-        // Animate in new content
-        gsap.to('.ad-product-image', {
-          duration: 0.4,
-          scale: 1,
-          opacity: 1,
-          ease: "back.out(1.2)"
-        });
-        
-        gsap.to(['.ad-title', '.ad-description', '.ad-price'], {
-          duration: 0.4,
-          opacity: 1,
-          y: 0,
-          ease: "back.out(1.2)",
-          stagger: 0.1
-        });
-        
-        // Remove morphing class
-        setTimeout(() => {
-          adUnit.classList.remove('morphing');
-        }, 800);
+    // Hover effects
+    button.addEventListener('mouseenter', () => {
+      if (!button.classList.contains('active')) {
+        gsap.to(button, { scale: 1.05, duration: 0.2 });
       }
     });
-  }
-
-  function showcaseAdFunctionality() {
-    const icons = Array.from(dataIcons);
-    let currentIndex = 0;
-
-    function cycleThrough() {
-      const currentIcon = icons[currentIndex];
-      const targetType = currentIcon.dataset.target;
-      
-      // Highlight current icon
-      dataIcons.forEach(i => i.classList.remove('active'));
-      currentIcon.classList.add('active');
-      
-      // Morph ad unit
-      morphAdUnit(targetType, productData[targetType]);
-      
-      // Reset icon after delay
-      setTimeout(() => {
-        currentIcon.classList.remove('active');
-        
-        currentIndex = (currentIndex + 1) % icons.length;
-        
-        if (currentIndex === 0) {
-          // Completed one cycle, show a "click to interact" hint
-          showInteractionHint();
-        } else {
-          setTimeout(cycleThrough, 1500);
-        }
-      }, 1200);
-    }
-
-    cycleThrough();
-  }
-
-  function showInteractionHint() {
-    // Create hint element
-    const hint = document.createElement('div');
-    hint.textContent = 'Click data points to explore variations';
-    hint.style.cssText = `
-      position: absolute;
-      top: 85%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.95);
-      color: #333;
-      padding: 0.75rem 1.5rem;
-      border-radius: 25px;
-      font-size: 1rem;
-      font-weight: 500;
-      pointer-events: none;
-      z-index: 10;
-      opacity: 0;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-    `;
     
-    document.getElementById('gtech-case').appendChild(hint);
-    
-    gsap.to(hint, {
-      duration: 0.5,
-      opacity: 1,
-      y: -10,
-      ease: "power2.out"
+    button.addEventListener('mouseleave', () => {
+      if (!button.classList.contains('active')) {
+        gsap.to(button, { scale: 1, duration: 0.2 });
+      }
     });
+  });
+  
+  // Set initial active state for user button
+  const userButton = document.querySelector('[data-type="user"]');
+  if (userButton) {
+    userButton.classList.add('active');
+    gsap.set(userButton, { scale: 1.1 });
+  }
+}
 
-    setTimeout(() => {
-      gsap.to(hint, {
-        duration: 0.5,
-        opacity: 0,
-        y: -20,
-        ease: "power2.out",
-        onComplete: () => hint.remove()
-      });
-    }, 3000);
+function animateAdElements(type) {
+  // Get reference to the main timeline
+  const mainTimeline = window.gtechMainTimeline;
+  if (!mainTimeline) return;
+  
+  // Map types to their corresponding timeline labels
+  const labelMap = {
+    'user': 'userIn',
+    'location': 'locationIn', 
+    'behaviour': 'behaviourIn',
+    'trends': 'trendsIn'
+  };
+  
+  const targetLabel = labelMap[type];
+  if (!targetLabel) return;
+  
+  // Seek to the appropriate label in the timeline
+  mainTimeline.seek(targetLabel);
+  
+  // Reset all ad groups visibility first
+  gsap.set(['#user-ad', '#location-ad', '#behaviour-ad', '#trending-ad'], { 
+    display: 'none', 
+    autoAlpha: 0 
+  });
+  
+  // Show and animate the target ad group based on type
+  switch(type) {
+    case 'user':
+      gsap.set('#user-ad', { display: 'block' });
+      gsap.to('#user-ad', { autoAlpha: 1, duration: 0.3 });
+      // Play from userIn label
+      mainTimeline.play(targetLabel);
+      break;
+      
+    case 'location':
+      gsap.set('#location-ad', { display: 'block' });
+      gsap.to('#location-ad', { autoAlpha: 1, duration: 0.3 });
+      // Play from locationIn label  
+      mainTimeline.play(targetLabel);
+      break;
+      
+    case 'behaviour':
+      gsap.set('#behaviour-ad', { display: 'block' });
+      gsap.to('#behaviour-ad', { autoAlpha: 1, duration: 0.3 });
+      // Play from behaviourIn label
+      mainTimeline.play(targetLabel);
+      break;
+      
+    case 'trends':
+      gsap.set('#trending-ad', { display: 'block' });
+      gsap.to('#trending-ad', { autoAlpha: 1, duration: 0.3 });
+      // Play from trendsIn label
+      mainTimeline.play(targetLabel);
+      break;
+      
+    default:
+      // Default to user animation
+      gsap.set('#user-ad', { display: 'block' });
+      gsap.to('#user-ad', { autoAlpha: 1, duration: 0.3 });
+      mainTimeline.play('userIn');
+      break;
   }
 }
 
 function addGtechBackgroundParticles() {
-  const gtechSection = document.getElementById('gtech-case');
+  // Create animated background particles for GTECH section
+  const gtechSection = document.querySelector('#gtech-case');
   if (!gtechSection) return;
-
-  // Create floating particles for visual interest
+  
+  // Create particle container
   const particleContainer = document.createElement('div');
   particleContainer.className = 'gtech-particles';
   particleContainer.style.cssText = `
@@ -835,58 +908,77 @@ function addGtechBackgroundParticles() {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
     overflow: hidden;
+    z-index: -1;
   `;
-
-  gtechSection.appendChild(particleContainer);
-
-  // Google brand colors for particles
-  const colors = ['#4285f4', '#ea4335', '#34a853', '#fbbc04'];
   
-  for (let i = 0; i < 20; i++) {
+  gtechSection.style.position = 'relative';
+  gtechSection.appendChild(particleContainer);
+  
+  // Create particles
+  const particleCount = 20;
+  const particles = [];
+  
+  for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
+    particle.className = 'gtech-particle';
+    
+    // Random Google brand color
+    const colors = ['#4285f4', '#ea4335', '#34a853', '#fbbc04'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
     particle.style.cssText = `
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: ${Math.random() * 8 + 4}px;
+      height: ${Math.random() * 8 + 4}px;
+      background: ${color};
       border-radius: 50%;
-      background: ${colors[i % colors.length]};
-      opacity: 0.6;
-      left: ${Math.random() * 100}%;
-      top: ${Math.random() * 100}%;
-      animation: gtechFloat ${3 + Math.random() * 4}s ease-in-out infinite;
-      animation-delay: ${Math.random() * 2}s;
+      opacity: 0.3;
     `;
+    
+    // Random initial position
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    
     particleContainer.appendChild(particle);
+    particles.push(particle);
   }
-
-  // Add CSS animation for particles
-  if (!document.getElementById('gtech-particles-style')) {
-    const style = document.createElement('style');
-    style.id = 'gtech-particles-style';
-    style.textContent = `
-      @keyframes gtechFloat {
-        0%, 100% { 
-          transform: translateY(0) translateX(0) scale(1);
-          opacity: 0.6;
-        }
-        25% { 
-          transform: translateY(-20px) translateX(10px) scale(1.2);
-          opacity: 1;
-        }
-        50% { 
-          transform: translateY(-10px) translateX(-10px) scale(0.8);
-          opacity: 0.8;
-        }
-        75% { 
-          transform: translateY(-30px) translateX(5px) scale(1.1);
-          opacity: 0.9;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  }
+  
+  // Animate particles with ScrollTrigger
+  ScrollTrigger.create({
+    trigger: "#gtech-case",
+    start: "top bottom",
+    end: "bottom top",
+    scrub: 1,
+    onUpdate: (self) => {
+      const progress = self.progress;
+      
+      particles.forEach((particle, index) => {
+        const speed = (index % 3 + 1) * 0.5;
+        const direction = index % 2 === 0 ? 1 : -1;
+        
+        gsap.set(particle, {
+          x: Math.sin(progress * Math.PI * 2 + index) * 30 * direction,
+          y: progress * 100 * speed - 50,
+          rotation: progress * 360 * direction,
+          opacity: 0.1 + Math.sin(progress * Math.PI) * 0.3
+        });
+      });
+    }
+  });
+  
+  // Floating animation for particles
+  particles.forEach((particle, index) => {
+    gsap.to(particle, {
+      y: "+=20",
+      duration: 2 + Math.random() * 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+      delay: Math.random() * 2,
+      gtechAnimation: true
+    });
+  });
 }
 
 // Note: init() is called from HTML's window.onload event

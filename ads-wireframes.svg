@@ -1,0 +1,48 @@
+<svg id="ads" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1228.08 976.55">
+  <g id="user-ad">
+    <rect id="user-bg" x="356.84" y="110.79" width="514.4" height="754.96" rx="14" ry="14" fill="#4285f4"/>
+    <path id="user-product" d="M850.57,604.52h-473.06V147.46c0-8.84,7.16-16,16-16h441.06c8.84,0,16,7.16,16,16v457.06Z" fill="#fff"/>
+    <path id="user-txt" d="M729.48,668.41h-352.23v-27.87h352.23v27.87ZM631.71,683.47h-254.46v27.87h254.46v-27.87ZM590.97,726.38h-213.71v27.87h213.71v-27.87Z" fill="#fff"/>
+    <rect id="user-cta" x="377.26" y="796.6" width="187.39" height="52.91" rx="26.45" ry="26.45" fill="#fff"/>
+  </g>
+  <g id="location-ad">
+    <path id="location-bg" d="M16,230.29h1196.08c8.38,0,15.19,6.81,15.19,15.19v485.58c0,8.38-6.81,15.19-15.19,15.19H16c-8.38,0-15.19-6.81-15.19-15.19V245.48c0-8.38,6.81-15.19,15.19-15.19Z" fill="#ea4335"/>
+    <rect id="location-product" x="22.67" y="252.15" width="472.24" height="472.24" rx="16" ry="16" fill="#fff"/>
+    <path id="location-txt" d="M1156.27,321.49h-569.94s0-45.09,0-45.09h569.94s0,45.09,0,45.09ZM998.08,345.85h-411.74s0,45.09,0,45.09h411.74s0-45.09,0-45.09ZM932.15,415.29h-345.81s0,45.09,0,45.09h345.81s0-45.09,0-45.09Z" fill="#fff"/>
+    <rect id="location-cta" x="586.33" y="614.53" width="303.21" height="85.61" rx="26.45" ry="26.45" fill="#fff"/>
+    <polygon id="location-star1" class="star" points="629.09 530.24 655.51 530.24 634.13 545.77 642.3 570.9 620.92 555.37 599.55 570.9 607.71 545.77 586.33 530.24 612.76 530.24 620.92 505.11 629.09 530.24" fill="#fff"/>
+    <polygon id="location-star2" class="star" points="714.86 529.88 741.28 529.88 719.9 545.41 728.07 570.53 706.69 555 685.32 570.53 693.48 545.41 672.1 529.88 698.53 529.88 706.69 504.75 714.86 529.88" fill="#fff"/>
+    <polygon id="location-star3" class="star" points="800.63 529.51 827.05 529.51 805.67 545.04 813.84 570.17 792.46 554.64 771.09 570.17 779.25 545.04 757.87 529.51 784.3 529.51 792.46 504.38 800.63 529.51" fill="#fff"/>
+    <polygon id="location-star4" class="star" points="886.4 529.14 912.82 529.14 891.44 544.67 899.61 569.8 878.23 554.27 856.86 569.8 865.02 544.67 843.65 529.14 870.07 529.14 878.23 504.01 886.4 529.14" fill="#fff"/>
+  </g>
+  <g id="behaviour-ad">
+    <path id="behaviour-bg" d="M16,230.29h1196.08c8.38,0,15.19,6.81,15.19,15.19v485.58c0,8.38-6.81,15.19-15.19,15.19H16c-8.38,0-15.19-6.81-15.19-15.19V245.48c0-8.38,6.81-15.19,15.19-15.19Z" fill="#34a853"/>
+    <g id="behaviour-products">
+      <rect id="behaviour_product1" class="behaviour-product" x="18.4" y="262.22" width="284.26" height="284.26" fill="#fff"/>
+      <rect id="behaviour_product2" class="behaviour-product" x="320.46" y="262.22" width="284.26" height="284.26" fill="#fff"/>
+      <rect id="behaviour_product3" class="behaviour-product" x="622.52" y="262.22" width="284.26" height="284.26" fill="#fff"/>
+      <rect id="behaviour_product4" class="behaviour-product" x="924.57" y="262.22" width="284.26" height="284.26" fill="#fff"/>
+    </g>
+    <g id="behaviour_txts">
+      <path id="behaviour-txt1" class="behaviour-txt" d="M302.94,586.64H18.13v-17.01h284.81v17.01ZM223.88,595.83H18.13v17.01h205.76v-17.01ZM190.94,622.03H18.13v17.01h172.81v-17.01Z" fill="#fff"/>
+      <path id="behaviour-txt2" class="behaviour-txt" d="M584.84,586.64h-264.66v-17.01h264.66v17.01ZM511.38,595.83h-191.2v17.01h191.2v-17.01ZM480.77,622.03h-160.58v17.01h160.58v-17.01Z" fill="#fff"/>
+      <path id="behaviour-txt3" class="behaviour-txt" d="M856.78,586.64h-234.53v-17.01h234.53v17.01ZM791.68,595.83h-169.44v17.01h169.44v-17.01ZM764.55,622.03h-142.3v17.01h142.3v-17.01Z" fill="#fff"/>
+      <path id="behaviour-txt4" class="behaviour-txt" d="M1167.56,586.64h-243.26v-17.01h243.26v17.01ZM1100.04,595.83h-175.74v17.01h175.74v-17.01ZM1071.9,622.03h-147.6v17.01h147.6v-17.01Z" fill="#fff"/>
+    </g>
+    <g id="behaviour-ctas">
+      <rect id="behaviour-cta1" class="behaviour-cta" x="18.13" y="671.82" width="151.52" height="42.78" rx="21.39" ry="21.39" fill="#fff"/>
+      <rect id="behaviour-cta2" class="behaviour-cta" x="320.18" y="671.82" width="151.52" height="42.78" rx="21.39" ry="21.39" fill="#fff"/>
+      <rect id="behaviour-cta3" class="behaviour-cta" x="622.24" y="671.82" width="151.52" height="42.78" rx="21.39" ry="21.39" fill="#fff"/>
+      <rect id="behaviour-cta4" class="behaviour-cta" x="924.3" y="671.82" width="151.52" height="42.78" rx="21.39" ry="21.39" fill="#fff"/>
+    </g>
+  </g>
+  <g id="trending-ad">
+    <rect id="trending-bg" x="355.41" y=".57" width="517.26" height="975.41" rx="23.43" ry="23.43" fill="#fbbc04"/>
+    <rect id="trending-screen" x="374.18" y="22.66" width="479.72" height="931.22" rx="22" ry="22" fill="#fff"/>
+    <rect id="trending-product" x="396.69" y="55.64" width="433.69" height="673.86" fill="#fbbc04"/>
+    <path id="trending-title" d="M512.49,130.7v-13.01h171.74v13.01h-171.74ZM512.96,104.96v-13.01h239.26v13.01h-239.26Z" fill="#fff"/>
+    <path id="trending-icon" d="M455.53,148.29c-20.38,0-36.96-16.58-36.96-36.96s16.58-36.96,36.96-36.96,36.96,16.58,36.96,36.96-16.58,36.96-36.96,36.96Z" fill="#fff"/>
+    <path id="trending-txt" d="M808.43,808.36h-411.74s0-32.57,0-32.57h411.74s0,32.57,0,32.57ZM694.14,825.95h-297.45s0,32.57,0,32.57h297.45s0-32.57,0-32.57ZM646.51,876.12h-249.83s0,32.57,0,32.57h249.83s0-32.57,0-32.57Z" fill="#fbbc04"/>
+    <polygon id="trending-play" points="663.54 392.57 588.54 349.27 588.54 435.87 663.54 392.57" fill="#fff"/>
+  </g>
+</svg>
