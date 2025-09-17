@@ -21,7 +21,7 @@ function init() {
     .addLabel('glow', 2.5)
     .addLabel('sparks', 2.6)
     .from('.avatar-container', { duration: 0, display: 'none' }, 'init')
-    .from('#circle_bg', { duration: 0.5, r: 0, ease: 'cubic.out' }, 'init')
+    .from('#circle_bg', { duration: 1, r: 0, ease: 'cubic.out' }, 'init')
     .from('#xavi', { duration: 0.5, y:'100%', ease: 'cubic.out'}, 'start')
     .call(() => {
       addMouseEvent();
@@ -197,6 +197,12 @@ function updateWindowSize() {
       // Initialize GTECH animation
       initGtechAnimation();
       addGtechBackgroundParticles();
+      
+      // Initialize FBTO animation
+      initFbtoAnimation();
+      
+      // Initialize HUAWEI animation
+      initHuaweiAnimation();
     }, 2500); // Reduced from 3000 to 2500 to start loading earlier
   }
   
@@ -857,7 +863,7 @@ function animateAdElements(type, onComplete) {
     userTL
       .to('#ad-bg', {
         duration: 0.5, 
-        morphSVG: {shape:"path[d='M857.24,867.75h-486.4c-8.84,0-16-7.16-16-16V124.79c0-8.84,7.16-16,16-16h486.4c8.84,0,16,7.16,16,16v726.96c0,8.84-7.16,16-16,16Z']", type: "rotational"}, 
+        morphSVG: {shape:"#user-bg", type: "rotational"}, 
         fill: gBlue, 
         ease: "back.out(1.7)"
       }, 0)
@@ -951,7 +957,7 @@ function animateAdElements(type, onComplete) {
 }
 
 function addGtechBackgroundParticles() {
-  // Create animated background particles for GTECH section
+  // Create Material Design-inspired background particles for GTECH section
   const gtechSection = document.querySelector('#gtech-case');
   if (!gtechSection) return;
   
@@ -966,77 +972,246 @@ function addGtechBackgroundParticles() {
     height: 100%;
     pointer-events: none;
     overflow: hidden;
-    z-index: -1;
+    z-index: 2;
   `;
   
   gtechSection.style.position = 'relative';
   gtechSection.appendChild(particleContainer);
   
-  // Create particles
-  const particleCount = 20;
+  // Create subtle Material Design particles
+  const particleCount = 12; // Reduced for cleaner look
   const particles = [];
+  
+  // Very subtle Google brand colors for Material Design feel
+  const materialColors = [
+    'rgba(66, 133, 244, 0.08)',   // Google Blue - very subtle
+    'rgba(234, 67, 53, 0.06)',    // Google Red - very subtle
+    'rgba(52, 168, 83, 0.07)',    // Google Green - very subtle
+    'rgba(251, 188, 4, 0.05)',    // Google Yellow - very subtle
+    'rgba(156, 39, 176, 0.04)',   // Material Purple - very subtle
+    'rgba(96, 125, 139, 0.06)'    // Material Blue Grey - very subtle
+  ];
   
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
-    particle.className = 'gtech-particle';
+    particle.className = 'material-particle';
     
-    // Random Google brand color
-    const colors = ['#4285f4', '#ea4335', '#34a853', '#fbbc04'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
+    // Material Design-inspired particle styling
+    const size = Math.random() * 3 + 1; // Smaller particles (1-4px)
+    const color = materialColors[Math.floor(Math.random() * materialColors.length)];
     
     particle.style.cssText = `
       position: absolute;
-      width: ${Math.random() * 8 + 4}px;
-      height: ${Math.random() * 8 + 4}px;
+      width: ${size}px;
+      height: ${size}px;
       background: ${color};
       border-radius: 50%;
-      opacity: 0.3;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      opacity: 0;
     `;
-    
-    // Random initial position
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.top = Math.random() * 100 + '%';
     
     particleContainer.appendChild(particle);
     particles.push(particle);
-  }
-  
-  // Animate particles with ScrollTrigger
-  ScrollTrigger.create({
-    trigger: "#gtech-case",
-    start: "top bottom",
-    end: "bottom top",
-    scrub: 1,
-    onUpdate: (self) => {
-      const progress = self.progress;
-      
-      particles.forEach((particle, index) => {
-        const speed = (index % 3 + 1) * 0.5;
-        const direction = index % 2 === 0 ? 1 : -1;
-        
-        gsap.set(particle, {
-          x: Math.sin(progress * Math.PI * 2 + index) * 30 * direction,
-          y: progress * 100 * speed - 50,
-          rotation: progress * 360 * direction,
-          opacity: 0.1 + Math.sin(progress * Math.PI) * 0.3
-        });
-      });
-    }
-  });
-  
-  // Floating animation for particles
-  particles.forEach((particle, index) => {
+    
+    // Material Design-inspired animation with cubic-bezier timing
+    gsap.set(particle, {
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      opacity: 0
+    });
+    
+    // Gentle, Material Design-style floating animation
     gsap.to(particle, {
-      y: "+=20",
-      duration: 2 + Math.random() * 2,
+      duration: Math.random() * 8 + 6, // 6-14 seconds
+      x: `+=${Math.random() * 100 - 50}`,
+      y: `+=${Math.random() * 80 - 40}`,
+      opacity: Math.random() * 0.4 + 0.1, // Very subtle opacity
+      ease: "none",
       repeat: -1,
       yoyo: true,
-      ease: "power1.inOut",
-      delay: Math.random() * 2,
-      gtechAnimation: true
+      delay: Math.random() * 2
     });
+    
+    // Subtle scale pulsing for Material Design depth
+    gsap.to(particle, {
+      duration: Math.random() * 4 + 3,
+      scale: Math.random() * 0.5 + 0.8,
+      ease: "power2.inOut",
+      repeat: -1,
+      yoyo: true,
+      delay: Math.random() * 3
+    });
+  }
+}
+
+// FBTO Animation Functions
+let fbtoTl = null; // Global timeline reference for FBTO animations
+
+function initFbtoAnimation() {
+  // ScrollTrigger animation for FBTO case study
+  ScrollTrigger.create({
+    trigger: "#fbto-case",
+    start: "top 80%",
+    end: "bottom 20%",
+    onEnter: () => {
+      console.log("FBTO section entered");
+      // First time entering - start the animation
+      if (!fbtoTl) {
+        startFbtoAnimations();
+      } else {
+        // Timeline exists but was paused - resume it
+        fbtoTl.play();
+      }
+    },
+    onLeave: () => {
+      console.log("FBTO section left");
+      if (fbtoTl) {
+        fbtoTl.pause();
+      }
+    },
+    onEnterBack: () => {
+      console.log("FBTO section entered from bottom");
+      if (fbtoTl) {
+        fbtoTl.play();
+      }
+    },
+    onLeaveBack: () => {
+      console.log("FBTO section left going up");
+      if (fbtoTl) {
+        fbtoTl.pause();
+      }
+    }
   });
 }
 
-// Note: init() is called from HTML's window.onload event
+function startFbtoAnimations() {
+  fbtoTl = gsap.timeline({ 
+    repeat: -1, // Loop the animation
+    yoyo: true,
+    onStart: () => {
+      console.log("FBTO animation started");
+    }
+  });
+  
+  // Noodle drawing animation
+  fbtoTl
+    .set('#noodle', { autoAlpha: 1, drawSVG: "0% 0%" })
+    .addLabel('noodleStart', 0)
+    .to('#noodle', 2.2, { drawSVG: "0% 100%", ease: "power1.out" }, 'noodleStart');
+    
+  console.log("FBTO timeline created and started");
+}
 
+// HUAWEI Animation Functions
+let huaweiTl = null; // Global timeline reference for HUAWEI animations
+
+function initHuaweiAnimation() {
+  // ScrollTrigger animation for HUAWEI case study
+  ScrollTrigger.create({
+    trigger: "#huawei-case",
+    start: "top 80%",
+    end: "bottom 20%",
+    onEnter: () => {
+      console.log("HUAWEI section entered");
+      // First time entering - start the animation
+      if (!huaweiTl) {
+        startHuaweiAnimations();
+      } else {
+        // Timeline exists but was paused - resume it
+        huaweiTl.play();
+      }
+    },
+    onLeave: () => {
+      console.log("HUAWEI section left");
+      if (huaweiTl) {
+        huaweiTl.pause();
+      }
+    },
+    onEnterBack: () => {
+      console.log("HUAWEI section entered from bottom");
+      if (huaweiTl) {
+        huaweiTl.play();
+      }
+    },
+    onLeaveBack: () => {
+      console.log("HUAWEI section left going up");
+      if (huaweiTl) {
+        huaweiTl.pause();
+      }
+    }
+  });
+}
+
+function startHuaweiAnimations() {
+  huaweiTl = gsap.timeline({ 
+    repeat: -1, 
+    onStart: () => {
+      console.log("HUAWEI animation started");
+    }
+  });
+  
+  // Huawei phone animation - colors fade in on top of each other with gradient changes
+  huaweiTl
+    // Set initial state - Only Green phone visible with green gradient (matches HTML default)
+    .set('#phones_front', { autoAlpha: 1 })
+    .set('#phones_back', { autoAlpha: 1 })
+    .set('.front_phone', { autoAlpha: 0 })
+    .set('.back_phone', { autoAlpha: 0 })
+    .set('#green_front', { autoAlpha: 1 })
+    .set('#green_back', { autoAlpha: 1 })
+    // Ensure gradient starts with green colors
+    .set('#bg_gradient stop', { attr: { "stop-color": (i) => ["#02b09c", "#009d91", "#027b7f"][i] } })
+    
+    // Define animation labels for each color phase
+    .addLabel('green_start', 0)
+    .addLabel('to_orange', 2)
+    .addLabel('to_black', 4)
+    .addLabel('to_blue', 6)
+    .addLabel('cycle_end', 8)
+    
+    // Phase 1: Orange fades in on top while gradient changes to orange
+    .to('#bg_gradient stop', { 
+      duration: 1.5, 
+      attr: { "stop-color": (i) => ["#ff8400", "#ff6700", "#ff3602"][i] }, 
+      ease: "sine.inOut",
+      stagger: 0.1 
+    }, 'to_orange')
+    .to(['#orange_front', '#orange_back'], { duration: 1, autoAlpha: 1, ease: "sine.inOut" }, 'to_orange')
+    
+    // Phase 2: Black fades in on top while gradient changes to black
+    .to('#bg_gradient stop', { 
+      duration: 1.5, 
+      attr: { "stop-color": (i) => ["#7c7c7c", "#4a4a4a", "#000000"][i] }, 
+      ease: "sine.inOut",
+      stagger: 0.1 
+    }, 'to_black')
+    .to(['#black_front', '#black_back'], { duration: 1, autoAlpha: 1, ease: "sine.inOut" }, 'to_black')
+    
+    // Phase 3: Blue fades in on top while gradient changes to blue
+    .to('#bg_gradient stop', { 
+      duration: 1.5, 
+      attr: { "stop-color": (i) => ["#d8edfc", "#a1daf8", "#4db4e7"][i] }, 
+      ease: "sine.inOut",
+      stagger: 0.1 
+    }, 'to_blue')
+    .to(['#blue_front', '#blue_back'], { duration: 1, autoAlpha: 1, ease: "sine.inOut" }, 'to_blue')
+    
+    // Phase 4: Reset for loop - hide all phones except green, reset gradient to green
+    .to(['#orange_front', '#orange_back', '#black_front', '#black_back', '#blue_front', '#blue_back'], { 
+      duration: 0.5, 
+      autoAlpha: 0, 
+      ease: "sine.inOut" 
+    }, 'cycle_end')
+    .to('#bg_gradient stop', { 
+      duration: 0.5, 
+      attr: { "stop-color": (i) => ["#02b09c", "#009d91", "#027b7f"][i] }, 
+      ease: "sine.inOut",
+      stagger: 0.1 
+    }, 'cycle_end');
+    
+  console.log("HUAWEI timeline created and started");
+}
+
+// Note: init() is called from HTML's window.onload event
