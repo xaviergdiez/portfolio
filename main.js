@@ -62,6 +62,10 @@ let yPosition;
 let height;
 let width;
 
+// Variables for background container viewbox
+let w = window.innerWidth;
+let h = window.innerHeight * 2;
+
 function percentage(partialValue, totalValue) {
   return (100 * partialValue) / totalValue;
 }
@@ -131,7 +135,24 @@ function updateWindowSize() {
     width = window.innerWidth;
   }
   updateWindowSize();
+  
+  // Initialize background container viewbox variables
+  w = window.innerWidth;
+  h = window.innerHeight * 2;
+  
+  // Resize handler for background container
+  function resizeHandler() {
+    w = window.innerWidth;
+    h = window.innerHeight * 2;
+    gsap.set('#bg_container', { attr: {viewBox: '0 0'+ ' ' + w + ' ' + h} });
+  }
+  
+  // Initialize background container viewbox
+  resizeHandler();
+  
+  // Add both resize handlers
   window.addEventListener("resize", updateWindowSize);
+  window.addEventListener("resize", resizeHandler);
   
   function setupUserInteraction(timeline) {
     // Create a visual indicator for user interaction (optional)
@@ -664,13 +685,13 @@ function startGtechAnimations() {
   // Animate SVG wireframes entrance
   gtechTl
     .addLabel('userIn', 0)
-    .addLabel('userOut', 2.5)
-    .addLabel('locationIn', 3)
-    .addLabel('locationOut', 5)
-    .addLabel('behaviourIn', 5.5)
-    .addLabel('behaviourOut', 8)
-    .addLabel('trendsIn', 8.5)
-    .addLabel('complete', 11)
+    .addLabel('userOut', 1.5)
+    .addLabel('locationIn', 2)
+    .addLabel('locationOut', 3.5)
+    .addLabel('behaviourIn', 4)
+    .addLabel('behaviourOut', 5.5)
+    .addLabel('trendsIn', 6)
+    .addLabel('complete', 7.5)
     // Data icons animate in sequence
     .fromTo('#interactive-ad-container', {duration: 0, autoAlpha: 0, immediateRender: true}, {duration: 0.5, autoAlpha: 1})
     .fromTo('#data-icon-user', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'userIn')
@@ -1152,8 +1173,15 @@ function startHuaweiAnimations() {
     }
   });
   
+  // Ensure w and h are defined (defensive programming)
+  if (typeof w === 'undefined' || typeof h === 'undefined') {
+    w = window.innerWidth;
+    h = window.innerHeight * 2;
+  }
+  
   // Huawei phone animation - colors fade in on top of each other with gradient changes
   huaweiTl
+    .set('#bg_container', { attr: {viewBox: '0 0'+ ' ' + w + ' ' + h} })
     // Set initial state - Only Green phone visible with green gradient (matches HTML default)
     .set('#phones_front', { autoAlpha: 1 })
     .set('#phones_back', { autoAlpha: 1 })

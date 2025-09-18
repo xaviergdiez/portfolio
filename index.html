@@ -2,6 +2,8 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xavier Garcia</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
@@ -12,6 +14,30 @@
 </head>
 
 <body>
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 256 256">
+          <g>
+            <path d="M217.6,36.9C193.2,12.9,161,0,126.9.2h0s0,0,0,0c-34.1.3-66.1,13.9-90,38.2C12.9,62.8,0,95,.2,129.1c.3,34.1,13.9,66.1,38.2,90,24.3,23.9,56.5,36.9,90.7,36.6,0,0,0,0,0,0,70.4-.6,127.2-58.4,126.6-128.9-.3-34.1-13.9-66.1-38.2-90ZM128.8,216.8s0,0,0,0c-23.7.2-46.1-8.8-63-25.5-16.9-16.6-26.3-38.8-26.5-62.5-.2-23.7,8.8-46.1,25.5-63,16.6-16.9,38.8-26.3,62.5-26.5,0,0,0,0,0,0h0c23.7-.2,46.1,8.8,63,25.5,16.9,16.6,26.3,38.8,26.5,62.6.4,48.9-39,89.1-88,89.5Z"/>
+            <polygon points="184.8 98.7 157.2 71.2 128 100.4 98.7 71.2 71.2 98.7 100.4 128 100.4 128 91.8 136.6 71.2 157.2 98.7 184.8 117.1 166.4 117.1 166.4 128 155.6 157.2 184.8 184.8 157.2 155.6 128 184.8 98.7"/>
+          </g>
+        </svg>
+        <div class="logo-text-container">
+          <span class="logo-text">Xavier Garcia</span>
+          <span class="logo-subtitle">Creative Developer</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#hero" class="active">Home</a></li>
+        <li><a href="#bmw-mini-case">Work</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="hero-container">
     <div class="frame-container flex-abs">
       <svg id="frame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156">
@@ -514,7 +540,7 @@
     <h2 class="case-study-subtitle">Healthy dose of Rich Media</h2>
   </div>
   <div id="huawei-case" class="case-study">
-    <svg id="bg_container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 7680 4320">
+    <svg id="bg_container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 7680 4320" preserveAspectRatio="xMidYMid slice">
         <defs>
             <radialGradient class="fullscreen" id="bg_gradient" cx="50%" cy="50%" r="50%" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#02b09c" stop-opacity="1"></stop>
@@ -522,19 +548,19 @@
                 <stop offset="1" stop-color="#027b7f" stop-opacity="1"></stop>
             </radialGradient>
         </defs>
-        <rect id="bg" width="140%" height="140%" x="0" y="0" fill="url(#bg_gradient)" />
+        <rect id="bg" width="100%" height="100%" x="0" y="0" fill="url(#bg_gradient)" />
     </svg>
     <div class="phones_wrapper">
-      <svg id="phones_front" class="phones hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 840">
+      <svg id="phones_front" class="phones" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 840">
         <defs>
           <pattern id="front_phones_pattern" patternUnits="userSpaceOnUse" width="400" height="840" x="0" y="0">
             <image id="green_front" class="front_phone" xlink:href="green_front.jpg" width="400" height="840" x="0"
               y="0" />
-            <image id="orange_front" class="front_phone hide" xlink:href="orange_front.jpg" width="400" height="840"
+            <image id="orange_front" class="front_phone" xlink:href="orange_front.jpg" width="400" height="840"
               x="0" y="0" />
-            <image id="black_front" class="front_phone hide" xlink:href="black_front.jpg" width="400" height="840" x="0"
+            <image id="black_front" class="front_phone" xlink:href="black_front.jpg" width="400" height="840" x="0"
               y="0" />
-            <image id="blue_front" class="front_phone hide" xlink:href="blue_front.jpg" width="400" height="840" x="0"
+            <image id="blue_front" class="front_phone" xlink:href="blue_front.jpg" width="400" height="840" x="0"
               y="0" />
           </pattern>
         </defs>
@@ -543,16 +569,16 @@
             d="M390.48,309.19c0-2-.21-3.55-2.87-3.11V272.84c2.4.27,2.87-1,2.87-3q-.08-46.68,0-93.36c0-2-.21-3.55-3-3.09v-2.64c0-36.74,0-69.56,0-106.3,0-5.26-.08-10.53-.44-15.77-.75-10.87-4.83-20.21-13.54-27.11-3.9-3.08-8.12-5.81-13.28-6.14-5.88-.37-11.77-.68-17.66-.68L200,14.68q-69,0-137.91,0c-7.58,0-15.17.19-22.75.41a17.33,17.33,0,0,0-5.55.93C23.22,20,16,27.38,12.45,38.15,9.78,46.3,9.53,54.79,9.53,63.28c0,235.24,0,466.56,0,701.81,0,9.11.38,18.23.79,27.34.38,8.77,3.15,16.74,9,23.42,4.46,5.1,9.81,9.24,16.64,10.22a126.62,126.62,0,0,0,17.86.91q73.08,0,146.18,0l143.35,0q6.86,0,13.69-.46a26.14,26.14,0,0,0,7.61-1.25A33.29,33.29,0,0,0,382.8,809c3.7-7.14,4.7-14.87,4.7-22.78q0-215.35,0-430.72v-3c2.4.27,3-.8,3-2.84Q390.39,329.42,390.48,309.19Z" />
         </g>
       </svg>
-      <svg id="phones_back" class="phones hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 840">
+      <svg id="phones_back" class="phones" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 840">
         <defs>
           <pattern id="back_phones_pattern" patternUnits="userSpaceOnUse" width="400" height="840" x="0" y="0">
             <image id="green_back" class="back_phone" xlink:href="green_back.jpg" width="400" height="840" x="0"
               y="0" />
-            <image id="orange_back" class="back_phone hide" xlink:href="orange_back.jpg" width="400" height="840" x="0"
+            <image id="orange_back" class="back_phone" xlink:href="orange_back.jpg" width="400" height="840" x="0"
               y="0" />
-            <image id="black_back" class="back_phone hide" xlink:href="black_back.jpg" width="400" height="840" x="0"
+            <image id="black_back" class="back_phone" xlink:href="black_back.jpg" width="400" height="840" x="0"
               y="0" />
-            <image id="blue_back" class="back_phone hide" xlink:href="blue_back.jpg" width="400" height="840" x="0"
+            <image id="blue_back" class="back_phone" xlink:href="blue_back.jpg" width="400" height="840" x="0"
               y="0" />
           </pattern>
         </defs>
@@ -588,7 +614,7 @@
               </div>
               <div class="contact-details">
                 <h3>Email</h3>
-                <a href="mailto:hello@xaviergarcia.dev">hello@xaviergarcia.dev</a>
+                <a href="mailto:hello@xaviergarcia.dev">hello@whoisxavier.com</a>
               </div>
             </div>
 
@@ -600,7 +626,7 @@
               </div>
               <div class="contact-details">
                 <h3>LinkedIn</h3>
-                <a href="https://linkedin.com/in/xaviergarcia" target="_blank">linkedin.com/in/xaviergarcia</a>
+                <a href="hhttps://www.linkedin.com/in/xavier-garcia-diez/" target="_blank">linkedin.com/xavier-garcia-diez/</a>
               </div>
             </div>
 
@@ -666,16 +692,17 @@
             <div class="footer-column">
               <h4>Services</h4>
               <ul>
-                <li><a href="#web-development">Web Development</a></li>
-                <li><a href="#mobile-apps">Mobile Apps</a></li>
-                <li><a href="#digital-campaigns">Digital Campaigns</a></li>
-                <li><a href="#ui-ux-design">UI/UX Design</a></li>
+                <li><a href="services.html#web-development">Web Development</a></li>
+                <li><a href="services.html#mobile-apps">Mobile Apps</a></li>
+                <li><a href="services.html#digital-campaigns">Digital Campaigns</a></li>
+                <li><a href="services.html#ui-ux-design">UI/UX Design</a></li>
               </ul>
             </div>
 
             <div class="footer-column">
               <h4>Work</h4>
               <ul>
+                <li><a href="#bmw-mini-case">BMW/MINI Case Study</a></li>
                 <li><a href="#gtech-case">GTECH Case Study</a></li>
                 <li><a href="#fbto-case">FBTO Project</a></li>
                 <li><a href="#huawei-case">Huawei Campaign</a></li>
@@ -686,10 +713,10 @@
             <div class="footer-column">
               <h4>Connect</h4>
               <ul>
-                <li><a href="mailto:hello@xaviergarcia.dev">Email</a></li>
-                <li><a href="https://linkedin.com/in/xaviergarcia" target="_blank">LinkedIn</a></li>
+                <li><a href="mailto:hello@whoisxavier.com">Email</a></li>
+                <li><a href="https://www.linkedin.com/in/xavier-garcia-diez/" target="_blank">LinkedIn</a></li>
                 <li><a href="https://github.com/xaviergdiez" target="_blank">GitHub</a></li>
-                <li><a href="https://twitter.com/xaviergarcia" target="_blank">Twitter</a></li>
+                <li><a href="https://instagram.com/whois.xavier" target="_blank">Instagram</a></li>
               </ul>
             </div>
           </div>
