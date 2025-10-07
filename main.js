@@ -52,6 +52,8 @@ function init() {
     .call(() => {
       // Animation complete - enable scrolling after banners are loaded
       console.log('Main animation complete - waiting for banners to load...');
+      // Initialize CTA buttons
+      initCaseStudyCTAs();
     }, null, 'sparks+=2')
 
 //Mouse cooridinates positioning and implementation
@@ -68,6 +70,61 @@ let h = window.innerHeight * 2;
 
 function percentage(partialValue, totalValue) {
   return (100 * partialValue) / totalValue;
+}
+
+// Case Study CTA Functionality
+function initCaseStudyCTAs() {
+  const ctaBtns = document.querySelectorAll('.case-cta-btn');
+  
+  ctaBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const caseId = this.dataset.case;
+      const expandedContent = document.getElementById(`${caseId}-expanded`);
+      const caseStudy = document.getElementById(`${caseId}-case`);
+      
+      if (!expandedContent || !caseStudy) return;
+      
+      const isExpanded = this.classList.contains('expanded');
+      
+      if (isExpanded) {
+        // Collapse
+        this.classList.remove('expanded');
+        expandedContent.classList.remove('expanded');
+        
+        // Update button text
+        this.querySelector('.cta-text').textContent = 'Learn More';
+        
+        // Remove expanded state from case study
+        caseStudy.classList.remove('case-expanded');
+        
+      } else {
+        // First, collapse any other expanded cases
+        document.querySelectorAll('.case-cta-btn.expanded').forEach(otherBtn => {
+          if (otherBtn !== this) {
+            otherBtn.click(); // This will trigger the collapse
+          }
+        });
+        
+        // Expand this case
+        this.classList.add('expanded');
+        expandedContent.classList.add('expanded');
+        
+        // Update button text
+        this.querySelector('.cta-text').textContent = 'Show';
+        
+        // Add expanded state to case study
+        caseStudy.classList.add('case-expanded');
+        
+        // Scroll the case study into view after animation
+        setTimeout(() => {
+          caseStudy.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }, 300);
+      }
+    });
+  });
 }
 
 let animationPlaying;
@@ -1243,3 +1300,8 @@ function startHuaweiAnimations() {
 }
 
 // Note: init() is called from HTML's window.onload event
+
+// Initialize CTA functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initCaseStudyCTAs();
+});

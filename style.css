@@ -189,10 +189,37 @@ body {
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: var(--space-32);
     padding: var(--space-24);
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-container {
+    flex-direction: row;
+}
+
+/* Mobile and tablet portrait layout */
+@media (max-width: 1024px) {
+    .hero-container {
+        flex-direction: column;
+    }
+}
+
+/* Vertical screens (portrait orientation) */
+@media (orientation: portrait) {
+    .hero-container {
+        flex-direction: column;
+    }
+}
+
+.case-study.case-expanded {
+    height: auto;
+    min-height: 100vh;
+    justify-content: flex-start;
+    padding-bottom: 0;
 }
 
 .hero-container {
@@ -226,12 +253,12 @@ body {
 }
 
 .masonry-grid {
-    transform: rotate(-30deg) translate(5%, 5%);
-    position: relative;
-    min-width: min(2000px, 200vw);
-    min-height: min(2000px, 200vh);
-    width: 100%;
-    max-width: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    width: 150vw;
+    height: 150vh;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
@@ -402,12 +429,8 @@ body {
 /* Responsive grid adjustments */
 @media (max-width: 768px) {
     .hero-container {
-        flex-direction: column;
-        height: 100vh;
         gap: var(--space-16);
         padding: var(--space-16);
-        justify-content: center;
-        align-items: center;
     }
     
     .avatar-container, .frame-container {
@@ -543,6 +566,217 @@ body {
         font-size: clamp(0.8rem, 5vw, 1.5rem);
         bottom: clamp(1rem, 4vh, 2rem);
         left: clamp(1rem, 4vw, 2rem);
+    }
+}
+
+/* Case Study CTA Button */
+.case-cta-btn {
+    position: absolute;
+    bottom: clamp(1rem, 4vh, 2rem);
+    right: clamp(2rem, 5vw, 4rem);
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+    color: white;
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-semibold);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.case-cta-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.case-cta-btn:active {
+    transform: translateY(0);
+}
+
+.cta-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+.case-cta-btn.expanded .cta-icon {
+    transform: rotate(180deg);
+}
+
+.case-cta-btn.expanded .cta-text::after {
+    content: " Less";
+}
+
+/* Expandable Content */
+.case-expanded-content {
+    width: 100%;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.85) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 15;
+    padding: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.case-expanded-content.expanded {
+    height: auto;
+    min-height: 50vh;
+    opacity: 1;
+    padding: clamp(2rem, 5vw, 4rem);
+}
+
+.expanded-inner {
+    color: white;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.case-details {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.case-detail-section {
+    margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.case-detail-section h3 {
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-bold);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: var(--color-teal-300);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.case-detail-section p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+.case-detail-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.case-detail-section li {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.case-detail-section li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-teal-300);
+    font-weight: bold;
+}
+
+.case-tech-stack {
+    grid-column: 1 / -1;
+    margin-top: clamp(1rem, 3vw, 2rem);
+    padding-top: clamp(1rem, 3vw, 2rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.case-tech-stack h4 {
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-semibold);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: white;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tech-tag {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--color-teal-300);
+    color: white;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .case-cta-btn {
+        bottom: clamp(0.5rem, 2vh, 1rem);
+        right: clamp(1rem, 3vw, 2rem);
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .case-details {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .case-expanded-content.expanded {
+        padding: 1.5rem;
+        max-height: 70vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .case-cta-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 1rem;
+        left: 1rem;
+        border-radius: 25px;
+        justify-content: center;
+        z-index: 1000;
+    }
+    
+    .case-expanded-content.expanded {
+        max-height: 60vh;
+        padding: 1rem;
+    }
+    
+    .case-study.case-expanded {
+        padding-bottom: 6rem; /* Account for fixed CTA button */
     }
 }
 
