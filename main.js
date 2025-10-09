@@ -1,8 +1,55 @@
 function init() {
    let avatar = document.querySelector('.avatar-container');
+   let frame = document.querySelector('.frame-container');
    let hero = document.querySelector('.hero-container');
    let tl = gsap.timeline();
    gsap.registerPlugin(DrawSVGPlugin,MorphSVGPlugin,ScrollTrigger)
+   
+   // Safari-specific fixes
+   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+   if (isSafari) {
+     console.log('Safari detected - applying compatibility fixes');
+     
+     // Ensure containers are visible
+     if (avatar) {
+       avatar.style.opacity = '1';
+       avatar.style.visibility = 'visible';
+       avatar.style.display = 'block';
+     }
+     if (frame) {
+       frame.style.opacity = '1';
+       frame.style.visibility = 'visible';
+       frame.style.display = 'block';
+     }
+     
+     // Disable problematic SVG filters for Safari
+     const glowFilter = document.getElementById('glow');
+     if (glowFilter) {
+       console.log('Disabling SVG glow filter for Safari compatibility');
+       glowFilter.style.display = 'none';
+     }
+     
+     // Apply CSS-based glow effects for Safari
+     const elementsWithGlow = document.querySelectorAll('[filter*="glow"], .skills-header, .skills-footer, .skill-name');
+     elementsWithGlow.forEach(el => {
+       el.style.filter = 'none';
+       if (el.classList.contains('skills-header') || el.classList.contains('skills-footer') || el.classList.contains('skill-name')) {
+         el.style.textShadow = '0 0 8px #7ae3fc, 0 0 12px #7ae3fc';
+       }
+     });
+     
+     // Apply drop-shadow to SVG stroke elements for Safari
+     const strokeElements = document.querySelectorAll('.frame-stroke, .corner, #circle_stroke');
+     strokeElements.forEach(el => {
+       el.style.filter = 'drop-shadow(0 0 6px #7ae3fc)';
+     });
+     
+     // Force repaint in Safari
+     setTimeout(() => {
+       if (avatar) avatar.style.transform = 'translateZ(0)';
+       if (frame) frame.style.transform = 'translateZ(0)';
+     }, 100);
+   }
    
   //  let userInteracted = false;
   //  let autoResumeTimeout;
@@ -11,7 +58,8 @@ function init() {
    document.body.style.overflow = 'hidden';
    
    tl
-    .set('.frame-container', { scale: 0, transformOrigin: "50% 50%" })
+    .set('.frame-container', { scale: 0, transformOrigin: "50% 50%", force3D: true })
+    .set('.avatar-container', { force3D: true, opacity: 1, visibility: 'visible' })
     .set(['.skill-name', '.skill-item'], { autoAlpha: 0, y: 5 })
     .set(['.eye2', '#xray', '.skills-header', '.dot', '.skills-footer'], { autoAlpha: 0 })
     .addLabel('init', 0)
@@ -20,7 +68,7 @@ function init() {
     .addLabel('helmet', 2)
     .addLabel('glow', 2.5)
     .addLabel('sparks', 2.6)
-    .from('.avatar-container', { duration: 0, display: 'none' }, 'init')
+    .from('.avatar-container', { duration: 0, opacity: 0, force3D: true }, 'init')
     .from('#circle_bg', { duration: 1, r: 0, ease: 'cubic.out' }, 'init')
     .from('#xavi', { duration: 0.5, y:'100%', ease: 'cubic.out'}, 'start')
     .call(() => {
@@ -30,15 +78,23 @@ function init() {
     .from("#circle_stroke", {duration: 0.5, autoAlpha:0, ease: 'cubic.out'}, 'helmet+=0.25')
     .from('#helmet', { duration: 0.5, y:'-100%', ease: 'cubic.out' }, 'helmet')
     .from('#helmet-back', { duration: 0.5, y:'-942%', ease: 'cubic.out' }, 'helmet')
-    .to('.helmet-icon', { duration: 1, attr: { "filter": "url(#glow)" }, ease: 'cubic.out' }, 'glow')
+    // Safari-compatible glow animation - use CSS properties instead of SVG filter
+    .to('.helmet-icon', { 
+      duration: 1, 
+      ...(isSafari ? 
+        { filter: 'drop-shadow(0 0 8px #7ae3fc)', ease: 'cubic.out' } : 
+        { attr: { "filter": "url(#glow)" }, ease: 'cubic.out' }
+      )
+    }, 'glow')
     .from('#blur-filter', { duration: 1, attr:{ "stdDeviation": 0 }, ease: 'cubic.out' }, 'glow')
     .from('.helmet-glow', {duration: 1, autoAlpha: 0, ease: 'cubic.out' }, 'glow')
     .to('#xray', { duration: 0.1, autoAlpha: 1, ease: 'rough({ template: none.out  , strength: 1, points: 1000, taper: none, randomize: true, clamp: false})', repeat: 5, yoyo: true }, 'glow')
-    .from('.frame-container', { duration: 0.5, scale: 0, ease: 'sine.inOut', transformOrigin: "50% 50%" }, 'glow')
+    .from('.frame-container', { duration: 0.5, scale: 0, ease: 'sine.inOut', transformOrigin: "50% 50%", force3D: true }, 'glow')
     .from('.avatar-container', { 
         duration: 0.5, 
         ...(hero.getBoundingClientRect().width > 768 ? {x: '-50%'} : {y: '-50%'}), 
-        ease: 'sine.inOut'
+        ease: 'sine.inOut',
+        force3D: true
     }, 'glow')
     .from('.frame-stroke', { duration: 0.5, drawSVG: "50% 50%", ease: 'sine.inOut', stagger: 0.25 }, 'glow')
     .from('.corner', { duration: 0.25, drawSVG: "50% 50%", ease: 'sine.inOut', stagger: 0.25 }, 'glow')

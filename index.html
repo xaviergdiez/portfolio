@@ -39,9 +39,10 @@
   </nav>
 
   <div class="hero-container">
-    <div class="frame-container flex-abs">
-      <svg id="frame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156">
+    <div class="frame-container flex-abs" style="opacity: 1; visibility: visible; display: block;">
+      <svg id="frame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156" style="display: block; width: 100%; height: 100%;">
         <defs>
+          <!-- Original glow filter for non-Safari browsers -->
           <filter id="glow" x="-200%" y="-200%" width="400%" height="400%" filterUnits="objectBoundingBox">
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feFlood flood-color="#7ae3fc" flood-opacity="1" result="sharp" />
@@ -51,13 +52,23 @@
               <feMergeNode in="sharpStroke" />
             </feMerge>
           </filter>
+          
+          <!-- Simplified glow filter for Safari -->
+          <filter id="glow-safari" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2" in="SourceGraphic" result="blur" />
+            <feOffset dx="0" dy="0" in="blur" result="offset" />
+            <feMerge>
+              <feMergeNode in="offset" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
         <g id="frame-paths">
-          <path class="corner" d="M155,15.32l-17.52-14.32h17.52v14.32Z" fill="transparent" stroke="#7ae3fc"
+          <path class="corner" data-glow="true" d="M155,15.32l-17.52-14.32h17.52v14.32Z" fill="transparent" stroke="#7ae3fc"
             stroke-linecap="round" stroke-linejoin="round" stroke-width="2" filter="url(#glow)" />
-          <path class="corner" d="M1,155v-27.99l36.62,27.99H1Z" fill="transparent" stroke="#7ae3fc"
+          <path class="corner" data-glow="true" d="M1,155v-27.99l36.62,27.99H1Z" fill="transparent" stroke="#7ae3fc"
             stroke-linecap="round" stroke-linejoin="round" stroke-width="2" filter="url(#glow)" />
-          <path class="frame-stroke"
+          <path class="frame-stroke" data-glow="true"
             d="M155,28.23v126.77H54.09l-10.39-7.94L7.07,119.06l-6.07-4.64V1h120.68l9.47,7.74,17.52,14.32,6.33,5.17Z"
             fill="transparent" stroke="#7ae3fc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             filter="url(#glow)" />
@@ -123,8 +134,8 @@
       </div>
     </div>
 
-    <div class="avatar-container flex-abs">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 154">
+    <div class="avatar-container flex-abs" style="opacity: 1; visibility: visible; display: block;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 154" style="display: block; width: 100%; height: 100%;">
         <defs>
           <clipPath id="clip-path">
             <circle id="circle-clip" cx="77" cy="77" r="77"></circle>
@@ -369,7 +380,7 @@
               points="30.26 43.25 32.79 44.34 33.98 51.95 31.44 50.98 32.23 56.72 29.01 48.44 31.34 49.45 30.26 43.25"
               style="fill: #7ae3fc;" />
           </g>
-          <circle id="circle_stroke" fill="transparent" stroke="#7ae3fc" stroke-width="3" cx="77" cy="77" r="77"
+          <circle id="circle_stroke" data-glow="true" fill="transparent" stroke="#7ae3fc" stroke-width="3" cx="77" cy="77" r="77"
             filter="url(#glow)"></circle>
         </g>
       </svg>
@@ -900,6 +911,81 @@
   </footer>
 
   <script>
+    // Safari-specific fixes - execute immediately
+    (function() {
+      // Detect Safari (excluding Chrome)
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      
+      if (isSafari) {
+        console.log('Safari detected - applying immediate fixes');
+        
+        // Force visibility of key elements
+        const ensureVisibility = () => {
+          const avatar = document.querySelector('.avatar-container');
+          const frame = document.querySelector('.frame-container');
+          
+          if (avatar) {
+            avatar.style.setProperty('opacity', '1', 'important');
+            avatar.style.setProperty('visibility', 'visible', 'important');
+            avatar.style.setProperty('display', 'block', 'important');
+            avatar.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+          }
+          
+          if (frame) {
+            frame.style.setProperty('opacity', '1', 'important');
+            frame.style.setProperty('visibility', 'visible', 'important');
+            frame.style.setProperty('display', 'block', 'important');
+            frame.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+          }
+          
+          // Handle SVG glow filter issues in Safari
+          const glowFilter = document.getElementById('glow');
+          if (glowFilter) {
+            console.log('Safari: Disabling complex SVG glow filter');
+            glowFilter.style.display = 'none';
+          }
+          
+          // Replace SVG filter with CSS effects for Safari
+          const glowElements = document.querySelectorAll('[data-glow="true"], [filter*="glow"]');
+          glowElements.forEach(el => {
+            console.log('Safari: Replacing SVG filter with CSS glow for element:', el);
+            el.style.filter = 'drop-shadow(0 0 6px #7ae3fc) drop-shadow(0 0 10px #7ae3fc)';
+            el.setAttribute('filter', 'none'); // Remove SVG filter reference
+          });
+          
+          // Fix CSS glow elements
+          const cssGlowElements = document.querySelectorAll('.skills-header, .skills-footer, .skill-name');
+          cssGlowElements.forEach(el => {
+            el.style.filter = 'none';
+            el.style.textShadow = '0 0 8px #7ae3fc, 0 0 12px #7ae3fc, 0 0 16px #7ae3fc';
+          });
+          
+          // Force repaint
+          setTimeout(() => {
+            if (avatar) avatar.style.transform = 'translateZ(0)';
+            if (frame) frame.style.transform = 'translateZ(0)';
+            
+            // Force re-render of SVG elements
+            const svgElements = document.querySelectorAll('svg');
+            svgElements.forEach(svg => {
+              svg.style.transform = 'translateZ(0)';
+            });
+          }, 50);
+        };
+        
+        // Run immediately and after DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', ensureVisibility);
+        } else {
+          ensureVisibility();
+        }
+        
+        // Also run after a short delay to catch any late-loading content
+        setTimeout(ensureVisibility, 100);
+        setTimeout(ensureVisibility, 500); // Additional safety check
+      }
+    })();
+    
     function pageLoaded() {
       init(); // Only initialize the hero animation
     }

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari Test - Avatar and Frame Containers</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1f2121;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            flex-wrap: wrap;
+        }
+        
+        .avatar-container, .frame-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 2px solid #7ae3fc;
+            background: rgba(122, 227, 252, 0.1);
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        
+        .avatar-container svg,
+        .frame-container svg {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #7ae3fc;
+            text-align: center;
+        }
+        
+        .debug-info {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Safari Container Visibility Test</h1>
+    
+    <div class="test-container">
+        <div class="avatar-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 154">
+                <circle cx="77" cy="77" r="75" fill="none" stroke="#7ae3fc" stroke-width="2"/>
+                <circle cx="77" cy="77" r="30" fill="#7ae3fc" opacity="0.5"/>
+                <text x="77" y="85" text-anchor="middle" fill="white" font-size="14">AVATAR</text>
+            </svg>
+            <div class="label">Avatar Container</div>
+        </div>
+        
+        <div class="frame-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156">
+                <rect x="10" y="10" width="136" height="136" fill="none" stroke="#7ae3fc" stroke-width="2"/>
+                <rect x="30" y="30" width="96" height="96" fill="#7ae3fc" opacity="0.3"/>
+                <text x="78" y="85" text-anchor="middle" fill="white" font-size="14">FRAME</text>
+            </svg>
+            <div class="label">Frame Container</div>
+        </div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>Debug Information:</h3>
+        <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+        <p><strong>Is Safari:</strong> <span id="isSafari"></span></p>
+        <p><strong>Containers Visible:</strong> <span id="containersVisible"></span></p>
+        <p><strong>SVGs Visible:</strong> <span id="svgsVisible"></span></p>
+    </div>
+    
+    <script>
+        // Debug information
+        document.getElementById('userAgent').textContent = navigator.userAgent;
+        
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        document.getElementById('isSafari').textContent = isSafari ? 'YES' : 'NO';
+        
+        // Check container visibility
+        setTimeout(() => {
+            const avatar = document.querySelector('.avatar-container');
+            const frame = document.querySelector('.frame-container');
+            const avatarSvg = avatar.querySelector('svg');
+            const frameSvg = frame.querySelector('svg');
+            
+            const avatarVisible = avatar && getComputedStyle(avatar).display !== 'none' && 
+                                 getComputedStyle(avatar).visibility !== 'hidden' && 
+                                 getComputedStyle(avatar).opacity !== '0';
+                                 
+            const frameVisible = frame && getComputedStyle(frame).display !== 'none' && 
+                                getComputedStyle(frame).visibility !== 'hidden' && 
+                                getComputedStyle(frame).opacity !== '0';
+            
+            const avatarSvgVisible = avatarSvg && getComputedStyle(avatarSvg).display !== 'none';
+            const frameSvgVisible = frameSvg && getComputedStyle(frameSvg).display !== 'none';
+            
+            document.getElementById('containersVisible').textContent = 
+                `Avatar: ${avatarVisible ? 'YES' : 'NO'}, Frame: ${frameVisible ? 'YES' : 'NO'}`;
+                
+            document.getElementById('svgsVisible').textContent = 
+                `Avatar SVG: ${avatarSvgVisible ? 'YES' : 'NO'}, Frame SVG: ${frameSvgVisible ? 'YES' : 'NO'}`;
+                
+            // If Safari and not visible, show alert
+            if (isSafari && (!avatarVisible || !frameVisible)) {
+                alert('Safari Issue Detected: Containers are not visible!');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

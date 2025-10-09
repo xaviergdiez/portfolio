@@ -320,7 +320,26 @@ body {
     width: 40vw;
     height: 40vw;
     min-width: 300px;
+    /* Safari fallback for aspect-ratio */
+    height: 40vw;
     aspect-ratio: 1;
+    /* Ensure visibility in Safari */
+    opacity: 1;
+    visibility: visible;
+    display: block;
+    /* Safari-specific fixes */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    /* Ensure proper rendering */
+    contain: layout style paint;
+}
+
+/* Safari-specific fallback */
+@supports not (aspect-ratio: 1) {
+    .avatar-container, .frame-container {
+        height: 40vw;
+    }
 }
 
 .frame-container {
@@ -424,6 +443,137 @@ body {
 
 .skill-item--accent .skill-level::after {
     background: #7ae3fc;
+}
+
+/* Safari-specific fixes - Enhanced */
+/* Safari viewport units fix */
+@supports (-webkit-touch-callout: none) {
+    .avatar-container, .frame-container {
+        /* Use -webkit-fill-available for Safari iOS */
+        height: 40vw !important;
+        min-height: 300px !important;
+        /* Force hardware acceleration */
+        -webkit-transform: translate3d(0,0,0) !important;
+        transform: translate3d(0,0,0) !important;
+        /* Prevent Safari layout issues */
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
+        /* Ensure visibility */
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+    }
+    
+    /* Specific SVG fixes for Safari */
+    .avatar-container svg,
+    .frame-container svg {
+        /* Ensure SVGs are visible in Safari */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        /* Prevent Safari SVG rendering issues */
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
+        position: relative !important;
+        z-index: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    /* Safari glow filter replacements - use CSS instead of SVG filters */
+    .skills-header,
+    .skills-footer,
+    .skill-name,
+    .skill-level {
+        filter: none !important;
+        -webkit-filter: none !important;
+        /* Replace with CSS glow effects */
+        text-shadow: 0 0 8px #7ae3fc, 0 0 12px #7ae3fc, 0 0 16px #7ae3fc !important;
+        -webkit-text-shadow: 0 0 8px #7ae3fc, 0 0 12px #7ae3fc, 0 0 16px #7ae3fc !important;
+    }
+    
+    /* SVG elements that use glow filter - replace with drop-shadow */
+    .frame-stroke,
+    .corner,
+    #circle_stroke {
+        filter: drop-shadow(0 0 6px #7ae3fc) drop-shadow(0 0 12px #7ae3fc) !important;
+        -webkit-filter: drop-shadow(0 0 6px #7ae3fc) drop-shadow(0 0 12px #7ae3fc) !important;
+    }
+    
+    /* Fix for Safari SVG filters - disable complex filters */
+    #frame svg defs filter,
+    .avatar-container svg defs filter {
+        /* Safari sometimes has issues with filter effects */
+        display: none !important;
+    }
+    
+    /* Ensure proper SVG viewBox rendering in Safari */
+    .avatar-container svg,
+    .frame-container svg,
+    #frame {
+        width: 100% !important;
+        height: 100% !important;
+        /* Safari fix for SVG sizing */
+        max-width: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Additional Safari-specific media queries */
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+        .avatar-container, .frame-container {
+            /* Safari-specific positioning */
+            position: relative !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            /* Force dimensions */
+            width: 40vw !important;
+            height: 40vw !important;
+            min-width: 300px !important;
+        }
+        
+        .avatar-container svg,
+        .frame-container svg {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        /* Safari glow alternatives */
+        .skills-header,
+        .skills-footer,
+        .skill-name {
+            filter: none !important;
+            text-shadow: 0 0 10px #7ae3fc !important;
+        }
+        
+        .skill-level::after {
+            box-shadow: 0 0 8px #7ae3fc !important;
+        }
+    }
+}
+
+/* Older Safari versions fallback */
+@supports not (display: grid) {
+    .avatar-container, .frame-container {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* Remove problematic filters for older Safari */
+    [filter*="glow"] {
+        filter: none !important;
+    }
+    
+    .skills-header,
+    .skills-footer,
+    .skill-name {
+        text-shadow: 0 0 5px #7ae3fc !important;
+    }
 }
 
 /* Responsive grid adjustments */
