@@ -1,0 +1,20 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2980 3820">
+    <title>dash</title>
+    <g id="rect1">
+        <polyline points="2980 2537.46 2980 2559.96 2957.5 2559.96" fill="none" stroke="#000" stroke-linejoin="round"
+            stroke-width="9" />
+        <line x1="2912.35" y1="2559.96" x2="45.08" y2="2559.96" fill="none" stroke="#000" stroke-linejoin="round"
+            stroke-width="9" stroke-dasharray="45.15 45.15" />
+        <polyline points="22.5 2559.96 0 2559.96 0 2537.46" fill="none" stroke="#000" stroke-linejoin="round"
+            stroke-width="9" />
+        <line y1="2491.73" y2="45.36" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="9"
+            stroke-dasharray="45.73 45.73" />
+        <polyline points="0 22.5 0 0 22.5 0" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="9" />
+        <line x1="67.65" x2="2934.92" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="9"
+            stroke-dasharray="45.15 45.15" />
+        <polyline points="2957.5 0 2980 0 2980 22.5" fill="none" stroke="#000" stroke-linejoin="round"
+            stroke-width="9" />
+        <line x1="2980" y1="68.23" x2="2980" y2="2514.6" fill="none" stroke="#000" stroke-linejoin="round"
+            stroke-width="9" stroke-dasharray="45.73 45.73" />
+    </g>
+</svg>

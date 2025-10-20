@@ -1,0 +1,97 @@
+html, body{
+    margin:0;
+    padding:0;
+}
+
+#container {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: #fafafc;
+}
+
+#text_bg1 {
+    position:absolute;
+    overflow:hidden;
+    width: 100px;
+    height:0px;
+    top:0px;
+    left:0px;
+}
+
+#text_bg1 img {
+    position:absolute;
+    overflow:hidden;
+    width: 100px;
+    height:250px;
+    top:0px;
+    left:0px;
+}
+
+#text_bg2 {
+    position:absolute;
+    overflow:hidden;
+    width: 100px;
+    height:0px;
+    top:0px;
+    left:100px;
+}
+
+#text_bg2 img {
+    position:absolute;
+    overflow:hidden;
+    width: 100px;
+    height:250px;
+    top:0px;
+    left:0px;
+}
+
+#text_bg3 {
+    position:absolute;
+    overflow:hidden;
+    width: 100px;
+    height:0px;
+    top:0px;
+    left:200px;
+}
+
+#text_bg3 img {
+    position:absolute;
+    overflow:hidden;
+    width: 100px;
+    height:250px;
+    top:0px;
+    left:0px;
+}
+
+svg {
+    overflow: hidden;
+}
+
+.element {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.show {
+    opacity: 1;
+}
+.hide {
+    opacity: 0;
+}
+
+#border {
+    pointer-events: none;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}

@@ -1,0 +1,107 @@
+/*--------------------------------------------------//
+/$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$
+/$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$
+| $$  \ $$| $$  \__/| $$  \__/| $$  \__/
+| $$$$$$$$| $$ /$$$$| $$      |  $$$$$$
+| $$__  $$| $$|_  $$| $$       \____  $$
+| $$  | $$| $$  \ $$| $$    $$ /$$  \ $$
+| $$  | $$|  $$$$$$/|  $$$$$$/|  $$$$$$/
+|__/  |__/ \______/  \______/  \______/
+Developed with loving code by http://www.agcs.works
+For questions and support email info@agcs.works
+//--------------------------------------------------*/
+
+@font-face {
+    font-family: "Play";
+    src: url(PlayBold.ttf);
+}
+
+html,body {
+    padding: 0;
+    margin: 0;
+}
+#container {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: black;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    font-family: 'Play', sans-serif;
+    text-transform: uppercase;
+}
+
+#bg {
+    position: absolute;
+    width:600px;
+    height:1200px;
+    background-size: 100% 100%;
+    top:0px;
+    right:0px;
+}
+
+#flash {
+    top: 58px;
+    left:-151px;
+}
+
+.element {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hide {
+    opacity: 0;
+}
+
+.text_flex {
+    position: absolute;
+    left: 20px;
+    top: 460px;
+    width:260px;
+    height:64px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: uppercase;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 1);
+}
+
+.cta_flex {
+    position: absolute;
+    width: 175px;
+    height: 47px;
+    left: 60px;
+    top: 467px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    line-height: 21px;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 1);
+}
+
+#border {
+    opacity: 1;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    pointer-events: none;
+}

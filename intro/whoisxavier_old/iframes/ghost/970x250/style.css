@@ -1,0 +1,175 @@
+#container {
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+}
+#container > img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+
+.ctatext {
+    opacity: 1;
+}
+#cta {
+    opacity: 1; 
+}
+#slideShow {
+    position: absolute;
+    left: -25px;
+    top: 0px;
+    width: 600px;
+    height: 250px;
+}
+#slideShow > section {
+    position: absolute;
+    top: 0px;
+    height: 250px;
+    transform: skew(-10deg);
+    border-left: 2px solid #e19f28;
+    overflow: hidden;
+}
+#slideShow > img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+#slide1 {
+    left: 0px;
+    width: 500px;
+}
+#slide2 {
+    left: 450px; 
+    width: 50px;
+}
+#slide3 {
+    left: 500px;
+    width: 50px; 
+    border-right: 2px solid #e19f28;
+}
+.slide-content {
+    transform: skew(10deg);
+    position: absolute;
+    left: -22px;
+    top: 0px;
+    height: 250px;    
+    background-size: 500px 250px;
+    background-position: center center;
+    overflow: hidden;
+}
+#slide_1_img {
+    width: 500px;
+    background-image: url('img/basejump_videostill_500x250.png');
+}
+#slide_2_img {
+    width: 100px;
+    background-image: url('img/rungun_videostill_500x250.png');
+}
+#slide_3_img {
+    width: 100px;
+    background-image: url('img/stealth_videostill_500x250.png');
+}
+.arrowleft {
+    position: absolute;
+    left: 18px;
+    top: 110px;
+    width: 30px;
+    height: 30px;  
+    cursor: pointer;
+    opacity: 0;
+}
+.arrowright {
+    position: absolute;
+    right: 18px;
+    top: 110px;
+    width: 30px;
+    height: 30px;  
+    cursor: pointer; 
+    opacity: 0;
+}
+#arrow2_left {
+    opacity: 1;
+}
+#arrow1_right {
+    right: 151px;
+}
+#arrow2_right {
+    right: 25px;
+}
+
+.playbutton {
+    position: absolute;
+    left: 200px;
+    top: 100px;
+    width: 50px;
+    height: 50px;    
+    cursor: pointer;
+    opacity: 0;
+}
+#playbutton1 {
+    opacity: 1;  
+    left: 250px; 
+}
+
+.mission_title {
+    position: absolute;
+    left: 160px;
+    top: 10px;
+    width: 240px;
+    height: 41px;    
+    cursor: pointer;
+    opacity: 1;
+}
+
+#mission2 {
+    left: 140px;
+}
+
+#mission3 {
+    left: 140px;
+}
+
+.slidevideo {
+    display: none;   
+}
+
+.soundbutton {
+    position: absolute;
+    left: 560px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-size: 100% 100%;
+}
+
+#mute {
+    background-image: url('img/mute.png'); 
+    display: none;
+}
+#sound {
+    background-image: url('img/sound.png');    
+}
+
+#clickarea {
+    position: absolute;
+    left: 550px;
+    top: 0px;
+    width: 420px;
+    height: 250px;
+    cursor: pointer;
+}
+.border {
+    border: 1px solid #db9305;
+    box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}

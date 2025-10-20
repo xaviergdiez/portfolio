@@ -7,7 +7,10 @@
   <title>Services - Xavier Garcia</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/EasePack.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
   <script src="main.js"></script>
 </head>
 
@@ -63,6 +66,62 @@
           </div>
         </div>
       </div>
+      <div class="hero-animation">
+           <svg id="logo_animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 761.96 421.94">
+            <defs>
+                <style>.icon_stroke{fill:transparent;stroke:#fff;stroke-miterlimit:10;stroke-width:37.5px;}.arrow_stroke{fill:transparent;stroke:#fff;stroke-miterlimit:10;stroke-width:10px;}.letters_fill{fill:#fff;stroke:none;}.phone_stroke{fill:transparent;stroke:#fff;stroke-miterlimit:1;stroke-width:1px;}.fill_purple{fill:#a384ec;}.fill_yellow{fill:#fae370;}.fill_red{fill:#d9534f;}.laptop_stroke{fill:transparent;stroke:#fff;stroke-miterlimit:10; stroke-width:1px;}.keyboard_stroke{fill:transparent;stroke:#fff;stroke-miterlimit:10;stroke-width:0.5px;}.stroke_purple{fill:transparent;stroke:#a384ec;stroke-miterlimit:10;stroke-width:1px;}.stroke_yellow{fill:transparent;stroke:#fae370;stroke-linecap:round;stroke-linejoin:round;stroke-width:4px;}</style>
+            </defs>
+            <title>intro_animation</title>
+            <g id="icon" class="hide">
+                <path id="circle_stroke" class="icon_stroke" d="M381,102.69A108.28,108.28,0,1,0,489.26,211,108.28,108.28,0,0,0,381,102.69"/><path id="x_stroke2" class="icon_stroke" d="M424,167.92,337.93,254"/><path id="x_stroke1" class="icon_stroke" d="M337.93,167.92,424,254"/><path id="arrow1" class="icon_stroke hide" d="M357.14,187.13,381,211l-24.66,24.6"/><path id="arrow2" class="icon_stroke hide" d="M375.65,187.13,399.49,211l-24.66,24.6"/>
+            </g>
+            <g id="phone_container">
+                <path id="back" class="phone_stroke" d="M577.31,148l0,16.3v.58l0,.58-.09.61-.11.59-.18.73-.25.73-.37.86-.44.85-.61,1-.7.95-.92,1.07-1,1.05-.85.77-.91.75-1.06.81-1.11.8-1.17.79-1.21.77-4.4,2.56-223.76,130-4.4,2.56-1.33.7-1.35.69-1.38.64-1.4.62-1.3.53-1.33.5-1.79.6-1.86.54-1.64.41-1.68.35-1.46.26-1.47.21-1.26.15-1.26.11-1,.07-1,.05h-2l-1.22,0-1.22-.05L305.2,320l-1.41-.14-1.63-.21-1.6-.26-1.81-.36-1.76-.43-1.29-.35-1.26-.39-1.34-.46-1.32-.49-1.43-.57-1.39-.61-1.5-.71-1.47-.74-1.07-.56-3.49-1.93-81.79-47.21-1.73-1-1.54-.93-1.49-.94-1.28-.85-1.24-.87-1.05-.8-1-.83-.85-.76-.8-.77-.67-.74-.61-.74-.75-1-.62-1-.46-.93-.37-.94-.24-.82-.17-.83-.1-.71,0-.7,0-16.3,0,.7.1.7.16.83.25.82.36.95.46.92.63,1.05.74,1,.62.74.67.73.79.78.85.76,1,.82,1.06.81,1.23.87,1.29.85,1.49.94,1.54.93,1.73,1,81.79,47.22,3.49,1.93L286,298l1.47.74,1.5.71,1.39.61,1.42.57,1.32.49,1.35.46,1.26.38,1.29.36,1.76.42,1.81.36,1.59.27,1.63.2,1.42.14,1.43.09,1.22.06,1.21,0h1l1,0,1-.05,1-.07,1.26-.11,1.26-.14,1.47-.21,1.46-.26,1.68-.36,1.64-.41,1.85-.54,1.8-.6,1.33-.49,1.29-.54,1.41-.61,1.37-.65,1.36-.68,1.32-.7,4.4-2.56,223.76-130,4.41-2.55,1.21-.78,1.17-.78,1.11-.8,1.06-.81.91-.76.85-.76,1-1,.92-1.08.7-.94.61-1,.44-.85.36-.85.25-.73.19-.73.11-.6.09-.6,0-.58Z"/>
+                <path id="front" class="phone_stroke" d="M562.09,131.66l2,1.15,1.54.92,1.5,1,1.28.85,1.24.87,1,.8,1,.83.86.76.79.78.67.72.62.75.73,1,.64,1,.46.93.36.94.24.82.17.83.09.71,0,.7v.58l0,.58-.09.6-.11.6-.19.73-.25.73-.36.85-.44.85-.61,1-.7.94-.92,1.08-1,1-.85.76-.91.76-1.06.81-1.11.8-1.17.78-1.21.78-4.41,2.55-223.76,130-4.4,2.56-1.32.7-1.36.68-1.37.65-1.41.61-1.29.54-1.33.49-1.8.6-1.85.54-1.64.41-1.68.36-1.46.26-1.47.21-1.26.14-1.26.11-1,.07-1,.05-1,0h-1l-1.21,0-1.22-.06-1.43-.09-1.42-.14-1.63-.2-1.59-.27-1.81-.36-1.76-.42-1.29-.36-1.26-.38-1.35-.46-1.32-.49-1.42-.57-1.39-.61-1.5-.71L286,298l-1.07-.56-3.49-1.93L199.69,248.3l-1.73-1-1.54-.93-1.49-.94-1.29-.85-1.23-.87-1.06-.81-1-.82-.85-.76-.79-.78-.67-.73-.62-.74-.74-1-.63-1.05-.46-.92-.36-.95-.25-.82-.16-.83-.1-.7,0-.7v-.59l0-.58.08-.6.13-.59.18-.73.25-.74.35-.85.45-.85.61-1,.7-.95.92-1.08,1-1,.86-.77.91-.75,1.06-.82,1.11-.8,1.17-.78,1.21-.77,4.4-2.56,223.76-130,4.41-2.55,1.32-.71,1.35-.68,1.38-.65,1.4-.61,1.3-.53,1.32-.5,1.8-.6,1.86-.54,1.64-.4,1.67-.36,1.46-.26,1.48-.21,1.26-.15,1.26-.11,1-.07,1,0,1,0h1l1.21,0,1.22,0,1.43.09,1.41.14,1.63.21,1.61.26,1.8.36,1.76.43,1.29.35,1.26.39,1.35.46,1.31.49,1.43.57,1.4.61,1.49.71,1.48.74,1.63.86,1.61.89,1.84,1Z"/>
+                <path id="speaker" class="phone_stroke" d="M504,117.38a.71.71,0,0,1,0,1.33,2.58,2.58,0,0,1-2.3,0l-19-11a.7.7,0,0,1,0-1.33,2.51,2.51,0,0,1,2.28,0Z"/>
+                <path id="phone_screen" class="phone_stroke" d="M543.21,163.41,336.36,283.62l-117.62-67.9L425.6,95.5Z"/>
+                <path id="phone_screen2" class="hide" d="M543.21,163.41,336.36,283.62l-117.62-67.9L425.6,95.5Z"/>
+                <path id="phone_screen3" class="hide" d="M543.21,163.41,336.36,283.62l-117.62-67.9L425.6,95.5Z"/>
+                <path id="phone_screen4" class="hide" d="M543.21,163.41,336.36,283.62l-117.62-67.9L425.6,95.5Z"/>
+                <path id="ui_bar" class="fill_purple hide" d="M425.6,35.5l117.61,67.9-36.74,21.35-117.6-67.9Z"/>
+                <path id="ui_circle2" class="fill_yellow hide" d="M430.31,100.89c25.29,14.6,25.43,38.27.3,52.87s-66,14.6-91.28,0-25.42-38.28-.3-52.87S405,86.29,430.31,100.89Z"/>
+                <path id="ui_circle1" class="fill_yellow hide" d="M438.6,48c6.49,3.75,6.53,9.83.07,13.59s-17,3.75-23.46,0-6.53-9.84-.07-13.59S432.1,44.27,438.6,48Z"/>
+                <path id="ui_btn" class="fill_red hide" d="M360.74,186.22,333.66,202,256.14,157.2l27.08-15.73Z"/>
+            </g>
+            <g id="laptop_container" class="hide">
+                <path class="laptop_stroke" d="M577.55,254,449.63,179.67h0L224.27,309.73l128,74.36a12.08,12.08,0,0,0,11,0l214.3-123.72C580.55,258.61,580.57,255.76,577.55,254Z"/><path id="laptop_front" class="laptop_stroke" d="M425.29,34.42c3-1.76,5.52-.35,5.53,3.14l.42,142.08L205.9,309.73l-.4-142.08a12.12,12.12,0,0,1,5.49-9.51Z"/><path id="laptop_back" class="laptop_stroke" d="M429.21,34l-.36-.17-.09,0a1.58,1.58,0,0,0-.31-.09l-.09,0a2.87,2.87,0,0,0-.41,0h-.08c-.12,0-.23,0-.35,0l-.17,0-.29,0-.23.05-.24.07a3,3,0,0,0-.39.14l-.21.08a6.52,6.52,0,0,0-.7.35L211,158.14c-.29.17-.57.37-.86.58l-.14.11c-.26.21-.52.44-.77.68l-.19.18-.36.4-.21.23-.22.26-.25.32-.15.21-.27.39-.11.16-.35.57a.41.41,0,0,1-.05.09l-.27.5c0,.05,0,.11-.08.16s-.17.35-.25.53l0,.08c-.09.2-.17.4-.25.6l-.06.18a4.59,4.59,0,0,0-.15.44,2,2,0,0,0-.07.23c0,.13-.07.26-.11.39l-.06.28c0,.11,0,.21-.06.31s-.06.29-.08.43l0,.24a7.85,7.85,0,0,0-.06,1l.42,148-5-2.9-.42-148a7.89,7.89,0,0,1,.07-1v-.11a.5.5,0,0,0,0-.12c0-.15.05-.3.08-.44l0-.2,0-.1c0-.1,0-.19.07-.29l.06-.25s0-.09,0-.14l.07-.22.06-.2.09-.25.06-.18a.36.36,0,0,0,0-.09c.06-.16.13-.33.2-.49v0l0-.08.18-.38s0-.1.07-.14l.09-.17.07-.16c.07-.11.13-.23.19-.34l.06-.09v0c.1-.16.19-.32.29-.47a.43.43,0,0,0,0-.07l.11-.16.17-.25.1-.14L203,158l.1-.14.15-.18.21-.26.09-.11.12-.12a4.59,4.59,0,0,1,.37-.39l.11-.13.07-.06a10,10,0,0,1,.78-.68l.14-.11a8.1,8.1,0,0,1,.86-.58L420.31,31.52a5.6,5.6,0,0,1,.69-.35l.08,0,.13,0,.39-.14.13,0,.12,0,.22,0a.7.7,0,0,1,.14,0l.15,0H423l.34,0h.05l.1,0,.16,0,.14.05.09,0,.06,0,.27.14h0Z"/><path id="laptop_screen" class="laptop_stroke" d="M421.86,46.41l.38,134-207,119.54-.38-134Z"/><path id="laptop_bottom" class="laptop_stroke" d="M559.16,266.13h0L344.86,389.86a9.66,9.66,0,0,1-1.12.54l-.07,0-.19.06c-.22.08-.45.17-.69.24l-.39.09-.22.05-.2.05c-.25.06-.51.1-.76.14l-.29,0-.19,0-.28,0c-.25,0-.51,0-.76,0h-.8c-.29,0-.57,0-.86-.06h-.1a1.81,1.81,0,0,0-.23,0l-.66-.1a2.86,2.86,0,0,1-.28-.07c-.27,0-.52-.12-.78-.19l-.41-.1-.32-.12-.3-.12a7.64,7.64,0,0,1-1.08-.51l-128-74.36,0-5.77,128,74.36a7.77,7.77,0,0,0,1.09.51l.3.12c.23.08.48.15.73.22l.77.2c.31.06.62.12.94.16l.24,0a11.2,11.2,0,0,0,1.3.07h.21a11.15,11.15,0,0,0,1.29-.07l.19,0c.42-.05.84-.12,1.25-.21l.22-.06a9.65,9.65,0,0,0,1.08-.33l.19-.06a9.14,9.14,0,0,0,1.18-.56l214.3-123.72h0c1.53-.89,2.3-2.05,2.29-3.21l0,5.77A3.88,3.88,0,0,1,559.16,266.13Z"/><path id="laptop_base" class="laptop_stroke" d="M559.14,260.37,344.84,384.09a12.08,12.08,0,0,1-11,0l-128-74.36L431.26,179.67h0L559.18,254C562.2,255.76,562.18,258.61,559.14,260.37Z"/><path id="keyboard" class="keyboard_stroke" d="M414.83,201.11,410,198.27l21.16-12.21,4.88,2.83Zm-2.07,1.19-4.88-2.83-21.16,12.22,4.88,2.83Zm-49.28,22.81,4.88,2.83,21.16-12.22-4.88-2.83Zm-23.23,13.41,4.87,2.83,21.16-12.21-4.87-2.84ZM317,251.93l4.88,2.84,21.16-12.22-4.88-2.83Zm2.8,4-4.87-2.84-21.17,12.22,4.88,2.83Zm-23.23,13.41-4.88-2.83-21.16,12.21,4.88,2.84Zm-23.24,13.41L268.47,280l-21.16,12.22,4.87,2.83Zm-28.11,10.59L224.07,305.6l4.87,2.83,21.16-12.22Zm203.88-96.87-11.78-6.84-21.17,12.21L428,208.73Zm-23.24,13.42-11.78-6.85L392.93,215.3l11.78,6.85Zm-56.18,18.79,11.78,6.84,21.17-12.21-11.79-6.85Zm-23.23,13.41L358.24,249l21.16-12.22-11.78-6.85Zm-23.24,13.41L335,262.39l21.16-12.22-11.78-6.84Zm9.71,8-11.78-6.85L300,269l11.78,6.85ZM309.7,277l-11.79-6.84-21.16,12.21,11.78,6.85Zm-23.24,13.42-11.78-6.85-21.16,12.22,11.78,6.85Zm-23.24,13.42L251.44,297l-21.16,12.22,11.78,6.84Zm200-99.16-11.78-6.84-21.16,12.21L442,216.9ZM439.94,218.1l-11.79-6.85L407,223.47l11.78,6.85Zm-56.19,18.79,11.79,6.84,21.16-12.21-11.79-6.85ZM360.52,250.3l11.78,6.85,21.16-12.22-11.78-6.85Zm-23.23,13.41,11.78,6.85,21.16-12.22-11.78-6.84Zm9.7,8.05-11.78-6.85-21.16,12.22L325.83,284Zm-23.23,13.42L312,278.33l-21.16,12.22,11.78,6.84Zm-23.24,13.41-11.78-6.85L267.58,304l11.78,6.85ZM277.28,312l-11.78-6.85-21.16,12.22,11.78,6.84Zm200-99.15L465.45,206l-21.16,12.22,11.78,6.84ZM454,226.27l-11.79-6.85-21.16,12.22,11.78,6.85Zm-56.19,18.79,11.79,6.84,21.16-12.21L419,232.84Zm-23.23,13.41,11.78,6.85,21.16-12.22-11.78-6.85Zm-23.23,13.42,11.78,6.84,21.16-12.21-11.78-6.85Zm9.7,8-11.78-6.84L328.11,285.3l11.78,6.85Zm-23.23,13.42L326,286.5l-21.16,12.22,11.78,6.84Zm-23.24,13.41-11.78-6.85-21.16,12.22L293.42,319Zm-23.24,13.42-11.78-6.85L258.4,325.55l11.78,6.84Zm200-99.15-11.78-6.85L458.35,226.4l11.78,6.84Zm-23.23,13.41-11.78-6.84-21.16,12.21,11.78,6.85Zm-56.18,18.79,11.78,6.85,21.16-12.22L433,241Zm-23.23,13.42,11.77,6.84,21.16-12.22-11.77-6.84Zm-23.24,13.41,11.78,6.84,21.16-12.21-11.78-6.85Zm9.7,8-11.78-6.84-21.16,12.22L354,300.32Zm-23.23,13.42-11.78-6.85-21.16,12.22,11.78,6.84Zm-23.24,13.41-11.77-6.84L295.71,320.3l11.77,6.85ZM305.4,328.35l-11.77-6.85-21.16,12.22,11.77,6.85Zm200-99.15-11.78-6.85-21.16,12.22,11.78,6.85Zm-23.23,13.41-11.78-6.84L449.18,248,461,254.83ZM458.88,256l-11.78-6.84-90.87,52.46L368,308.49Zm-92.94,53.66-11.78-6.85L333,315.06l11.78,6.85ZM342.7,323.1l-11.77-6.84-21.16,12.22,11.77,6.84Zm-23.24,13.42-11.77-6.84-21.16,12.21,11.77,6.85Z"/>
+                <path id="trackpad" class="laptop_stroke" d="M449.74,271.52l37.6,21.85-82.83,47.82-37.6-21.85Z"/>
+                <path id="ui_screen1" class="fill_green hide" d="M214,166,420.66,46.87,421,180.61,214.32,299.93Z"/>
+                <path id="ui_screen2" class="fill_green hide" d="M214,166,420.66,46.87,421,180.61,214.32,299.93Z"/>
+                <path id="ui_screen3" class="fill_green hide" d="M214,166,420.66,46.87,421,180.61,214.32,299.93Z"/>
+                <path id="ui_screen" class="fill_green hide" d="M233.23,166,439.9,46.87l.33,133.74L233.56,299.93Z"/>
+                <path id="ui_header" class="fill_purple hide" d="M213.94,166.19,420.61,46.87l.05,19.49L214,185.68Z"/>
+                <path id="ui_content1" class="fill_purple hide" d="M415.24,76.14l.28,99.31L313.43,234.39l-.26-90.67,0-8.64Z"/>
+                <path id="ui_content" class="fill_purple hide" d="M415.24,76.14l.28,99.31L313.43,234.39l-.26-90.67,0-8.64Z"/>
+                <path id="ui_block3" class="fill_yellow hide" d="M260,219.36l.12,45.79-39.84,23-.13-45.79Z"/>
+                <path id="ui_block1" class="fill_yellow hide" d="M259.88,165.83l.13,45.79-39.85,23L220,188.84Z"/>
+                <path id="ui_block2" class="fill_yellow hide" d="M307.08,138.58l.13,45.79-39.85,23-.13-45.79Z"/>
+                <path id="ui_block4" class="fill_yellow hide" d="M307.23,192.11l.13,45.79-39.84,23-.13-45.79Z"/>
+                <path id="ui_icon" class="fill_yellow hide" d="M224.86,162.18c3.58-2.07,6.5-.41,6.51,3.71a14.26,14.26,0,0,1-6.47,11.2c-3.58,2.07-6.5.41-6.51-3.71A14.24,14.24,0,0,1,224.86,162.18Z"/>
+            </g>
+            <g id="tv_container">
+                <path id="tv_body" d="M560.52,71.16V300.68a8.78,8.78,0,0,1-8.78,8.78H210.22a8.78,8.78,0,0,1-8.78-8.78V71.16a8.78,8.78,0,0,1,8.78-8.78H551.74A8.78,8.78,0,0,1,560.52,71.16Z"/>
+                <path id="tv_screen" class="hide" d="M546,262.63H216V76.82H546Z"/>
+                <path id="tv_base" class="hide" d="M435.54,358.29v-1.36h0c0-.35-.37-.64-.37-.64s-9.56-6.44-11.51-8-2.69-1.8-3.71-6.24c-1.33-5.77-3.41-32.59-3.41-32.59H345.43s-2.09,26.82-3.42,32.59c-1,4.44-1.75,4.68-3.71,6.24s-11.51,8-11.51,8-.39.29-.36.64h0v1.36s-.11,1.27,3.89,1.27H431.66C435.66,359.56,435.54,358.29,435.54,358.29Z"/>
+                <path id="play_screen1" class="fill_purple hide" d="M393,176.51H368.92V162.93H393Z"/>
+                <path id="play_screen2" class="hide" d="M546,176.51H216V162.93H546Z"/>
+                <path id="play_ball1" class="fill_yellow hide" d="M426.32,169.72A45.34,45.34,0,1,1,381,124.39,45.34,45.34,0,0,1,426.32,169.72Z"/>
+                <path id="play_bulb" class="fill_yellow hide" d="M426.32,164.34a45.34,45.34,0,1,0-67,39.86v27.48a20,20,0,0,0,20,20h3.25a20,20,0,0,0,20-20V204.2A45.34,45.34,0,0,0,426.32,164.34Z"/>
+                <path id="bulb_base" class="stroke_purple hide" d="M359.36,204.9h43.25m-43.25,4.21h43.25m-43.25,4.2h43.25m-43.25,4.21h43.25m-43.25,4.2h43.25m-43.25,4.2h43.25m-43.25,4.21h43.25m-43.25,4.2h43.25m-43.25,4.2h43.25m-43.25,4.21h43.25m-43.25,4.2h43.25"/>
+                <path id="filament" class="stroke_purple hide" d="M376.55,204.21,366.05,165l8.38,2.9a19.88,19.88,0,0,0,13.1,0l8.38-2.9-10.49,39.17"/>
+                <path id="ray2" class="stroke_yellow hide" d="M329.18,110.22,340,121"/>
+                <path id="ray4" class="stroke_yellow hide" d="M432.78,110.22,422,121"/>
+                <path id="ray3" class="stroke_yellow hide" d="M381,87.76v21.58"/>
+                <path id="ray1" class="stroke_yellow hide" d="M306.43,165H328"/>
+                <path id="ray5" class="stroke_yellow hide" d="M434,165h21.57"/>
+            </g>
+          </svg>
+        </div>
     </div>
   </section>
 
@@ -330,8 +389,8 @@
   </footer>
 
   <script>
-    // Minimal GSAP animations for the services page
-    gsap.registerPlugin(ScrollTrigger);
+    // GSAP animations for the services page
+    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MorphSVGPlugin);
 
     // Simple hero animations
     gsap.from(".hero-title .title-line", {
@@ -358,6 +417,304 @@
       delay: 0.5,
       ease: "power2.out"
     });
+
+    // Hero animation loop - copied from intro.js and refactored to GSAP 3
+    function initHeroAnimation() {
+      try {
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, MorphSVGPlugin, ExpoScaleEase);
+        console.log('GSAP plugins registered successfully');
+
+        // Define element selectors from intro.js
+        const phone_container = document.getElementById('phone_container');
+        const back = document.getElementById('back');
+        const front = document.getElementById('front');
+        const phone_screen = document.getElementById('phone_screen');
+        const phone_screen2 = document.getElementById('phone_screen2');
+        const phone_screen3 = document.getElementById('phone_screen3');
+        const phone_screen4 = document.getElementById('phone_screen4');
+        const speaker = document.getElementById('speaker');
+        
+        // Laptop elements  
+        const laptop_container = document.getElementById('laptop_container');
+        const laptop_base = document.getElementById('laptop_base');
+        const laptop_bottom = document.getElementById('laptop_bottom');
+        const trackpad = document.getElementById('trackpad');
+        const keyboard = document.getElementById('keyboard');
+        
+        // TV elements
+        const tv_body = document.getElementById('tv_body');
+        const tv_screen = document.getElementById('tv_screen');
+        const tv_base = document.getElementById('tv_base');
+        
+        // UI elements
+        const ui_circle1 = document.getElementById('ui_circle1');
+        const ui_circle2 = document.getElementById('ui_circle2');
+        const ui_header = document.getElementById('ui_header');
+        const ui_icon = document.getElementById('ui_icon');
+        const ui_block1 = document.getElementById('ui_block1');
+        const ui_block2 = document.getElementById('ui_block2');
+        const ui_block3 = document.getElementById('ui_block3');
+        const ui_block4 = document.getElementById('ui_block4');
+        const ui_content1 = document.getElementById('ui_content1');
+        const ui_content = document.getElementById('ui_content');
+        const ui_bar = document.getElementById('ui_bar');
+        const ui_btn = document.getElementById('ui_btn');
+        const ui_screen1 = document.getElementById('ui_screen1');
+        const ui_screen2 = document.getElementById('ui_screen2');
+        const ui_screen3 = document.getElementById('ui_screen3');
+        
+        // Play elements
+        const play_ball1 = document.getElementById('play_ball1');
+        const play_screen1 = document.getElementById('play_screen1');
+        const play_screen2 = document.getElementById('play_screen2');
+        const play_bulb = document.getElementById('play_bulb');
+        
+        // Bulb elements
+        const bulb_base = document.getElementById('bulb_base');
+        const filament = document.getElementById('filament');
+        const ray1 = document.getElementById('ray1');
+        const ray2 = document.getElementById('ray2');
+        const ray3 = document.getElementById('ray3');
+        const ray4 = document.getElementById('ray4');
+        const ray5 = document.getElementById('ray5');
+
+        // Initial GSAP settings from intro.js (GSAP 3 syntax)
+        gsap.set([phone_container, laptop_container], {autoAlpha:1});
+        gsap.set(['.phone_stroke', '.laptop_stroke', '.keyboard_stroke'], {drawSVG:"50% 50%"});
+        gsap.set([ui_circle1, ui_circle2], {y:-20});
+        if (tv_body) gsap.set(tv_body, {autoAlpha:1, fill:"transparent", drawSVG:"50% 50%", stroke:"rgb(255, 255, 255)"});
+        gsap.set([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {x:120});
+        if (ui_content) gsap.set(ui_content, {x:60});
+        gsap.set([ui_bar, ui_btn], {scale:0, transformOrigin:"center center"});
+        if (play_ball1) gsap.set(play_ball1, {scale:0, y:-140, transformOrigin:"center center"});
+        gsap.set([bulb_base, filament, ray1, ray2, ray3, ray4, ray5], {autoAlpha:1, drawSVG:"0% 0%"});
+        
+        const tl = gsap.timeline({  });
+        
+        // Main animation sequence from intro.js (device morphing part only)
+        tl.to(front, {duration: 1, morphSVG:"#front", stroke:"rgb(207, 207, 207)"})
+        .to([back, phone_screen, speaker], {duration: 1, drawSVG:"0% 100%", stroke:"rgb(207, 207, 207)", stagger: 0.5}, "-=1")
+        .to(back, {duration: 0.7, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        .to(front, {duration: 0.7, fill:"rgb(255, 255, 255)"}, '-=0.7')
+        .to(speaker, {duration: 0.7, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        .to(phone_screen, {duration: 0.7, fill:"rgba(58, 116, 69, 0.8)"}, '-=1.7')
+        .to(phone_screen2, {duration: 0.7, y:-60, fill:"rgba(109, 217, 129)", autoAlpha:0.8, ease:"expo.out"}, '-=0.5')
+        .to(phone_screen3, {duration: 0.7, y:-40, fill:"rgba(109, 217, 129)", autoAlpha:0.4, ease:"expo.out"}, '-=0.5')
+        .to(phone_screen4, {duration: 0.7, y:-20, fill:"rgba(109, 217, 129)", autoAlpha:0.2, ease:"expo.out"}, '-=0.5')
+        .to(ui_bar, {duration: 0.7, scale:1, autoAlpha:1, ease:"bounce.out"}, '-=0.5')
+        .to([ui_circle1, ui_circle2], {duration: 0.7, autoAlpha:1, y:0, ease:"expo.in", stagger: 0.35}, '-=0.5')
+        .to(ui_btn, {duration: 0.7, scale:1, autoAlpha:1, ease:"bounce.out"}, '-=0.2')
+        .to([phone_screen2, phone_screen3, phone_screen4], {duration: 0.7, y:0, ease:"expo.in", delay:1, stagger: 0.2})
+        .to([ui_bar, ui_circle1, ui_circle2, ui_btn], {duration: 0.7, y:60, ease:"bounce.out"}, '-=0.2')
+        .to([front, back, phone_screen, phone_screen2, phone_screen3, phone_screen4, speaker, ui_bar, ui_circle1, ui_circle2, ui_btn], {duration: 1, fill:"transparent", stroke:"#fff", delay:1})
+        .to([phone_screen2, phone_screen3, phone_screen4, ui_bar, ui_circle1, ui_circle2, ui_btn], {duration: 1, autoAlpha:0}, '-=1')
+        
+        // Morph to laptop
+        .to(front, {duration: 1, morphSVG:"#laptop_front"})
+        .to(speaker, {duration: 0.5, autoAlpha:0}, '-=1')
+        .to(phone_screen, {duration: 1, morphSVG:"#laptop_screen"}, '-=1')
+        .to(back, {duration: 1, morphSVG:"#laptop_back"}, '-=1')
+        .to([laptop_base, laptop_bottom, trackpad, keyboard], {duration: 1, drawSVG:"0% 100%", stroke:"rgb(207, 207, 207)", stagger: 0.5}, '-=1')
+        .to(back, {duration: 0.7, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        .to([front, laptop_base], {duration: 0.7, fill:"rgb(255, 255, 255)", stroke:"rgb(207, 207, 207)"}, '-=1.7')
+        .to([laptop_bottom, trackpad, keyboard, phone_screen], {duration: 0.7, fill:"rgb(207, 207, 207)", stroke:"rgb(207, 207, 207)"}, '-=0.7')
+        .to(phone_screen, {duration: 0.7, fill:"rgba(58, 116, 69, 0.8)"})
+        .to(ui_screen3, {duration: 0.7, x:60, fill:"rgba(109, 217, 129)", autoAlpha:0.8, ease:"expo.out"}, '-=0.5')
+        .to(ui_screen2, {duration: 0.7, x:40, fill:"rgba(109, 217, 129)", autoAlpha:0.4, ease:"expo.out"}, '-=0.5')
+        .to(ui_screen1, {duration: 0.7, x:20, fill:"rgba(109, 217, 129)", autoAlpha:0.2, ease:"expo.out"}, '-=0.5')
+        .to([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {duration: 0.7, autoAlpha:1, x:60, ease:"bounce.out", stagger: 0.2})
+        .to(ui_content1, {duration: 0.7, morphSVG:"#ui_content"})
+        .to([ui_screen1, ui_screen2, ui_screen3], {duration: 0.7, x:0, ease:"expo.in", stagger: 0.2})
+        .to([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {duration: 0.7, x:0, ease:"bounce.out"}, '-=0.2')
+        .to([front, back, phone_screen, laptop_base, laptop_bottom, trackpad, keyboard], {duration: 1, fill:"transparent", stroke:"#fff", delay:1})
+        .to([ui_screen1, ui_screen2, ui_screen3, ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1, front], {duration: 1, autoAlpha:0}, '-=1')
+        .to([back, laptop_base, laptop_bottom, keyboard], {duration: 1, drawSVG:"100% 100%"})
+        
+        // Morph to TV
+        .to(tv_body, {duration: 1, drawSVG:"0% 100%"})
+        .to(phone_screen, {duration: 1, morphSVG:"#tv_screen"}, '-=1')
+        .to(trackpad, {duration: 0.5, morphSVG:"#tv_base"}, '-=1')
+        .to(tv_body, {duration: 0.7, fill:"rgb(255, 255, 255)"})
+        .to(trackpad, {duration: 0.7, autoAlpha:1, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        // .to(play_screen1, {duration: 0.3, autoAlpha:1, morphSVG:"#play_screen2"})
+        // .to(play_screen1, {duration: 0.7, morphSVG:"#tv_screen"})
+        
+        // Light bulb sequence
+        .to(play_ball1, {duration: 0.7, autoAlpha:1, scale:1, y:0, ease:"bounce.out"})
+        .to(play_ball1, {duration: 1, morphSVG:"#play_bulb"})
+        .to([bulb_base, filament], {duration: 0.5, drawSVG:"0% 100%", stagger: 0.2}, '-=1')
+        .to([ray1, ray2, ray3, ray4, ray5], {duration: 0.5, drawSVG:"0% 100%", stagger: 0.2})
+        
+        // Reset for loop
+        // .to([play_ball1, bulb_base, filament, ray1, ray2, ray3, ray4, ray5], {duration: 0.8, autoAlpha:0}, "+=1")
+        // .to([tv_body, play_screen1], {duration: 0.5, autoAlpha:0})
+        // .to(phone_screen, {duration: 1, morphSVG:"#phone_screen"})
+        // .to(front, {duration: 1, morphSVG:"#front"}, '-=1')
+        // .to(trackpad, {duration: 1, morphSVG:"#trackpad"}, '-=1')
+        // .to(speaker, {duration: 0.5, autoAlpha:1})
+        
+        // Reset all states for next loop
+        // .set(['.phone_stroke', '.laptop_stroke', '.keyboard_stroke'], {drawSVG:"50% 50%"})
+        // .set([ui_circle1, ui_circle2], {y:-20})
+        // .set(tv_body, {autoAlpha:1, fill:"transparent", drawSVG:"50% 50%", stroke:"rgb(255, 255, 255)"})
+        // .set([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {x:120, autoAlpha:0})
+        // .set(ui_content, {x:60})
+        // .set([ui_bar, ui_btn], {scale:0})
+        // .set([bulb_base, filament, ray1, ray2, ray3, ray4, ray5], {drawSVG:"0% 0%"})
+        // .set([phone_screen2, phone_screen3, phone_screen4], {autoAlpha:0})
+        // .set([ui_screen1, ui_screen2, ui_screen3], {autoAlpha:0})
+        // .set(play_ball1, {scale:0, y:-140, autoAlpha:0})
+        // .set(play_screen1, {autoAlpha:0});
+
+        // Start animation after page load
+        setTimeout(() => {
+          tl.play();
+        }, 1000);
+
+      } catch (error) {
+        console.error('Error initializing hero animation:', error);
+      }
+    }
+        const ui_circle1 = document.getElementById('ui_circle1');
+        const ui_circle2 = document.getElementById('ui_circle2');
+        const ui_bar = document.getElementById('ui_bar');
+        const ui_btn = document.getElementById('ui_btn');
+        
+        // Laptop UI elements (missing from previous version)
+        const ui_screen1 = document.getElementById('ui_screen1');
+        const ui_screen2 = document.getElementById('ui_screen2');
+        const ui_screen3 = document.getElementById('ui_screen3');
+        const ui_header = document.getElementById('ui_header');
+        const ui_icon = document.getElementById('ui_icon');
+        const ui_block1 = document.getElementById('ui_block1');
+        const ui_block2 = document.getElementById('ui_block2');
+        const ui_block3 = document.getElementById('ui_block3');
+        const ui_block4 = document.getElementById('ui_block4');
+        const ui_content1 = document.getElementById('ui_content1');
+        const ui_content = document.getElementById('ui_content');
+        
+        // TV/Play elements
+        const play_screen1 = document.getElementById('play_screen1');
+        const play_screen2 = document.getElementById('play_screen2');
+        const play_ball1 = document.getElementById('play_ball1');
+        
+        // Light bulb elements
+        const play_bulb = document.getElementById('play_bulb');
+        const bulb_base = document.getElementById('bulb_base');
+        const filament = document.getElementById('filament');
+        const ray1 = document.getElementById('ray1');
+        const ray2 = document.getElementById('ray2');
+        const ray3 = document.getElementById('ray3');
+        const ray4 = document.getElementById('ray4');
+        const ray5 = document.getElementById('ray5');
+
+        // Initial GSAP settings - exactly matching intro.js pattern
+        gsap.set([phone_container, laptop_container], {autoAlpha:1}); // Key fix - make containers visible!
+        gsap.set(circle_stroke, {morphSVG: "#front", drawSVG:"50% 50%", fill:"transparent", stroke:"rgb(255, 255, 255)"});
+        gsap.set([laptop_base, laptop_bottom, trackpad, keyboard], {autoAlpha:1, drawSVG: "50% 50%", fill:"transparent", stroke:"rgb(255, 255, 255)"})
+        gsap.set([ui_circle1, ui_circle2], {y:-20});
+        gsap.set(tv_body, {autoAlpha:1, fill:"transparent", drawSVG:"50% 50%", stroke:"rgb(255, 255, 255)"});
+        gsap.set([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {x:120});
+        gsap.set(ui_content, {x:60});
+        gsap.set([ui_bar, ui_btn], {scale:0, transformOrigin:"center center"});
+        gsap.set([bulb_base, filament, ray1, ray2, ray3, ray4, ray5], {autoAlpha:1, drawSVG:"0% 0%"});
+        gsap.set([phone_screen2, phone_screen3, phone_screen4], {autoAlpha:0});
+        gsap.set([ui_screen1, ui_screen2, ui_screen3], {autoAlpha:0});
+        gsap.set([play_bulb], { autoAlpha:0, scale:0, y:-140, transformOrigin:"center center"});
+        gsap.set([play_ball1], { autoAlpha:0, scale:0, y:-140, transformOrigin:"center center"});
+        gsap.set([play_screen1], { autoAlpha:0 });
+        gsap.set([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {autoAlpha:0});
+
+        // Create looping timeline - following intro.js sequence exactly
+        const tl = gsap.timeline({ });
+        
+        // Following intro.js line by line for device morphing
+        tl.to([back, phone_screen, speaker, circle_stroke], {duration: 1, drawSVG:"0% 100%", stroke:"rgb(207, 207, 207)", stagger: 0.5})
+        .to(back, {duration: 0.7, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        .to(circle_stroke, {duration: 0.7, fill:"rgb(255, 255, 255)"}, '-=0.7')
+        .to(speaker, {duration: 0.7, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        .to(phone_screen, {duration: 0.7, fill:"rgba(58, 116, 69, 0.8)"}, '-=1.7')
+        .to(phone_screen4, {duration: 0.7, y:-60, fill:"rgba(109, 217, 129)", autoAlpha:0.8, ease:"expo.out"}, '-=0.5')
+        .to(phone_screen3, {duration: 0.7, y:-40, fill:"rgba(109, 217, 129)", autoAlpha:0.4, ease:"expo.out"}, '-=0.5')
+        .to(phone_screen2, {duration: 0.7, y:-20, fill:"rgba(109, 217, 129)", autoAlpha:0.2, ease:"expo.out"}, '-=0.5')
+        .to(ui_bar, {duration: 0.7, scale:1, autoAlpha:1, ease:"bounce.out"}, '-=0.5')
+        .to([ui_circle1, ui_circle2], {duration: 0.7, autoAlpha:1, y:0, ease:"expo.in", stagger: 0.5}, '-=0.5')
+        .to(ui_btn, {duration: 0.7, scale:1, autoAlpha:1, ease:"bounce.out"}, '-=0.2')
+        .to([phone_screen2, phone_screen3, phone_screen4], {duration: 0.7, y:0, ease:"expo.in", delay:1, stagger: 0.2})
+        .to([ui_bar, ui_circle1, ui_circle2, ui_btn], {duration: 0.7, y:60, ease:"bounce.out"}, '-=0.2')
+        .to([circle_stroke, back, phone_screen, phone_screen2, phone_screen3, phone_screen4, speaker, ui_bar, ui_circle1, ui_circle2, ui_btn], {duration: 1, fill:"transparent", stroke:"#fff", delay:1})
+        .to([phone_screen2, phone_screen3, phone_screen4, ui_bar, ui_circle1, ui_circle2, ui_btn], {duration: 1, autoAlpha:0}, '-=1')
+        
+        // Morph to laptop - exactly following intro.js
+        .to(circle_stroke, {duration: 1, morphSVG:"#laptop_front"})
+        .to(speaker, {duration: 0.5, autoAlpha:0}, '-=1')
+        .to(phone_screen, {duration: 1, morphSVG:"#laptop_screen"}, '-=1')
+        .to(back, {duration: 1, morphSVG:"#laptop_back"}, '-=1')
+        .to([laptop_base, laptop_bottom, trackpad, keyboard], {duration: 1, drawSVG:"0% 100%", stroke:"rgb(207, 207, 207)", stagger: 0.5}, '-=1')
+        .to(back, {duration: 0.7, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        .to([circle_stroke, laptop_base], {duration: 0.7, fill:"rgb(255, 255, 255)", stroke:"rgb(207, 207, 207)"}, '-=1.7')
+        .to([laptop_bottom, trackpad, keyboard, phone_screen], {duration: 0.7, fill:"rgb(207, 207, 207)", stroke:"rgb(207, 207, 207)"}, '-=0.7')
+        .to(phone_screen, {duration: 0.7, fill:"rgba(58, 116, 69, 0.8)"})
+        .to(ui_screen3, {duration: 0.7, x:60, fill:"rgba(109, 217, 129)", autoAlpha:0.8, ease:"expo.out"}, '-=0.5')
+        .to(ui_screen2, {duration: 0.7, x:40, fill:"rgba(109, 217, 129)", autoAlpha:0.4, ease:"expo.out"}, '-=0.5')
+        .to(ui_screen1, {duration: 0.7, x:20, fill:"rgba(109, 217, 129)", autoAlpha:0.2, ease:"expo.out"}, '-=0.5')
+        .to([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {duration: 0.7, autoAlpha:1, x:60, ease:"bounce.out", stagger: 0.2})
+        .to(ui_content1, {duration: 0.7, morphSVG:"#ui_content"})
+        .to([ui_screen1, ui_screen2, ui_screen3], {duration: 0.7, x:0, ease:"expo.in", stagger: 0.2})
+        .to([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {duration: 0.7, x:0, ease:"bounce.out"}, '-=0.2')
+        
+        // Clean up laptop - following intro.js
+        .to([circle_stroke, back, phone_screen, laptop_base, laptop_bottom, trackpad, keyboard], {duration: 1, fill:"transparent", stroke:"#fff", delay:1})
+        .to([ui_screen1, ui_screen2, ui_screen3, ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1, circle_stroke], {duration: 1, autoAlpha:0}, '-=1')
+        .to([back, laptop_base, laptop_bottom, keyboard], {duration: 1, drawSVG:"100% 100%"})
+        
+        // Morph to TV - following intro.js
+        .to(tv_body, {duration: 1, drawSVG:"0% 100%"})
+        .to(phone_screen, {duration: 1, morphSVG:"#tv_screen"}, '-=1')
+        .to(trackpad, {duration: 0.5, morphSVG:"#tv_base"}, '-=1')
+        .to(tv_body, {duration: 0.7, fill:"rgb(255, 255, 255)"})
+        .to([phone_screen, trackpad], {duration: 0.7, autoAlpha:1, fill:"rgb(207, 207, 207)"}, '-=0.7')
+        // .to(play_screen1, {duration: 0.3, autoAlpha:1, morphSVG:"#play_screen2"})
+        .to(play_screen1, {duration: 0.7, autoAlpha: 1, morphSVG:"#tv_screen"})
+        
+        // Light bulb sequence - following intro.js exactly
+        .to(play_ball1, {duration: 0.7, autoAlpha:1, scale:1, y:0, ease:"bounce.out"})
+        .to(play_ball1, {duration: 1, morphSVG:"#play_bulb"})
+        .to([bulb_base, filament], {duration: 0.5, drawSVG:"0% 100%", stagger: 0.2}, '-=1')
+        .to([ray1, ray2, ray3, ray4, ray5], {duration: 0.5, drawSVG:"0% 100%", stagger: 0.2})
+        
+        // Reset for loop - back to phone
+        // .to([play_ball1, bulb_base, filament, ray1, ray2, ray3, ray4, ray5], {duration: 0.8, autoAlpha:0}, "+=1")
+        // .to(tv_body, {duration: 0.5, autoAlpha:0})
+        // .to(phone_screen, {duration: 1, morphSVG:"#phone_screen"})
+        // .to(circle_stroke, {duration: 1, morphSVG:"#front"}, '-=1')
+        // .to(trackpad, {duration: 1, morphSVG:"#back"}, '-=1')
+        // .to(speaker, {duration: 0.5, autoAlpha:1})
+        
+        // Reset all states for next loop
+        // .set('.phone_stroke', {drawSVG:"50% 50%"})
+        // .set('.laptop_stroke', {drawSVG:"50% 50%"})
+        // .set('.keyboard_stroke', {drawSVG:"50% 50%"})
+        // .set([ui_circle1, ui_circle2], {y:-20})
+        // .set(tv_body, {autoAlpha:1, fill:"transparent", drawSVG:"50% 50%", stroke:"rgb(255, 255, 255)"})
+        // .set([ui_header, ui_icon, ui_block1, ui_block2, ui_block3, ui_block4, ui_content1], {x:120, autoAlpha:0})
+        // .set(ui_content, {x:60})
+        // .set([ui_bar, ui_btn], {scale:0})
+        // .set([bulb_base, filament, ray1, ray2, ray3, ray4, ray5], {drawSVG:"0% 0%"})
+        // .set([phone_screen2, phone_screen3, phone_screen4], {autoAlpha:0})
+        // .set([ui_screen1, ui_screen2, ui_screen3], {autoAlpha:0})
+        // .set([play_bulb], {autoAlpha:0, scale:0, y:-140})
+        // .set([play_ball1], {autoAlpha:0, scale:0, y:-140})
+        // .set([play_screen1], {autoAlpha:0});
+
+        // Start animation after page load
+        setTimeout(() => {
+          tl.play();
+        }, 1000);
+
+    // Initialize hero animation when DOM is ready
+    document.addEventListener('DOMContentLoaded', initHeroAnimation);
   </script>
 </body>
 

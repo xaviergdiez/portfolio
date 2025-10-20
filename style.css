@@ -468,16 +468,16 @@ body {
     .avatar-container svg,
     .frame-container svg {
         /* Ensure SVGs are visible in Safari */
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+        display: none;
+        visibility: visible;
+        opacity: 1;
         /* Prevent Safari SVG rendering issues */
-        -webkit-transform: translateZ(0) !important;
-        transform: translateZ(0) !important;
-        position: relative !important;
-        z-index: 1 !important;
-        width: 100% !important;
-        height: 100% !important;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
     }
     
     /* Safari glow filter replacements - use CSS instead of SVG filters */
@@ -708,14 +708,15 @@ body {
 @media (max-width: 480px) {
     .case-study-title {
         font-size: clamp(2rem, 15vw, 4rem);
-        bottom: clamp(2.5rem, 8vh, 4rem);
+        bottom: clamp(5.5rem, 14vh, 7rem); /* Moved up for better spacing */
         left: clamp(1rem, 4vw, 2rem);
     }
     
     .case-study-subtitle {
         font-size: clamp(0.8rem, 5vw, 1.5rem);
-        bottom: clamp(1rem, 4vh, 2rem);
+        bottom: clamp(3.75rem, 12vh, 5.5rem); /* Moved up to maintain equal spacing */
         left: clamp(1rem, 4vw, 2rem);
+        margin-top: 0; /* Remove margin-top on mobile to control spacing precisely */
     }
 }
 
@@ -911,13 +912,16 @@ body {
 
 @media (max-width: 480px) {
     .case-cta-btn {
-        position: fixed;
-        bottom: 2rem;
-        right: 1rem;
-        left: 1rem;
+        position: absolute;
+        bottom: 1.5rem; /* Bottom element with least space */
+        left: clamp(1rem, 4vw, 2rem); /* Align with title and subtitle */
+        right: auto; /* Remove right positioning */
+        width: auto; /* Allow natural width */
+        min-width: 120px; /* Minimum width for button */
         border-radius: 25px;
         justify-content: center;
-        z-index: 1000;
+        z-index: 20;
+        padding: 0.875rem 1.5rem; /* Touch-friendly padding */
     }
     
     .case-expanded-content.expanded {
@@ -2907,11 +2911,85 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 60px;
 }
 
 .hero-text {
-  max-width: 800px;
-  margin: 0 auto;
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-animation {
+  flex: 0 0 600px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-animation svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Essential classes for SVG animation - from intro */
+.hide {
+  opacity: 0;
+}
+
+.phone_stroke {
+  fill: transparent;
+  stroke: #fff;
+  stroke-miterlimit: 1;
+  stroke-width: 1px;
+}
+
+.laptop_stroke {
+  fill: transparent;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  stroke-width: 1px;
+}
+
+.keyboard_stroke {
+  fill: transparent;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  stroke-width: 0.5px;
+}
+
+.fill_purple {
+  fill: #a384ec;
+}
+
+.fill_yellow {
+  fill: #fae370;
+}
+
+.fill_red {
+  fill: #d9534f;
+}
+
+.fill_green {
+  fill: #6dd981;
+}
+
+.stroke_purple {
+  fill: transparent;
+  stroke: #a384ec;
+  stroke-miterlimit: 10;
+  stroke-width: 1px;
+}
+
+.stroke_yellow {
+  fill: transparent;
+  stroke: #fae370;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4px;
 }
 
 .hero-title {
@@ -3380,8 +3458,18 @@ body {
   }
   
   .hero-content {
-    gap: 60px;
+    flex-direction: column;
+    gap: 40px;
     text-align: center;
+  }
+  
+  .hero-text {
+    max-width: 100%;
+  }
+  
+  .hero-animation {
+    flex: 0 0 300px;
+    height: 300px;
   }
   
   .hero-stats {
@@ -3423,8 +3511,14 @@ body {
   }
   
   .hero-content {
+    flex-direction: column;
+    gap: 32px;
     padding: 0 16px;
-    gap: 40px;
+  }
+  
+  .hero-animation {
+    flex: 0 0 250px;
+    height: 250px;
   }
   
   .hero-stats {
@@ -3508,7 +3602,13 @@ body {
   }
   
   .hero-content {
-    gap: 32px;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .hero-animation {
+    flex: 0 0 200px;
+    height: 200px;
   }
   
   .hero-stats {
@@ -3556,5 +3656,27 @@ body {
     width: 50px;
     height: 50px;
     font-size: 1.125rem;
+  }
+}
+
+/* Landscape orientation on tablets and phones */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .hero-content {
+    flex-direction: row;
+    gap: 40px;
+    text-align: left;
+  }
+  
+  .hero-animation {
+    flex: 0 0 250px;
+    height: 250px;
+  }
+}
+
+/* Portrait orientation - force column layout */
+@media (orientation: portrait) {
+  .hero-content {
+    flex-direction: column !important;
+    text-align: center;
   }
 }

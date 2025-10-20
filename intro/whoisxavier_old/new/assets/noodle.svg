@@ -1,0 +1,12 @@
+<svg id="noodle_container_1" class="noodle abs" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 772.11 979.46">
+            <defs>
+                <linearGradient x1="22.862053%" y1="53.1652652%" x2="54.599094%" y2="45.8998365%" id="linearGradient">
+                    <stop stop-color="#37e474" offset="0%"></stop>
+                    <stop stop-color="#06ADFF" offset="100%"></stop>
+                </linearGradient>
+            </defs>
+            <path id="noodle_1"
+                d="M32.5,947Q117,866.21,78,760C39.1,653.72,72.67,594.4,122.45,564.26S248.74,530,305,620.11,419.78,698.18,449,683s48.74-50.23,41.15-91.41c-16.79-91.07-134-76.87-143.35-161.73s89.17-131,164.89-64.39c78.74,69.23,169.56,36.41,203.68-21.54,56.39-95.71,12.7-197.7-113.37-233.82C543.83,94,497.55,66.62,466.11,32.5"
+                style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:95px;stroke:url(#linearGradient)" />
+</svg>

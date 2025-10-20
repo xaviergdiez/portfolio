@@ -1,0 +1,12 @@
+<svg id="noodle_container" class="blockElement" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1366 768">
+    <defs>
+        <linearGradient id="linear-gradient" x1="1.55" y1="767.93" x2="2.02" y2="768.04"
+            gradientTransform="matrix(500, 500, 646.65, -646.65, -496801.58, 496004.97)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#37e474" />
+            <stop offset="1" stop-color="#06adff" />
+        </linearGradient>
+    </defs>
+    <path id="noodle" fill="transparent" stroke-linecap="round" stroke-linejoin="round" stroke-width="141.42" stroke="url(#linear-gradient)"
+        d="M-79.61,493.17q174,3.9,244.73-148.94C236.05,191.41,333.83,164.3,418,185s169,96.87,133.37,250.94,38.64,203,85.37,217.77,104.18-1.57,139.54-52.9c78.18-113.54-60.14-222,19.34-321.13s231.76-44,241.34,105.79c10,155.75,140.16,216.8,237.07,191.72,160.1-41.39,221.47-194.73,126.79-365.46C1356.5,133.53,1336.6,56,1339.42-13">
+    </path>
+</svg>

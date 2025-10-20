@@ -1,0 +1,43 @@
+<svg id="hero_logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2020 2020">
+    <!-- <image id="logo_full" x="0" y="0" width="2020" height="2020" xlink:href="bmw_full.svg"></image> -->
+    <g id="logo_outline">
+        <path id="outer_circle" class="circle outline"
+            d="M1010,10C457.74,10,10,457.72,10,1010S457.74,2010,1010,2010s1000-447.7,1000-1000S1562.31,10,1010,10Zm0,1950c-524.68,0-950-425.31-950-950S485.32,60,1010,60s950,425.33,950,950S1534.68,1960,1010,1960Z"
+            fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+        </path>
+        <path id="inner_circle" class="circle outline"
+            d="M1010,373.11c-351.75,0-636.9,285.14-636.9,636.89s285.15,636.87,636.9,636.87,636.9-285.13,636.9-636.87S1361.75,373.1,1010,373.11Zm0,1252.59c-340,0-615.7-275.65-615.7-615.69h0C394.3,670,670,394.29,1010,394.29S1625.7,670,1625.7,1010,1350.07,1625.7,1010,1625.7Z"
+            fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+        </path>
+        <g id="logo_letters">
+            <path id="letter_b" class="letters outline"
+                d="M556.24,415.58C536.06,396,504.81,390,475.52,408.2c5.57-14.53,3.29-29.32.32-37.48-12.65-23.05-17-25.92-27.46-34.66-33.73-28.28-69.17-4.14-94.48,26.1l-122.6,146L424,669.82l129.23-154c29.5-35.2,34.1-70.06,3-100.24ZM307,486l73.6-87.7c8.51-10.17,27.79-9.76,40.2.63,13.63,11.46,13.68,27.67,4.48,38.55l-72.75,86.73L307,486ZM510.14,500.6,433.4,592.05l-48.13-40.39,77.35-92.17c8.75-10.4,28.2-13.43,41.34-2.4,14.89,12.47,16.36,31.37,6.18,43.51Z"
+                fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+            </path>
+            <path id="letter_m" class="letters outline"
+                d="M1036,346.19l66.16-175.35V346.19h50.25V95.06h-75.52l-68.68,179.8h.65L940.22,95.06H864.7V346.19H915V170.84l66.17,175.35Z"
+                fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+            </path>
+            <path id="letter_w" class="letters outline"
+                d="M1725.59,451.65l-85.81,125.18,134.84-66.34,36.54,43.88L1599,660.93,1556.08,609l82.27-124-.48-.63L1501,542.94l-43.33-51.6,143.1-189.46,36.58,43.86L1547.75,466.4l138.61-61.82Z"
+                fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+            </path>
+        </g>
+        <path id="section_tl" class="section outline"
+            d="M413.23,997.06c5.64-321.79,264.34-579.13,586.15-584.75M413.23,997.06c5.64-321.79,264.34-579.13,586.15-584.75V997.07Z"
+            fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+        </path>
+        <path id="section_tr" class="section outline"
+            d="M1607.75,997.06c-5.65-321.79-264.34-579.13-586.15-584.75m586.15,584.75c-5.65-321.79-264.34-579.13-586.15-584.75V997.07Z"
+            fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+        </path>
+        <path id="section_bl" class="section outline"
+            d="M413.23,1021.81c5.64,321.79,264.34,579.13,586.15,584.75M413.23,1021.81c5.64,321.79,264.34,579.13,586.15,584.75V1021.8Z"
+            fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+        </path>
+        <path id="section_br" class="section outline"
+            d="M1607.75,1021.81c-5.65,321.79-264.34,579.13-586.15,584.75m586.15-584.75c-5.65,321.79-264.34,579.13-586.15,584.75V1021.8Z"
+            fill="transparent" stroke="#fff" stroke-linejoin="round" stroke-width="9">
+        </path>
+    </g>
+</svg>

@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "title": "UK_bann_F70_728x90_-_-_RFI_NA_NA_ENG_-",
+  "description": "",
+  "width": 728,
+  "height": 90,
+  "events": {
+    "enabled": 1,
+    "list": {}
+  },
+  "clicktags": {
+    "clickTAG": "https://www.bmw.com/"
+  },
+  "source": "index.html"
+}

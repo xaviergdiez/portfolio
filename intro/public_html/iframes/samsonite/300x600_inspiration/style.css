@@ -1,0 +1,142 @@
+/*--------------------------------------------------//
+/$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$
+/$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$
+| $$  \ $$| $$  \__/| $$  \__/| $$  \__/
+| $$$$$$$$| $$ /$$$$| $$      |  $$$$$$
+| $$__  $$| $$|_  $$| $$       \____  $$
+| $$  | $$| $$  \ $$| $$    $$ /$$  \ $$
+| $$  | $$|  $$$$$$/|  $$$$$$/|  $$$$$$/
+|__/  |__/ \______/  \______/  \______/
+Developed with loving code by http://www.agcs.works
+For questions and support email info@agcs.works
+//--------------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+html,body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+#container {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #fff;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+}
+.element {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hide {
+    opacity: 0;
+}
+#border {
+    opacity: 1;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    pointer-events: none;
+}
+
+.textelement {
+    position: absolute;
+    text-align: center;
+    color: #ffffff;
+    top: 30px;
+    width: 300px;
+    height: 55px;
+    font-size: 26px;
+    font-weight: 700;
+    z-index: 99999;
+}
+#text5 {
+    top: 210px;
+}
+#logo_big {
+    z-index: 99999;
+}
+#ctabox {
+    position: absolute;
+    left: 0px;
+    top: 370px;
+    width: 100%;
+    height: 80px;
+    z-index: 9999;
+    /*
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    */
+    text-align:center;
+}
+#cta {
+    border: 3px solid #ffffff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 20px;
+    overflow: hidden;
+    position: relative;
+    display:inline-block;
+}
+#cta.active:after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    left: -200px;
+    top: 0px;
+    transform: skewX(-20deg);
+    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.6), rgba(255,255,255,0));
+    height: 120%;
+    animation: shine 0.75s ease-out;
+    animation-iteration-count: 2;
+    animation-delay: 0s;
+}
+@keyframes shine {
+    100% {
+        left: 100%;
+    }
+}
+
+
+#containerConfetti {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+.dot{
+    width:40px;
+    height:40px;
+    border-radius: 30px;
+    position:absolute;
+    background-color:#00FF00;
+}
+
+
+.heart_spec{
+    width:40px;
+    height:40px;
+    position:absolute;
+    fill:#f8dede;
+}

@@ -1,0 +1,17 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 2980 3820">
+    <defs>
+        <linearGradient id="shine" x1="782.9" y1="1987.09" x2="2197.12" y2="572.87"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0" />
+            <stop offset="0.25" stop-color="#fff" stop-opacity="0" />
+            <stop offset="0.5" stop-color="#fff" stop-opacity="0" />
+            <stop offset="0.75" stop-color="#fff" stop-opacity="0" />
+            <stop offset="1" stop-color="#fff" stop-opacity="0" />
+        </linearGradient>
+    </defs>
+    <title>shine</title>
+    <path id="shine_container" fill="url(#shine)"
+        d="M1490,280C937.74,280,490,727.68,490,1280S937.74,2280,1490,2280s1000-447.71,1000-1000S2042.31,280,1490,280Z">
+    </path>
+</svg>

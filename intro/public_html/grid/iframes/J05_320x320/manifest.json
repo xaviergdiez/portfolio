@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "title": "CENTRAL_BANN_J05_320x320_-_EU-R2U_TDA_DI25-000250234_NA_ENG_-",
+  "description": "",
+  "width": 320,
+  "height": 320,
+  "events": {
+    "enabled": 1,
+    "list": {}
+  },
+  "clicktags": {
+    "clickTAG": "https://www.mini.com/"
+  },
+  "source": "index.html"
+}

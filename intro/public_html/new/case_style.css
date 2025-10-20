@@ -1,0 +1,658 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    font: 1.5rem Helvetica, arial, sans-serif;
+    /* display: grid;
+    grid-template-columns: 1fr 2fr 1fr; */
+}
+
+.blockElement {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.abs {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.mask {
+    overflow: hidden;
+}
+
+.fullWidth {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+}
+
+.fullHeight {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: 100%;
+}
+
+.hide {
+    opacity: 0;
+}
+
+.case_hero {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+#bmw_wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: radial-gradient(circle at top center, rgba(150,150,150,1) 0%, rgba(80,80,80,1) 35%, rgba(0,0,0,1) 100%);
+}
+
+
+#hero_logo, #hero_cars {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    overflow: visible;
+}
+
+#hero_scramble {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+#fbto_bg { background-color: #002e6e; }
+
+.blue {
+    color: #002e6e;
+}
+
+#noodle_container {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    overflow: visible;
+}
+
+.phones_wrapper {
+    position: absolute;
+    width: 50%;
+    height: 200%;
+    top: 30%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    transform: translate(-50%, -50%) rotate(45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(45deg);
+    -moz-transform: translate(-50%, -50%) rotate(45deg);
+    -ms-transform: translate(-50%, -50%) rotate(45deg);
+    -o-transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.phones {
+    height: 50%;
+    width: auto;
+    transform-origin: center center;
+}
+
+#phones_front {
+    transform: rotate(180deg);
+    margin-bottom: 1em;
+}
+
+#phones_back {
+    margin-top: 1em;
+}
+
+.case_info {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    padding-bottom: 0.5em;
+    transform: translateX(-50%);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 1em;
+    grid-template-areas:
+        "header header"
+        "intro intro"
+        "demo1 aside1"
+        "demo2 aside2"
+        "demo3 aside3"
+        "demo4 demo4"
+        "footer footer";
+}
+
+.case_header {
+    width: 100%;
+    grid-area: header;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.case_header img {
+    width: 30%;
+    margin: 4% 0% 0% 4%;
+    align-self: flex-start;
+}
+
+#bmw_logo {
+    width: 15%;
+}
+
+.case_header h1 {
+    width: 92%;
+    margin-block-start: 0.5em;
+    margin-block-end: 0em;
+    margin-inline-start: 4%;
+    margin-inline-end: 4%;
+    font-weight: bold;
+}
+
+.case_intro {
+    grid-area: intro;
+}
+
+.case_intro p {
+    width: 92%;
+    margin-block-start: 0em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 4%;
+    margin-inline-end: 4%;
+}
+
+.demo_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#demo1_demo {
+    width: 100%;
+    height: 100%;
+    grid-area: demo1;
+}
+
+#demo2_demo {
+    width: 100%;
+    height: 100%;
+    grid-area: demo2;
+}
+
+#demo3_demo {
+    width: 100%;
+    height: 100%;
+    grid-area: demo3;
+}
+
+#demo4_demo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-items: center;
+    grid-area: demo4;
+}
+
+#mozaiek_demo {
+    width: 96%;
+    height: auto;
+    /* align-self: flex-start; */
+}
+
+#huawei_demo {
+    width: 96%;
+    height: auto;
+    /* align-self: flex-start; */
+}
+
+#colors_demo {
+    width: 96%;
+    height: auto;
+    /* align-self: flex-start; */
+}
+
+#huawei_banners {
+    width: 96%;
+    height: auto;
+    /* align-self: flex-start; */
+}
+
+#interscroller_demo {
+    width: 96%;
+    height: auto;
+    /* align-self: flex-start; */
+}
+
+#hpto_demo {
+    width: 96%;
+    height: auto;
+    /* align-self: flex-start; */
+}
+
+.halfpage {
+    min-height: 600px;
+    margin-left: 1%;
+}
+
+.demo_aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.center {
+    justify-content: center;
+}
+
+.demo_aside h2, .demo_aside h3, .demo_aside p {
+    width: 92%;
+    text-align: left;
+    align-self: flex-start;
+    margin-block-start: 0em;
+    margin-block-end: 0.5em;
+    margin-inline-start: 4%;
+    margin-inline-end: 4%;
+}
+
+.demo_aside h2 {
+    margin-block-start: 0.5em;
+    font-size: 1.3em;
+}
+
+.demo_aside h3 {
+    font-size: 1em;
+}
+
+.demo_aside p {
+    font-size: 0.8em;
+}
+
+.footer {
+    color: black;
+    font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    grid-area: footer;
+}
+
+.footer :hover {
+    font-style: oblique;
+}
+
+#demo1_aside {
+    width: 100%;
+    height: 100%;
+    /* grid-column: 2;
+    grid-row: 3; */
+    grid-area: aside1;
+}
+
+#demo2_aside {
+    width: 100%;
+    height: 100%;
+    /* grid-column: 2;
+    grid-row: 4; */
+    grid-area: aside2;
+}
+
+#demo3_aside {
+    width: 100%;
+    height: 100%;
+    /* grid-column: 2;
+    grid-row: 5; */
+    grid-area: aside3;
+}
+
+.cta_demo {
+    width: 30%;
+    height: auto;
+    align-self: flex-start;
+    margin-inline-start: 4%;
+    cursor: pointer;
+}
+
+.case_bullets {
+    width: 92%;
+    display: block;
+    text-align: left;
+    list-style-type: none;
+    list-style-position: inside;
+    margin-block-start: 0;
+    margin-block-end: 0.5em;
+    margin-inline-start: 4%;
+    margin-inline-end: 0px;
+    padding: 0;
+}
+
+li {
+    background-image: url(bullet.svg);
+    background-repeat: no-repeat;
+    background-size: 1em;
+    background-position: 0% 50%;
+    padding-left: 1.5em;
+    margin-bottom: 0.5em;
+    font-size: 1em;
+    font-weight: lighter;
+}
+ 
+/*------------------------------------------*/
+
+/* MEDIA QUERIES PHONES */
+
+/* Landscape */
+@media only screen and (max-width: 40em) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+    .case_info {
+        position: absolute;
+        background-color: white;
+        /* border: 1px solid #ccc; */
+        width: 100%;
+        /* height: 150%; */
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 0.5em;
+        grid-template-areas:
+            "header header"
+            "intro intro"
+            "demo1 aside1"
+            "demo2 aside2"
+            "demo3 aside3"
+            "demo4 demo4"
+            "footer footer";
+    }
+
+    .case_header img {
+        width: 40%;
+    }
+
+    #bmw_logo {
+        width: 10%;
+    }
+
+    .case_header h1 {
+        font-size: 1em;
+    }
+
+    #hero_scramble {
+        font-size: 0.7em;
+    }
+
+    .case_intro p {
+        font-size: 0.4em;
+    }
+
+    .halfpage {
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        -moz-transform: scale(0.5);
+        -ms-transform: scale(0.5);
+        -o-transform: scale(0.5);
+    }
+
+    /* #demo4_demo {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    } */
+
+    .demo_aside h2 {
+        font-size: 0.8em;
+        margin-block-start: 0em;
+        margin-block-end: 0.2em;
+    }
+
+    .demo_aside h3 {
+        font-size: 0.4em;
+    }
+
+    .demo_aside p {
+        font-size: 0.6em;
+    }
+    
+
+    .cta_demo {
+        width: 40%;
+    }
+
+    ul {
+        margin-block-start: 0.2em;
+        margin-block-end: 0.2em;
+    }
+
+    li {
+        font-size: 0.4em;
+    }
+}
+
+/* Portrait */
+
+@media only screen and (max-width: 40em) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+
+    .case_info {
+        position: absolute;
+        background-color: white;
+        /* border: 1px solid #ccc; */
+        width: 100%;
+        /* height: 150%; */
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 0.5em;
+        grid-template-areas:
+            "header header"
+            "intro intro"
+            "demo1 demo1"
+            "aside1 aside1"
+            "demo2 demo2"
+            "aside2 aside2"
+            "demo3 demo3"
+            "aside3 aside3"
+            "demo4 demo4"
+            "footer footer";
+    }
+
+    .case_header img {
+        width: 50%;
+    }
+
+    #bbmw_logo {
+        width: 20%;
+    }
+
+    .case_header h1 {
+        font-size: 1.2em;
+    }
+
+    #hero_scramble {
+        font-size: 0.7em;
+    }
+
+    .case_intro p {
+        font-size: 0.6em;
+    }
+
+    #demo4_demo {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .halfpage {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+}
+
+    .demo_aside h2 {
+        font-size: 1em;
+        margin-block-start: 0em;
+        margin-block-end: 0.2em;
+    }
+
+    .demo_aside h3 {
+        font-size: 0.6em;
+    }
+
+    .demo_aside p {
+        font-size: 0.6em;
+    }
+
+    .cta_demo {
+        width: 50%;
+    }
+
+    ul {
+        margin-block-start: 0.2em;
+        margin-block-end: 0.2em;
+    }
+
+    li {
+        font-size: 0.6em;
+    }
+}
+
+/* MEDIA QUERIES TABLETS */
+
+/* Landscape */
+@media only screen and (min-width: 40.063em) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+/* Portrait */
+@media only screen and (min-width: 40.063em) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+    .case_info {
+        position: absolute;
+        background-color: white;
+        /* border: 1px solid #ccc; */
+        width: 100%;
+        /* height: 150%; */
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 1em;
+        grid-template-areas:
+            "header header"
+            "intro intro"
+            "demo1 demo1"
+            "aside1 aside1"
+            "demo2 demo2"
+            "aside2 aside2"
+            "demo3 demo3"
+            "aside3 aside3"
+            "demo4 demo4"
+            "footer footer";
+    }
+
+    .case_header img {
+        width: 50%;
+    }
+
+    #bmw_logo {
+        width: 15%;
+    }
+
+    .case_header h1 {
+        font-size: 1.4em;
+    }
+
+    #hero_scramble {
+        font-size: 1em;
+    }
+
+    .case_intro p {
+        font-size: 0.8em;
+    }
+
+    .demo_aside h2 {
+        font-size: 1.2em;
+        margin-block-start: 0em;
+        margin-block-end: 0.2em;
+    }
+
+    .demo_aside h3 {
+        font-size: 0.8em;
+    }
+
+    .demo_aside p {
+        font-size: 0.6em;
+    }
+
+    .cta_demo {
+        width: 40%;
+    }
+
+    ul {
+        margin-block-start: 0.2em;
+        margin-block-end: 0.2em;
+    }
+
+    li {
+        font-size: 0.8em;
+    }
+}

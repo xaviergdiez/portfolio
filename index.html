@@ -966,7 +966,7 @@
             if (frame) frame.style.transform = 'translateZ(0)';
             
             // Force re-render of SVG elements
-            const svgElements = document.querySelectorAll('svg');
+            const svgElements = document.querySelectorAll('svg:not(#noodle_container)');
             svgElements.forEach(svg => {
               svg.style.transform = 'translateZ(0)';
             });

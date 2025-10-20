@@ -1,0 +1,229 @@
+/*--------------------------------------------------//
+/$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$
+/$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$
+| $$  \ $$| $$  \__/| $$  \__/| $$  \__/
+| $$$$$$$$| $$ /$$$$| $$      |  $$$$$$
+| $$__  $$| $$|_  $$| $$       \____  $$
+| $$  | $$| $$  \ $$| $$    $$ /$$  \ $$
+| $$  | $$|  $$$$$$/|  $$$$$$/|  $$$$$$/
+|__/  |__/ \______/  \______/  \______/
+Developed with loving code by http://www.agcs.works
+For questions and support email info@agcs.works
+//--------------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+html,body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+#container {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #fff;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+}
+.element {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hide {
+    opacity: 0;
+}
+
+#border {
+    opacity: 1;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    pointer-events: none;
+}
+
+.textelement {
+    position: absolute;
+    left: 20px;
+    top: 55px;
+    width: 260px;
+    height: 50px;
+    text-align: center;   
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#textbox {
+    position: absolute;
+    left: 0px;
+    top: 215px;
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#text4 {
+    color: #fff;
+    width: 240px;
+    height: 130px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+#ctabox {
+    position: absolute;
+    left: 0px;
+    top: 340px;
+    width: 100%;
+    height: 35px;
+    /*
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    */
+    text-align:center; 
+}
+
+#cta {
+    border: 3px solid #fff;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px 15px;
+    overflow: hidden;
+    position: relative;
+    display:inline-block;
+    
+}
+#cta.active:after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    left: -200px;
+    top: 0px;
+    transform: skewX(-20deg);
+    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.6), rgba(255,255,255,0));
+    height: 120%;
+    animation: shine 0.75s ease-out;
+    animation-iteration-count: 2;
+    animation-delay: 0s;
+}
+
+/*#cta.active:after {
+    content:'';
+    width: 135px;
+    height: 35px;
+    top: 0px;
+    left: 0px;
+    overflow: auto;
+    border: 3px solid #f2b19b;
+    position:absolute;
+    animation: neon 0.75s ease-out;
+    animation-iteration-count: 2;
+    animation-delay: 0s;
+    box-shadow: 0px 0px 0px 0px rgba(230, 107, 94,0.3);
+}
+
+@keyframes neon {
+    100% {
+        border: 3px solid #fadfd3;
+        box-shadow: 0px 0px 20px 10px rgba(230, 107, 94,0.7);
+    }
+}*/
+
+@keyframes shine {
+    100% {
+        left: 100%;
+    }
+}
+
+#containerConfetti {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width:100%; 
+    height:100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+.dot{
+    width:40px;
+    height:40px;
+    border-radius: 30px;
+    position:absolute;
+    background-color:#00FF00;
+}
+
+.bag {
+    position: absolute;
+    width:97px;
+    height:117px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#bag_container1 {
+    background-image:url("bag1.png");
+    top:140px;
+    left:35px;
+    background-position: left;
+}
+   
+#bag_container2 {
+    background-image:url("bag2.png");
+    top:140px;
+    right:35px;
+    background-position: left;
+}
+
+#bag_container3 {
+    background-image:url("bag3.png");
+    top:277px;
+    left:35px;
+    background-position: left;
+}
+   
+#bag_container4 {
+    background-image:url("bag4.png");
+    top:277px;
+    right:35px;
+    background-position: left;
+}
+
+#bag_container5 {
+    background-image:url("bag5.png");
+    top:414px;
+    left:35px;
+    background-position: left;
+}
+   
+#bag_container6 {
+    background-image:url("bag6.png");
+    top:414px;
+    right:35px;
+    background-position: left;
+}
+
+
+.heart_spec{
+    width:40px;
+    height:40px;
+    position:absolute;
+    fill:#f8dede;
+}

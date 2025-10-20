@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weborama Interscroller Optional Front</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- WEBORAMA SCREENAD META DATA (don't edit/remove) -->
+    <!-- SCRVERSION: screenad_interface_1.0.3 -->
+    <!-- SCRFORMAT: layer -->
+    <!-- SCRSTICKY: false -->
+    <!-- SCRWIDTH: 320 -->
+    <!-- SCRHEIGHT: 240 -->
+    <!-- TEMPLATENAME: Weborama Interscroller Optional Front -->
+    <!-- TEMPLATEDATE: 2018-04-23 -->
+
+    <script language="javascript" src="//media.adrcdn.com/scripts/screenad_interface_1.0.3_scrambled.js"></script>
+    <script language="javascript" src="//media.adrcdn.com/ad-resources/interscroller/4.0.0/interscroller-front.min.js"></script>
+    <script language="javascript" src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .stage {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            background-color: rgba(255, 0, 0, 0);
+        }
+
+        /* Example Content */
+        #weborama-image-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        .weborama-click {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .blockElement {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .element {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        #cta {
+          position: absolute;
+          height: auto;
+          overflow: hidden;
+        }
+
+        /* .white_bottom {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 200%;
+          transform: translateX(-50%);
+          background-color: white;
+        }
+
+        .white_top {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 200%;
+          transform: translateX(-50%);
+          background-color: white;
+        } */
+
+        /* #copy02 {
+          height: auto;
+          position: absolute;
+        }
+
+          #copy01 {
+          left: 50%;
+          transform: translateX(-50%);
+        } */ 
+
+        #scale_container {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 100%;
+          height: 100%;
+          transform: translateX(-50%);
+        }
+
+        .container {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate( -50%, -50%);
+          background-repeat:no-repeat;
+          background-position:center;
+        }
+
+        .cta {
+          display: none;
+        }
+
+    </style>
+    <script src="db_interscroller_front.js"></script>
+</head>
+
+<body>
+    <div id="stage" class="stage">
+
+        <!-- EXAMPLE CONTENT -->
+        <div id="weborama-image-overlay">
+          <div id="bg02" class='blockElement'></div>
+          <div id="bg01" class='blockElement'></div>
+          <svg id="content_small_portrait" class="blockElement" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 621 1104">
+                <defs>
+                    <linearGradient id="shadow_gradient_small_portrait" x1="100%" y1="50.1516792%" x2="0%" y2="49.8483208%">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                    <filter x="-15.0%" y="-272.7%" width="130.0%" height="645.5%" filterUnits="objectBoundingBox"
+                        id="shadow_blur_small_portrait">
+                        <feGaussianBlur stdDeviation="10" in="SourceGraphic"></feGaussianBlur>
+                    </filter>
+                    <linearGradient x1="100%" y1="56.7956423%" x2="0%" y2="43.2043577%" id="cta_gradient_small_portrait" class="cta_gradient">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                </defs>
+                <rect class="white_top" width="200%" height="144" fill="#fff" style="top: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <rect class="white_bottom" y="956" width="200%" height="148" fill="#fff" style="bottom: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <image id="bg_small_portrait" class="element" width="621" height="1104" xlink:href="content_small_portrait.png"></image>
+                <path class="cta_shadow" fill="url(#shadow_gradient_small_portrait)" opacity="0.800000012" filter="url(#shadow_blur_small_portrait)"
+                     d="M433.67,1052.3h160v8.58h-160a2.34,2.34,0,0,1-2.34-2.34v-3.9A2.34,2.34,0,0,1,433.67,1052.3Z"></path>
+                <rect class="cta_bg" x="424.3" y="997.65" width="176.42" height="62.45" rx="2.34" fill="url(#cta_gradient_small_portrait)"></rect>
+                <path class="cta_copy"
+                     d="M449.09,1019.5h5.41a5.2,5.2,0,0,1,3.67,1.24,4.26,4.26,0,0,1,1.34,3.26,3.62,3.62,0,0,1-.68,2.22,1.51,1.51,0,1,0,.39,2.82,4.23,4.23,0,0,1,.81,2.55,4.16,4.16,0,0,1-1.43,3.24,5.35,5.35,0,0,1-3.7,1.28h-5.81Zm2.3,7.26h2.85a3,3,0,0,0,2.16-.74,2.48,2.48,0,0,0,.8-1.91,2.39,2.39,0,0,0-.82-1.89,3.31,3.31,0,0,0-2.23-.71h-2.76Zm0,7.33h3.18a3.39,3.39,0,0,0,2.26-.72,2.42,2.42,0,0,0,.86-1.92,2.59,2.59,0,0,0-.78-2,3.07,3.07,0,0,0-2.24-.74h-3.28Zm19.6-1.85,1.9.66a5,5,0,0,1-1.83,2.56,5.28,5.28,0,0,1-3.23,1,5.53,5.53,0,0,1-4-1.63,6.58,6.58,0,0,1-.06-8.65,5.42,5.42,0,0,1,7.78-.09,6.25,6.25,0,0,1,1.43,4.3,4.39,4.39,0,0,1,0,.7h-8.48a3.4,3.4,0,0,0,1,2.46,3.26,3.26,0,0,0,2.4,1A3,3,0,0,0,471,1032.24Zm-6.49-2.93h6.16a2.84,2.84,0,0,0-3.09-2.88,2.92,2.92,0,0,0-2.16.86A3.07,3.07,0,0,0,464.5,1029.31Zm17.52-4.59v2.35a6.39,6.39,0,0,0-1-.07q-3.09,0-3.09,3.46v5.65h-2.2v-11.27h2.15v2a3.49,3.49,0,0,1,3.37-2.16A4.4,4.4,0,0,1,482,1024.72Zm10.14,7.52,1.9.66a5,5,0,0,1-1.83,2.56,5.28,5.28,0,0,1-3.23,1,5.53,5.53,0,0,1-4-1.63,6.58,6.58,0,0,1-.06-8.65,5.42,5.42,0,0,1,7.78-.09,6.25,6.25,0,0,1,1.43,4.3,4.39,4.39,0,0,1-.05.7H485.6a3.4,3.4,0,0,0,1,2.46,3.26,3.26,0,0,0,2.4,1A3,3,0,0,0,492.16,1032.24Zm-6.49-2.93h6.16a2.84,2.84,0,0,0-3.09-2.88,2.92,2.92,0,0,0-2.16.86A3.07,3.07,0,0,0,485.67,1029.31Zm21.36-4.47-4.8,4.75,4.89,6.52h-2.76l-3.68-5-1.57,1.57v3.4h-2.17v-17h2.17v10.68l4.87-5Zm9.53,7.4,1.9.66a5,5,0,0,1-1.83,2.56,5.28,5.28,0,0,1-3.23,1,5.53,5.53,0,0,1-4-1.63,6.58,6.58,0,0,1-.06-8.65,5.42,5.42,0,0,1,7.78-.09,6.25,6.25,0,0,1,1.43,4.3,4.39,4.39,0,0,1,0,.7H510a3.4,3.4,0,0,0,1,2.46,3.29,3.29,0,0,0,2.4,1A3,3,0,0,0,516.56,1032.24Zm-6.49-2.93h6.16a2.84,2.84,0,0,0-3.09-2.88,2.89,2.89,0,0,0-2.15.86A3,3,0,0,0,510.07,1029.31Zm13.47.28v6.52h-2.2v-11.27h2.15v1.62a3.74,3.74,0,0,1,3.47-2,3.69,3.69,0,0,1,3,1.24,4.81,4.81,0,0,1,1,3.21v7.15h-2.21v-6.77c0-1.89-.87-2.84-2.62-2.84a2.33,2.33,0,0,0-1.93.88A3.47,3.47,0,0,0,523.54,1029.59Z"
+                    fill="#fff" style="isolation:isolate" ></path>
+                <path class="cta_arrow"
+                    d="M567.32,1019.15l8.61,8.61-8.69,8.7-1.92-1.92,4.69-4.69H555.78v-2.73h15.64l-6-6Z"
+                    fill="#fff" ></path>
+            </svg>
+          <svg id="content_small_landscape" class="blockElement" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1104 621">
+              <defs>
+                  <linearGradient id="shadow_gradient_small_landscape" x1="100%" y1="50.1516792%" x2="0%"
+                      y2="49.8483208%">
+                      <stop stop-color="#07C0FF" offset="0%"></stop>
+                      <stop stop-color="#038CFF" offset="100%"></stop>
+                  </linearGradient>
+                  <filter x="-15.0%" y="-272.7%" width="130.0%" height="645.5%" filterUnits="objectBoundingBox"
+                      id="shadow_blur_small_landscape">
+                      <feGaussianBlur stdDeviation="10" in="SourceGraphic"></feGaussianBlur>
+                  </filter>
+                  <linearGradient x1="100%" y1="56.7956423%" x2="0%" y2="43.2043577%" id="cta_gradient_small_landscape"
+                      class="cta_gradient">
+                      <stop stop-color="#07C0FF" offset="0%"></stop>
+                      <stop stop-color="#038CFF" offset="100%"></stop>
+                  </linearGradient>
+              </defs>
+              <rect class="white_top" width="200%" height="94" fill="#fff" style="top: 0; left: 50%; transform: translateX(-50%);"></rect>
+              <rect class="white_bottom" y="522" width="200%" height="98" fill="#fff"
+                  style="bottom: 0; left: 50%; transform: translateX(-50%);"></rect>
+              <image id="bg_small_landscape" class="element" width="1104" height="621" xlink:href="content_small_landscape.png"></image>
+              <path class="cta_shadow" fill="url(#shadow_gradient_small_landscape)" opacity="0.800000012"
+                  filter="url(#shadow_blur_small_landscape)"
+                  d="M931.54,587.35h128.81v6.91H931.54a1.89,1.89,0,0,1-1.89-1.89v-3.14A1.89,1.89,0,0,1,931.54,587.35Z"></path>
+              <rect class="cta_bg" x="924" y="543.36" width="142" height="50.27" rx="1.88" fill="url(#cta_gradient_small_landscape)"></rect>
+              <path class="cta_copy"
+                  d="M944,561h4.36a4.17,4.17,0,0,1,3,1,3.39,3.39,0,0,1,1.08,2.62,3,3,0,0,1-.54,1.79,3.08,3.08,0,0,1-1.46,1.09,3,3,0,0,1,1.77,1.18,3.43,3.43,0,0,1,.65,2,3.38,3.38,0,0,1-1.15,2.61,4.33,4.33,0,0,1-3,1H944Zm1.85,5.84h2.3a2.45,2.45,0,0,0,1.74-.59,2,2,0,0,0,.64-1.54,1.88,1.88,0,0,0-.66-1.52,2.65,2.65,0,0,0-1.79-.57H945.8Zm0,5.9h2.57a2.68,2.68,0,0,0,1.81-.58,1.94,1.94,0,0,0,.69-1.55,2.12,2.12,0,0,0-.62-1.59,2.5,2.5,0,0,0-1.81-.59H945.8Zm15.78-1.49,1.53.53a4.09,4.09,0,0,1-1.48,2.07,4.23,4.23,0,0,1-2.6.8,4.44,4.44,0,0,1-3.23-1.31,4.74,4.74,0,0,1-1.33-3.54,4.83,4.83,0,0,1,1.28-3.43,4.35,4.35,0,0,1,6.26-.06,5,5,0,0,1,1.15,3.45,3,3,0,0,1,0,.57H956.3a2.74,2.74,0,0,0,.8,2A2.62,2.62,0,0,0,959,573,2.45,2.45,0,0,0,961.58,571.2Zm-5.22-2.35h4.95a2.41,2.41,0,0,0-.67-1.67,2.44,2.44,0,0,0-1.81-.65,2.33,2.33,0,0,0-1.74.69A2.43,2.43,0,0,0,956.36,568.85Zm14.1-3.7V567a5.32,5.32,0,0,0-.78-.06c-1.66,0-2.48.93-2.48,2.79v4.54h-1.78v-9.06h1.74v1.58a2.8,2.8,0,0,1,2.71-1.73A3.81,3.81,0,0,1,970.46,565.15Zm8.16,6.05,1.52.53a4,4,0,0,1-1.47,2.07,4.23,4.23,0,0,1-2.6.8,4.44,4.44,0,0,1-3.23-1.31,4.74,4.74,0,0,1-1.33-3.54,4.83,4.83,0,0,1,1.28-3.43,4.35,4.35,0,0,1,6.26-.06,5,5,0,0,1,1.15,3.45,3,3,0,0,1,0,.57h-6.82a2.74,2.74,0,0,0,.8,2,2.62,2.62,0,0,0,1.93.77A2.45,2.45,0,0,0,978.62,571.2Zm-5.22-2.35h5a2.41,2.41,0,0,0-.67-1.67,2.46,2.46,0,0,0-1.81-.65,2.33,2.33,0,0,0-1.74.69A2.43,2.43,0,0,0,973.4,568.85Zm17.19-3.6-3.87,3.82,3.94,5.24h-2.22l-3-4-1.26,1.26v2.73h-1.76V560.67h1.76v8.59l3.92-4Zm7.67,6,1.53.53a4.14,4.14,0,0,1-1.47,2.07,4.28,4.28,0,0,1-2.61.8,4.44,4.44,0,0,1-3.23-1.31,4.77,4.77,0,0,1-1.33-3.54,4.83,4.83,0,0,1,1.28-3.43,4.1,4.1,0,0,1,3.06-1.36,4.06,4.06,0,0,1,3.2,1.3,5,5,0,0,1,1.15,3.45,3,3,0,0,1,0,.57H993a2.74,2.74,0,0,0,.8,2,2.62,2.62,0,0,0,1.93.77A2.45,2.45,0,0,0,998.26,571.2ZM993,568.85h5a2.29,2.29,0,0,0-2.49-2.32,2.34,2.34,0,0,0-1.74.69A2.48,2.48,0,0,0,993,568.85Zm10.84.22v5.24h-1.78v-9.06h1.74v1.3A3.31,3.31,0,0,1,1009,566a3.89,3.89,0,0,1,.84,2.58v5.75h-1.77v-5.44c0-1.52-.71-2.28-2.11-2.28a1.87,1.87,0,0,0-1.56.7A2.8,2.8,0,0,0,1003.88,569.07Z"
+                  fill="#fff" style="isolation:isolate"></path>
+              <path class="cta_arrow"
+                  d="M1039.11,560.67l6.94,6.93-7,7-1.54-1.54,3.77-3.78h-11.46v-2.2h12.6l-4.86-4.86Z"
+                  fill="#fff"></path>
+          </svg>
+          <svg id="content_medium_portrait" class="blockElement" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 1366">
+                <defs>
+                    <linearGradient id="shadow_gradient_medium_portrait" x1="100%" y1="50.1516792%" x2="0%" y2="49.8483208%">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                    <filter x="-15.0%" y="-272.7%" width="130.0%" height="645.5%" filterUnits="objectBoundingBox"
+                        id="shadow_blur_medium_portrait">
+                        <feGaussianBlur stdDeviation="10" in="SourceGraphic"></feGaussianBlur>
+                    </filter>
+                    <linearGradient x1="100%" y1="56.7956423%" x2="0%" y2="43.2043577%" id="cta_gradient_medium_portrait" class="cta_gradient">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                </defs>
+                <rect class="white_top" width="200%" height="154" fill="#fff" style="top: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <rect class="white_bottom" y="1228" width="200%" height="140" fill="#fff"
+                    style="bottom: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <image id="bg_medium_portrait" class="element" width="800" height="1366" xlink:href="content_medium_portrait.png"></image>
+                <path class="cta_shadow" fill="url(#shadow_gradient_medium_portrait)" opacity="0.800000012" filter="url(#shadow_blur_medium_portrait)"
+                      d="M568.19,1308.46H742.35v9.34H568.19a2.55,2.55,0,0,1-2.54-2.55V1311A2.55,2.55,0,0,1,568.19,1308.46Z"></path>
+                <rect class="cta_bg" x="558" y="1248.99" width="192" height="67.96" rx="2.55" fill="url(#cta_gradient_medium_portrait)"></rect>
+                <path class="cta_copy"
+                     d="M585,1272.77h5.89a5.67,5.67,0,0,1,4,1.35,4.61,4.61,0,0,1,1.46,3.54,4,4,0,0,1-.74,2.42,4.16,4.16,0,0,1-2,1.48,4.08,4.08,0,0,1,2.38,1.59,4.8,4.8,0,0,1-.67,6.3,5.86,5.86,0,0,1-4,1.39H585Zm2.5,7.9h3.11a3.3,3.3,0,0,0,2.34-.81,2.67,2.67,0,0,0,.87-2.07,2.6,2.6,0,0,0-.89-2.07,3.62,3.62,0,0,0-2.42-.76h-3Zm0,8h3.46a3.7,3.7,0,0,0,2.46-.78,2.62,2.62,0,0,0,.93-2.09,2.85,2.85,0,0,0-.84-2.16,3.41,3.41,0,0,0-2.44-.8h-3.57Zm21.33-2,2.06.71a5.47,5.47,0,0,1-2,2.8,5.73,5.73,0,0,1-3.52,1.08,6,6,0,0,1-4.37-1.77,6.41,6.41,0,0,1-1.8-4.78,6.5,6.5,0,0,1,1.73-4.64,5.91,5.91,0,0,1,8.47-.09,6.81,6.81,0,0,1,1.55,4.68,5.26,5.26,0,0,1-.05.76h-9.23a3.69,3.69,0,0,0,1.09,2.68,3.53,3.53,0,0,0,2.61,1A3.31,3.31,0,0,0,608.81,1286.63Zm-7.06-3.18h6.7a3.08,3.08,0,0,0-3.36-3.14,3.18,3.18,0,0,0-2.35.93A3.34,3.34,0,0,0,601.75,1283.45Zm19.06-5V1281a7.4,7.4,0,0,0-1-.08c-2.24,0-3.37,1.26-3.37,3.77v6.15H614v-12.26h2.34v2.14a3.81,3.81,0,0,1,3.67-2.35A4,4,0,0,1,620.81,1278.45Zm11,8.18,2.06.71a5.47,5.47,0,0,1-2,2.8,5.73,5.73,0,0,1-3.52,1.08,6,6,0,0,1-4.37-1.77,6.41,6.41,0,0,1-1.8-4.78A6.5,6.5,0,0,1,624,1280a5.91,5.91,0,0,1,8.47-.09,6.81,6.81,0,0,1,1.55,4.68,5.26,5.26,0,0,1,0,.76h-9.23a3.69,3.69,0,0,0,1.09,2.68,3.53,3.53,0,0,0,2.61,1A3.31,3.31,0,0,0,631.85,1286.63Zm-7.06-3.18h6.7a3.08,3.08,0,0,0-3.36-3.14,3.18,3.18,0,0,0-2.35.93A3.34,3.34,0,0,0,624.79,1283.45Zm23.24-4.87-5.22,5.17,5.33,7.09h-3l-4-5.41-1.71,1.71v3.7h-2.37v-18.46h2.37V1284l5.3-5.43Zm10.38,8.05,2.06.71a5.49,5.49,0,0,1-2,2.8,5.72,5.72,0,0,1-3.51,1.08,6,6,0,0,1-4.37-1.77,6.41,6.41,0,0,1-1.8-4.78,6.5,6.5,0,0,1,1.73-4.64,5.9,5.9,0,0,1,8.46-.09,6.77,6.77,0,0,1,1.56,4.68,5.26,5.26,0,0,1,0,.76h-9.23a3.73,3.73,0,0,0,1.08,2.68,3.57,3.57,0,0,0,2.62,1A3.31,3.31,0,0,0,658.41,1286.63Zm-7.06-3.18h6.7a3.29,3.29,0,0,0-.92-2.26,3.26,3.26,0,0,0-2.44-.88,3.15,3.15,0,0,0-2.35.93A3.34,3.34,0,0,0,651.35,1283.45Zm14.65.3v7.09h-2.39v-12.26H666v1.76a4.07,4.07,0,0,1,3.77-2.12,4,4,0,0,1,3.25,1.35,5.24,5.24,0,0,1,1.14,3.49v7.78h-2.4v-7.37c0-2-1-3.08-2.85-3.08a2.54,2.54,0,0,0-2.11.95A3.79,3.79,0,0,0,666,1283.75Z"
+                    fill="#fff" style="isolation:isolate"></path>
+                <path class="cta_arrow"
+                    d="M713.65,1272.39l9.37,9.37-9.46,9.46-2.08-2.08,5.1-5.11H701.09v-3h17l-6.57-6.57Z"
+                    fill="#fff" ></path>
+            </svg>
+            <svg id="content_medium_landscape" class="blockElement" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1366 800">
+                <defs>
+                    <linearGradient id="shadow_gradient_medium_landscape" x1="100%" y1="50.1516792%" x2="0%" y2="49.8483208%">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                    <filter x="-15.0%" y="-272.7%" width="130.0%" height="645.5%" filterUnits="objectBoundingBox"
+                        id="shadow_blur_medium_landscape">
+                        <feGaussianBlur stdDeviation="10" in="SourceGraphic"></feGaussianBlur>
+                    </filter>
+                    <linearGradient x1="100%" y1="56.7956423%" x2="0%" y2="43.2043577%" id="cta_gradient_medium_landscape" class="cta_gradient">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                </defs>
+                <rect class="white_top" width="200%" height="130" fill="#fff" style="top: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <rect class="white_bottom" y="669" width="200%" height="130" fill="#fff" style="bottom: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <image id="bg_medium_landscape" class="element" width="1366" height="800" xlink:href="content_medium_landscape.png"></image>
+                <path class="cta_shadow" fill="url(#shadow_gradient_medium_landscape)" opacity="0.800000012" filter="url(#shadow_blur_medium_landscape)"
+                     d="M1114.31,755.67h154.2v8.27h-154.2a2.26,2.26,0,0,1-2.26-2.25v-3.76A2.26,2.26,0,0,1,1114.31,755.67Z"></path>
+                <rect class="cta_bg" x="1105.28" y="703.01" width="170" height="60.18" rx="2.26" fill="url(#cta_gradient_medium_landscape)"></rect>
+                <path class="cta_copy"
+                     d="M1129.17,724.07h5.21a5,5,0,0,1,3.53,1.19,4.07,4.07,0,0,1,1.3,3.14,3.57,3.57,0,0,1-.65,2.14,1.45,1.45,0,1,0,.37,2.72,4.07,4.07,0,0,1,.78,2.45,4,4,0,0,1-1.38,3.13,5.16,5.16,0,0,1-3.57,1.23h-5.59Zm2.21,7h2.75a2.9,2.9,0,0,0,2.08-.71,2.38,2.38,0,0,0,.77-1.84,2.3,2.3,0,0,0-.79-1.82A3.15,3.15,0,0,0,1134,726h-2.66Zm0,7.07h3.07a3.3,3.3,0,0,0,2.18-.7,2.32,2.32,0,0,0,.82-1.85,2.53,2.53,0,0,0-.74-1.91,3,3,0,0,0-2.17-.71h-3.16Zm18.89-1.79,1.83.64a4.91,4.91,0,0,1-1.76,2.47,5.08,5.08,0,0,1-3.12,1,5.33,5.33,0,0,1-3.87-1.57,5.69,5.69,0,0,1-1.59-4.23,5.75,5.75,0,0,1,1.53-4.11,5.21,5.21,0,0,1,7.5-.08,6,6,0,0,1,1.37,4.14,4.36,4.36,0,0,1,0,.68H1144a3.23,3.23,0,0,0,1,2.37,3.13,3.13,0,0,0,2.31.92A2.94,2.94,0,0,0,1150.27,736.34Zm-6.25-2.82H1150a2.73,2.73,0,0,0-3-2.77,2.77,2.77,0,0,0-2.07.82A2.94,2.94,0,0,0,1144,733.52Zm16.88-4.42v2.26a6,6,0,0,0-.93-.07c-2,0-3,1.11-3,3.34v5.44h-2.12V729.21H1157v1.9a3.35,3.35,0,0,1,3.25-2.08A4.05,4.05,0,0,1,1160.9,729.1Zm9.77,7.24,1.83.64a4.87,4.87,0,0,1-1.77,2.47,5,5,0,0,1-3.11,1,5.33,5.33,0,0,1-3.87-1.57,5.69,5.69,0,0,1-1.59-4.23,5.75,5.75,0,0,1,1.53-4.11,5.21,5.21,0,0,1,7.5-.08,6,6,0,0,1,1.37,4.14,4.36,4.36,0,0,1,0,.68h-8.17a3.23,3.23,0,0,0,1,2.37,3.13,3.13,0,0,0,2.31.92A2.94,2.94,0,0,0,1170.67,736.34Zm-6.25-2.82h5.93a2.73,2.73,0,0,0-3-2.77,2.77,2.77,0,0,0-2.07.82A2.89,2.89,0,0,0,1164.42,733.52Zm20.58-4.31-4.63,4.58,4.72,6.28h-2.67l-3.54-4.79-1.51,1.52v3.27h-2.1V723.73h2.1V734l4.69-4.81Zm9.18,7.13,1.83.64a4.85,4.85,0,0,1-1.76,2.47,5.08,5.08,0,0,1-3.12,1,5.36,5.36,0,0,1-3.87-1.57,6.34,6.34,0,0,1,0-8.34,5.2,5.2,0,0,1,7.49-.08,6,6,0,0,1,1.38,4.14,4.21,4.21,0,0,1,0,.68h-8.17a3.31,3.31,0,0,0,1,2.37,3.16,3.16,0,0,0,2.31.92A2.94,2.94,0,0,0,1194.18,736.34Zm-6.25-2.82h5.94a2.93,2.93,0,0,0-.82-2,2.89,2.89,0,0,0-2.16-.78,2.78,2.78,0,0,0-2.08.82A3,3,0,0,0,1187.93,733.52Zm13,.27v6.28h-2.13V729.21h2.08v1.56a4,4,0,0,1,6.22-.68,4.65,4.65,0,0,1,1,3.09v6.89H1206v-6.52c0-1.82-.84-2.73-2.53-2.73a2.24,2.24,0,0,0-1.86.84A3.38,3.38,0,0,0,1200.91,733.79Z"
+                    fill="#fff" style="isolation:isolate"></path>
+                <path class="cta_arrow"
+                    d="M1243.09,723.73l8.3,8.3-8.38,8.38-1.84-1.85,4.52-4.52H1232v-2.63h15.08l-5.82-5.82Z"
+                    fill="#fff"></path>
+            </svg>
+            <svg id="content_large" class="blockElement" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2560 1440">
+                <defs>
+                    <linearGradient id="shadow_gradient" x1="100%" y1="50.1516792%" x2="0%" y2="49.8483208%">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                    <filter x="-15.0%" y="-272.7%" width="130.0%" height="645.5%" filterUnits="objectBoundingBox" id="shadow_blur">
+                        <feGaussianBlur stdDeviation="10" in="SourceGraphic"></feGaussianBlur>
+                    </filter>
+                    <linearGradient x1="100%" y1="56.7956423%" x2="0%" y2="43.2043577%" id="cta_gradient" class="cta_gradient">
+                        <stop stop-color="#07C0FF" offset="0%"></stop>
+                        <stop stop-color="#038CFF" offset="100%"></stop>
+                    </linearGradient>
+                </defs>
+                <rect width="200%" height="782" y="-600" fill="#fff" style="top: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <rect y="1252" width="200%" height="788" fill="#fff" style="bottom: 0; left: 50%; transform: translateX(-50%);"></rect>
+                <image id="bg_large" width="2560" height="1440" class="element" xlink:href="content_large.png"></image>
+                <path class="cta_shadow" fill="url(#shadow_gradient)" opacity="0.800000012" filter="url(#shadow_blur)"
+                    d="M2079.61,1386.28h276.92v14.86H2079.61a4,4,0,0,1-4.05-4.05v-6.76A4.05,4.05,0,0,1,2079.61,1386.28Z"></path>
+                <rect class="cta_bg" x="2063.4" y="1291.72" width="305.29" height="108.07" rx="4.05" fill="url(#cta_gradient)"></rect>
+                <path class="cta_copy"
+                    d="M2106.3,1329.53h9.36a9,9,0,0,1,6.34,2.15,7.27,7.27,0,0,1,2.33,5.63,6.39,6.39,0,0,1-1.17,3.85,2.61,2.61,0,1,0,.67,4.89,7.3,7.3,0,0,1,1.4,4.39,7.22,7.22,0,0,1-2.48,5.62,9.23,9.23,0,0,1-6.4,2.2h-10Zm4,12.57h4.95a5.25,5.25,0,0,0,3.72-1.28,4.29,4.29,0,0,0,1.38-3.3,4.1,4.1,0,0,0-1.42-3.29,5.71,5.71,0,0,0-3.85-1.21h-4.78Zm0,12.68h5.51a5.81,5.81,0,0,0,3.91-1.26,4.11,4.11,0,0,0,1.48-3.32,4.5,4.5,0,0,0-1.33-3.42,5.4,5.4,0,0,0-3.89-1.28h-5.68Zm33.92-3.2,3.28,1.13a8.6,8.6,0,0,1-3.16,4.44,9.07,9.07,0,0,1-5.59,1.72,9.54,9.54,0,0,1-6.95-2.81,10.21,10.21,0,0,1-2.86-7.6,10.33,10.33,0,0,1,2.76-7.38,9.35,9.35,0,0,1,13.45-.14,10.77,10.77,0,0,1,2.48,7.44,6.79,6.79,0,0,1-.09,1.21h-14.67a5.86,5.86,0,0,0,1.73,4.26,5.65,5.65,0,0,0,4.15,1.66A5.26,5.26,0,0,0,2144.19,1351.58Zm-11.22-5.07h10.65a4.9,4.9,0,0,0-5.35-5,5,5,0,0,0-3.72,1.48A5.24,5.24,0,0,0,2133,1346.51Zm30.31-7.94v4a11.91,11.91,0,0,0-1.66-.12q-5.35,0-5.35,6v9.76h-3.81v-19.49h3.73v3.41a6,6,0,0,1,5.83-3.73A6.56,6.56,0,0,1,2163.28,1338.57Zm17.55,13,3.28,1.13a8.66,8.66,0,0,1-3.16,4.44,9.1,9.1,0,0,1-5.6,1.72,9.58,9.58,0,0,1-6.95-2.81,10.2,10.2,0,0,1-2.85-7.6,10.36,10.36,0,0,1,2.75-7.38,9.37,9.37,0,0,1,13.46-.14,10.81,10.81,0,0,1,2.47,7.44,8,8,0,0,1-.08,1.21h-14.67a5.85,5.85,0,0,0,1.72,4.26,5.67,5.67,0,0,0,4.15,1.66A5.28,5.28,0,0,0,2180.83,1351.58Zm-11.23-5.07h10.66a4.9,4.9,0,0,0-5.35-5,5,5,0,0,0-3.73,1.48A5.28,5.28,0,0,0,2169.6,1346.51Zm37-7.74-8.31,8.23,8.47,11.26h-4.78l-6.36-8.59-2.72,2.72v5.87h-3.77v-29.34h3.77v18.48l8.43-8.63Zm16.49,12.81,3.28,1.13a8.6,8.6,0,0,1-3.16,4.44,9.07,9.07,0,0,1-5.59,1.72,9.56,9.56,0,0,1-6.95-2.81,10.21,10.21,0,0,1-2.86-7.6,10.33,10.33,0,0,1,2.76-7.38,9.35,9.35,0,0,1,13.45-.14,10.77,10.77,0,0,1,2.48,7.44,8,8,0,0,1-.08,1.21h-14.67a5.85,5.85,0,0,0,1.72,4.26,5.65,5.65,0,0,0,4.15,1.66A5.26,5.26,0,0,0,2223.05,1351.58Zm-11.22-5.07h10.65a4.89,4.89,0,0,0-5.34-5,5,5,0,0,0-3.73,1.48A5.24,5.24,0,0,0,2211.83,1346.51Zm23.3.49v11.26h-3.81v-19.49h3.73v2.8a6.46,6.46,0,0,1,6-3.37,6.36,6.36,0,0,1,5.16,2.15,8.36,8.36,0,0,1,1.8,5.55v12.36h-3.8v-11.71c0-3.27-1.52-4.9-4.54-4.9a4,4,0,0,0-3.35,1.52A6,6,0,0,0,2235.13,1347Z"
+                    fill="#fff" style="isolation:isolate"></path>
+                <path class="cta_arrow"
+                    d="M2310.89,1328.93l14.9,14.9-15,15-3.32-3.31,8.12-8.12h-24.64v-4.72H2318l-10.44-10.44Z"
+                    fill="#fff"></path>
+            </svg>
+          </div>
+            </div>
+        </div>
+        <div id="click-area" class="weborama-click" onclick="screenad.click();"></div>
+    </div>
+</body>
+
+</html>

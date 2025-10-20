@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1666.63 813.34">
+    <defs>
+        <linearGradient id="linear-gradient" x1="151.86" y1="851.66" x2="152.33" y2="851.76"
+            gradientTransform="matrix(500, 500, 646.65, -646.65, -625951.82, 475072.92)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#37e474" />
+            <stop offset="1" stop-color="#06adff" />
+        </linearGradient>
+    </defs>
+    <title>noodle_big</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="noodle_container_1" data-name="noodle container 1">
+            <path id="noodle_1" data-name="noodle 1"
+                d="M70.71,576.9q174,3.9,244.73-148.95C386.36,275.14,484.14,248,568.27,268.7s169,96.88,133.36,251,38.64,203,85.38,217.77,104.17-1.57,139.53-52.9c78.19-113.54-60.13-222,19.35-321.13s231.75-44,241.34,105.78c10,155.76,140.15,216.81,237.07,191.73,160.1-41.39,221.47-194.74,126.78-365.46-44.27-78.19-64.16-155.72-61.34-224.73"
+                fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="141.42"
+                stroke="url(#linear-gradient)" />
+        </g>
+    </g>
+</svg>

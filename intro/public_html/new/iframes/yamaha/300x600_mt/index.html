@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="ad.size" content="width=300,height=600">
+        <link href="style.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container" style="width:300px; height:600px;">
+            <img class="hide" id="bg" src="bg_big.jpg">
+            <img class="element hide" id="bg_zoom" src="bg_zoom.jpg">
+            <img class="element" id="half_top" src="half_top.png">
+            <img class="element" id="half_bottom" src="half_bottom.png">
+            <img class="element hide" id="logo_full" src="logo_full.png">
+            <img class="element hide" id="logo_top" src="logo_top.png">
+            <img class="element hide" id="logo_bottom" src="logo_bottom.png">
+            <div class="element hide" id="cut_container">
+                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1200"><defs><style>.cls-1{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:1.5px;}</style></defs><title>300x250_cut</title><path id="cut_path" class="cls-1" d="M600,428,0,665.72"/></svg>
+            </div>
+            <img class="element hide" id="flash" src="cut_flash.png">
+            <img class="element hide" id="shadow" src="matrix.png">
+            <div id="text1flex" class="text_flex hide"><div id="text1">challenge the darkness</div></div>
+            <div id="text2flex" class="text_flex hide"><div id="text2">Available now</div></div>
+            <img class="element hide" id="toplogo" src="toplogo.png">
+            <img class="element hide" id="bike" src="bike.png">
+            <img class="element hide" id="cta" src="cta.png">
+            <img class="element hide" id="cta_glow" src="cta_glow.png">
+            <div id="ctaflex" class="cta_flex hide"><div class="cta_txt">discover more</div></div>
+
+            <img class="element hide" id="logo" src="logo.png">
+            <div class="element" id="border"></div>
+        </div>
+        <script type="text/javascript" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+        
+        <!-- GSAP v3.13.0 Core and Plugins via Official CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/TextPlugin.min.js" type="text/javascript"></script>
+        
+        <!-- Premium Plugins via Official CDN (now available as of GSAP 3.13.0) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/MorphSVGPlugin.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" type="text/javascript"></script>
+        
+        <script src="main.js" type="text/javascript"></script>
+        <script type="text/javascript" charset="utf-8">
+            if (Enabler.isInitialized()) {
+                init();
+            } else {
+                Enabler.addEventListener(
+                    studio.events.StudioEvent.INIT,
+                    init
+                );
+            }
+            function init() {
+
+                initBanner();
+            }
+              
+        </script>
+    </body>
+</html>

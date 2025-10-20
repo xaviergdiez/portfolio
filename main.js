@@ -19,7 +19,7 @@ function init() {
      if (frame) {
        frame.style.opacity = '1';
        frame.style.visibility = 'visible';
-       frame.style.display = 'block';
+      //  frame.style.display = 'block';
      }
      
      // Disable problematic SVG filters for Safari
@@ -43,12 +43,6 @@ function init() {
      strokeElements.forEach(el => {
        el.style.filter = 'drop-shadow(0 0 6px #7ae3fc)';
      });
-     
-     // Force repaint in Safari
-     setTimeout(() => {
-       if (avatar) avatar.style.transform = 'translateZ(0)';
-       if (frame) frame.style.transform = 'translateZ(0)';
-     }, 100);
    }
    
   //  let userInteracted = false;
@@ -57,9 +51,55 @@ function init() {
    // Lock scrolling initially
    document.body.style.overflow = 'hidden';
    
+   // Force avatar position and prevent any overrides - MUST be before timeline
+   const forceAvatarPosition = () => {
+     const avatarContainer = document.querySelector('.avatar-container');
+     if (avatarContainer) {
+       avatarContainer.style.transition = 'none';
+       const transformValue = window.innerWidth > 768 ? 'translateX(-50%) translateZ(0)' : 'translateY(-50%) translateZ(0)';
+       avatarContainer.style.transform = transformValue;
+       avatarContainer.style.setProperty('transform', transformValue, 'important');
+       console.log('Avatar position forced to:', transformValue);
+     }
+   };
+   
+   // Apply immediately 
+   forceAvatarPosition();
+   
+   // Use MutationObserver to prevent any style overrides
+   const avatarContainer = document.querySelector('.avatar-container');
+   if (avatarContainer) {
+     const observer = new MutationObserver((mutations) => {
+       mutations.forEach((mutation) => {
+         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+           const currentTransform = avatarContainer.style.transform;
+           const expectedTransform = window.innerWidth > 768 ? 'translateX(-50%) translateZ(0)' : 'translateY(-50%) translateZ(0)';
+           if (!currentTransform.includes('-50%')) {
+             console.log('Avatar position override detected, forcing correct position');
+             forceAvatarPosition();
+           }
+         }
+       });
+     });
+     observer.observe(avatarContainer, { attributes: true, attributeFilter: ['style'] });
+     
+     // Disconnect observer when glow animation starts
+     setTimeout(() => {
+       observer.disconnect();
+       console.log('Avatar position observer disconnected');
+     }, 2500);
+   }
+   
    tl
-    .set('.frame-container', { scale: 0, transformOrigin: "50% 50%", force3D: true })
-    .set('.avatar-container', { force3D: true, opacity: 1, visibility: 'visible' })
+    .set('.frame-container', { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%", force3D: true })
+    .set('.avatar-container', { 
+      force3D: true, 
+      opacity: 1, 
+      visibility: 'visible', 
+      // Use transform instead of x/y for more reliable positioning
+      transform: window.innerWidth > 768 ? 'translateX(-50%) translateZ(0)' : 'translateY(-50%) translateZ(0)',
+      immediateRender: true 
+    })
     .set(['.skill-name', '.skill-item'], { autoAlpha: 0, y: 5 })
     .set(['.eye2', '#xray', '.skills-header', '.dot', '.skills-footer'], { autoAlpha: 0 })
     .addLabel('init', 0)
@@ -68,7 +108,6 @@ function init() {
     .addLabel('helmet', 2)
     .addLabel('glow', 2.5)
     .addLabel('sparks', 2.6)
-    .from('.avatar-container', { duration: 0, opacity: 0, force3D: true }, 'init')
     .from('#circle_bg', { duration: 1, r: 0, ease: 'cubic.out' }, 'init')
     .from('#xavi', { duration: 0.5, y:'100%', ease: 'cubic.out'}, 'start')
     .call(() => {
@@ -88,14 +127,16 @@ function init() {
     }, 'glow')
     .from('#blur-filter', { duration: 1, attr:{ "stdDeviation": 0 }, ease: 'cubic.out' }, 'glow')
     .from('.helmet-glow', {duration: 1, autoAlpha: 0, ease: 'cubic.out' }, 'glow')
+    
     .to('#xray', { duration: 0.1, autoAlpha: 1, ease: 'rough({ template: none.out  , strength: 1, points: 1000, taper: none, randomize: true, clamp: false})', repeat: 5, yoyo: true }, 'glow')
-    .from('.frame-container', { duration: 0.5, scale: 0, ease: 'sine.inOut', transformOrigin: "50% 50%", force3D: true }, 'glow')
-    .from('.avatar-container', { 
+    .to('.frame-container', { duration: 0.5, autoAlpha: 1, scale: 1, ease: 'sine.inOut', transformOrigin: "50% 50%", force3D: true }, 'glow')
+    .to ('.avatar-container', { 
         duration: 0.5, 
-        ...(hero.getBoundingClientRect().width > 768 ? {x: '-50%'} : {y: '-50%'}), 
+        transform: window.innerWidth > 768 ? 'translateX(0%) translateZ(0)' : 'translateY(0%) translateZ(0)',
         ease: 'sine.inOut',
-        force3D: true
+        force3D: false,
     }, 'glow')
+    .from(['.frame-stroke', '.corner'], {duration: 0.1, strokeWidth: 0, ease: 'sine.inOut' }, 'glow')
     .from('.frame-stroke', { duration: 0.5, drawSVG: "50% 50%", ease: 'sine.inOut', stagger: 0.25 }, 'glow')
     .from('.corner', { duration: 0.25, drawSVG: "50% 50%", ease: 'sine.inOut', stagger: 0.25 }, 'glow')
     .to('#tube-ball', { duration: 0.5, y: "-250%", ease: 'cubic.out', repeat: -1, }, 'sparks')
