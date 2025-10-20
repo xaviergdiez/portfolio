@@ -789,7 +789,7 @@
               </div>
               <div class="contact-details">
                 <h3>Email</h3>
-                <a href="mailto:hello@xaviergarcia.dev">hello@whoisxavier.com</a>
+                <a href="mailto:hello@whoisxavier.com">hello@xwhoisxavier.com</a>
               </div>
             </div>
 
@@ -801,7 +801,7 @@
               </div>
               <div class="contact-details">
                 <h3>LinkedIn</h3>
-                <a href="hhttps://www.linkedin.com/in/xavier-garcia-diez/" target="_blank">linkedin.com/xavier-garcia-diez/</a>
+                <a href="https://www.linkedin.com/in/xavier-garcia-diez/" target="_blank">linkedin.com/xavier-garcia-diez/</a>
               </div>
             </div>
 
@@ -856,57 +856,7 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-container">
-      <div class="footer-content">
-        <div class="footer-main">
-          <div class="footer-brand">
-            <h3>Xavier Garcia</h3>
-            <p>Creative Developer & Digital Strategist</p>
-          </div>
-
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4>Services</h4>
-              <ul>
-                <li><a href="services.html#web-development">Web Development</a></li>
-                <li><a href="services.html#mobile-apps">Mobile Apps</a></li>
-                <li><a href="services.html#digital-campaigns">Digital Campaigns</a></li>
-                <li><a href="services.html#ui-ux-design">UI/UX Design</a></li>
-              </ul>
-            </div>
-
-            <div class="footer-column">
-              <h4>Work</h4>
-              <ul>
-                <li><a href="#bmw-mini-case">BMW/MINI Case Study</a></li>
-                <li><a href="#gtech-case">GTECH Case Study</a></li>
-                <li><a href="#fbto-case">FBTO Project</a></li>
-                <li><a href="#huawei-case">Huawei Campaign</a></li>
-                <li><a href="#portfolio">View All Work</a></li>
-              </ul>
-            </div>
-
-            <div class="footer-column">
-              <h4>Connect</h4>
-              <ul>
-                <li><a href="mailto:hello@whoisxavier.com">Email</a></li>
-                <li><a href="https://www.linkedin.com/in/xavier-garcia-diez/" target="_blank">LinkedIn</a></li>
-                <li><a href="https://github.com/xaviergdiez" target="_blank">GitHub</a></li>
-                <li><a href="https://instagram.com/whois.xavier" target="_blank">Instagram</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <div class="footer-bottom-content">
-            <p>&copy; 2025 Xavier Garcia. All rights reserved.</p>
-            <div class="footer-legal">
-              <a href="#privacy">Privacy Policy</a>
-              <a href="#terms">Terms of Service</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p>&copy; 2025 Xavier Garcia. All rights reserved.</p>
     </div>
   </footer>
 
@@ -928,14 +878,14 @@
             avatar.style.setProperty('opacity', '1', 'important');
             avatar.style.setProperty('visibility', 'visible', 'important');
             avatar.style.setProperty('display', 'block', 'important');
-            avatar.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+            // avatar.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
           }
           
           if (frame) {
             frame.style.setProperty('opacity', '1', 'important');
             frame.style.setProperty('visibility', 'visible', 'important');
             frame.style.setProperty('display', 'block', 'important');
-            frame.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+            // frame.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
           }
           
           // Handle SVG glow filter issues in Safari
@@ -962,13 +912,13 @@
           
           // Force repaint
           setTimeout(() => {
-            if (avatar) avatar.style.transform = 'translateZ(0)';
-            if (frame) frame.style.transform = 'translateZ(0)';
+            // if (avatar) avatar.style.transform = 'translateZ(0)';
+            // if (frame) frame.style.transform = 'translateZ(0)';
             
             // Force re-render of SVG elements
             const svgElements = document.querySelectorAll('svg:not(#noodle_container)');
             svgElements.forEach(svg => {
-              svg.style.transform = 'translateZ(0)';
+              // svg.style.transform = 'translateZ(0)';
             });
           }, 50);
         };

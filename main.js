@@ -5,8 +5,10 @@ function init() {
    let tl = gsap.timeline();
    gsap.registerPlugin(DrawSVGPlugin,MorphSVGPlugin,ScrollTrigger)
    
-   // Safari-specific fixes
+   // Browser-specific fixes
    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+   const isChromeMobile = /Chrome.*Mobile|CriOS/i.test(navigator.userAgent);
+   
    if (isSafari) {
      console.log('Safari detected - applying compatibility fixes');
      
@@ -45,50 +47,50 @@ function init() {
      });
    }
    
+   if (isChromeMobile) {
+     console.log('Chrome Mobile detected - applying compatibility fixes');
+     
+     // Chrome mobile needs explicit positioning properties
+     if (avatar) {
+       avatar.style.opacity = '1';
+       avatar.style.visibility = 'visible';
+       avatar.style.display = 'block';
+       // Clear any conflicting transforms before GSAP takes control
+       avatar.style.transform = '';
+       avatar.style.willChange = 'transform';
+       // Force hardware acceleration for smoother animations
+       avatar.style.backfaceVisibility = 'hidden';
+       avatar.style.perspective = '1000px';
+     }
+   }
+   
   //  let userInteracted = false;
   //  let autoResumeTimeout;
    
    // Lock scrolling initially
    document.body.style.overflow = 'hidden';
    
-   // Force avatar position and prevent any overrides - MUST be before timeline
-   const forceAvatarPosition = () => {
-     const avatarContainer = document.querySelector('.avatar-container');
-     if (avatarContainer) {
-       avatarContainer.style.transition = 'none';
-       const transformValue = window.innerWidth > 768 ? 'translateX(-50%) translateZ(0)' : 'translateY(-50%) translateZ(0)';
-       avatarContainer.style.transform = transformValue;
-       avatarContainer.style.setProperty('transform', transformValue, 'important');
-       console.log('Avatar position forced to:', transformValue);
-     }
-   };
-   
-   // Apply immediately 
-   forceAvatarPosition();
-   
-   // Use MutationObserver to prevent any style overrides
+   // Avatar positioning - Use GSAP-only approach for all browsers (cohesive positioning)
    const avatarContainer = document.querySelector('.avatar-container');
-   if (avatarContainer) {
-     const observer = new MutationObserver((mutations) => {
-       mutations.forEach((mutation) => {
-         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-           const currentTransform = avatarContainer.style.transform;
-           const expectedTransform = window.innerWidth > 768 ? 'translateX(-50%) translateZ(0)' : 'translateY(-50%) translateZ(0)';
-           if (!currentTransform.includes('-50%')) {
-             console.log('Avatar position override detected, forcing correct position');
-             forceAvatarPosition();
-           }
-         }
-       });
-     });
-     observer.observe(avatarContainer, { attributes: true, attributeFilter: ['style'] });
+   
+  //  if (avatarContainer) {
+  //    console.log('Setting up GSAP-only avatar positioning for all browsers');
      
-     // Disconnect observer when glow animation starts
-     setTimeout(() => {
-       observer.disconnect();
-       console.log('Avatar position observer disconnected');
-     }, 2500);
-   }
+  //    // Clear any existing CSS transforms to avoid conflicts
+  //    avatarContainer.style.transform = '';
+  //    avatarContainer.style.removeProperty('transform');
+     
+  //    // Set initial position using GSAP properties only
+  //    gsap.set(avatarContainer, {
+  //      force3D: true,
+  //      // Set initial centered position - mobile uses yPercent, desktop uses xPercent
+  //      ...(window.innerWidth > 768 ? { xPercent: -50, x: 0 } : { yPercent: -50, y: 0 }),
+  //      clearProps: 'transform', // Clear any conflicting CSS transforms
+  //      immediateRender: true
+  //    });
+     
+  //    console.log('Avatar initial position set:', window.innerWidth > 768 ? 'xPercent: -50' : 'yPercent: -50');
+  //  }
    
    tl
     .set('.frame-container', { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%", force3D: true })
@@ -96,9 +98,9 @@ function init() {
       force3D: true, 
       opacity: 1, 
       visibility: 'visible', 
-      // Use transform instead of x/y for more reliable positioning
-      transform: window.innerWidth > 768 ? 'translateX(-50%) translateZ(0)' : 'translateY(-50%) translateZ(0)',
-      immediateRender: true 
+      // Consistent GSAP-only positioning for all browsers
+      ...(window.innerWidth > 768 ? { xPercent: -50, x: 0 } : { yPercent: -50, y: 0 }),
+      transformOrigin: "50% 50%"
     })
     .set(['.skill-name', '.skill-item'], { autoAlpha: 0, y: 5 })
     .set(['.eye2', '#xray', '.skills-header', '.dot', '.skills-footer'], { autoAlpha: 0 })
@@ -109,7 +111,7 @@ function init() {
     .addLabel('glow', 2.5)
     .addLabel('sparks', 2.6)
     .from('#circle_bg', { duration: 1, r: 0, ease: 'cubic.out' }, 'init')
-    .from('#xavi', { duration: 0.5, y:'100%', ease: 'cubic.out'}, 'start')
+    .from('#xavi', { duration: 0.5, yPercent: 100, ease: 'cubic.out'}, 'start')
     .call(() => {
       addMouseEvent();
     }, null, 'mouse')
@@ -132,9 +134,10 @@ function init() {
     .to('.frame-container', { duration: 0.5, autoAlpha: 1, scale: 1, ease: 'sine.inOut', transformOrigin: "50% 50%", force3D: true }, 'glow')
     .to ('.avatar-container', { 
         duration: 0.5, 
-        transform: window.innerWidth > 768 ? 'translateX(0%) translateZ(0)' : 'translateY(0%) translateZ(0)',
+        // Consistent GSAP-only positioning - animate to final centered position
+        ...(window.innerWidth > 768 ? { xPercent: 0, x: 0 } : { yPercent: 0, y: 0 }),
         ease: 'sine.inOut',
-        force3D: false,
+        force3D: true,
     }, 'glow')
     .from(['.frame-stroke', '.corner'], {duration: 0.1, strokeWidth: 0, ease: 'sine.inOut' }, 'glow')
     .from('.frame-stroke', { duration: 0.5, drawSVG: "50% 50%", ease: 'sine.inOut', stagger: 0.25 }, 'glow')
@@ -307,6 +310,23 @@ function updateWindowSize() {
   // Add both resize handlers
   window.addEventListener("resize", updateWindowSize);
   window.addEventListener("resize", resizeHandler);
+  
+  // Universal resize handler for avatar positioning (all browsers)
+  const handleAvatarResize = () => {
+    const avatarContainer = document.querySelector('.avatar-container');
+    if (avatarContainer) {
+      // Re-apply GSAP positioning after resize/orientation change
+      gsap.set(avatarContainer, {
+        force3D: true,
+        ...(window.innerWidth > 768 ? { xPercent: -50, x: 0 } : { yPercent: -50, y: 0 }),
+        clearProps: 'transform'
+      });
+      console.log('Avatar position updated after resize:', window.innerWidth > 768 ? 'xPercent: -50' : 'yPercent: -50');
+    }
+  };
+  
+  window.addEventListener("resize", handleAvatarResize);
+  window.addEventListener("orientationchange", handleAvatarResize);
   
   function setupUserInteraction(timeline) {
     // Create a visual indicator for user interaction (optional)

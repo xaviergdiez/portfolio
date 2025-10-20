@@ -274,6 +274,7 @@ body {
 .banner-item {
     border-radius: 6px;
     overflow: hidden;
+    overflow-y: hidden; /* Explicitly remove vertical scroll */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -283,6 +284,8 @@ body {
     background: rgba(26, 26, 26, 0.8);
     position: absolute;
     backdrop-filter: blur(1px);
+    /* Disable all touch events */
+    touch-action: none;
 }
 
 .banner-item:hover {
@@ -334,7 +337,6 @@ body {
     /* Ensure proper rendering */
     contain: layout style paint;
 }
-
 /* Safari-specific fallback */
 @supports not (aspect-ratio: 1) {
     .avatar-container, .frame-container {
@@ -1901,6 +1903,16 @@ body {
     margin-top: 1em;
 }
 
+/* Mobile adjustments for phones */
+@media (max-width: 768px) {
+  .phones_wrapper {
+    width: 70%;
+    height: 150%;
+    left: 55%;
+  }
+}
+
+
 /* Responsive adjustments for data icons */
 @media (max-width: 1024px) {
   .gtech-data-icons {
@@ -2486,13 +2498,18 @@ body {
 .site-footer {
   background: var(--color-charcoal-700);
   color: var(--color-white);
-  padding: 80px 0 24px 0;
+  padding: 24px 0;
 }
 
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 24px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .footer-content {
@@ -2565,9 +2582,11 @@ body {
   gap: 20px;
 }
 
-.footer-bottom p {
-  color: rgba(var(--color-white), 0.6);
+.footer-container p {
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
 }
 
 .footer-legal {
