@@ -1,3 +1,86 @@
+// Case Study CTA Functionality - Defined at the top for global availability
+function initCaseStudyCTAs() {
+  console.log('initCaseStudyCTAs function called');
+  const ctaBtns = document.querySelectorAll('.case-cta-btn');
+  
+  ctaBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const caseId = this.dataset.case;
+      const expandedContent = document.getElementById(`${caseId}-expanded`);
+      const caseStudy = document.getElementById(`${caseId}-case`);
+      
+      if (!expandedContent || !caseStudy) return;
+      
+      const isExpanded = this.classList.contains('expanded');
+      
+      if (isExpanded) {
+        // Collapse
+        this.classList.remove('expanded');
+        expandedContent.classList.remove('expanded');
+        
+        // Update button text
+        this.querySelector('.cta-text').textContent = 'Learn More';
+        
+        // Remove expanded state from case study
+        caseStudy.classList.remove('case-expanded');
+        
+      } else {
+        // First, collapse any other expanded cases
+        document.querySelectorAll('.case-cta-btn.expanded').forEach(otherBtn => {
+          if (otherBtn !== this) {
+            otherBtn.click(); // This will trigger the collapse
+          }
+        });
+        
+        // Expand this case
+        this.classList.add('expanded');
+        expandedContent.classList.add('expanded');
+        
+        // Update button text
+        this.querySelector('.cta-text').textContent = 'Show';
+        
+        // Add expanded state to case study
+        caseStudy.classList.add('case-expanded');
+        
+        // Scroll the case study into view after animation
+        setTimeout(() => {
+          caseStudy.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }, 300);
+      }
+    });
+  });
+}
+
+// Scroll lock helper functions
+let scrollPosition = 0;
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+function preventDefaultForScrollKeys(e) {
+  // Prevent arrow keys, space, page up/down from scrolling
+  if([32, 33, 34, 35, 36, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    e.preventDefault();
+  }
+}
+
+function lockScroll() {
+  scrollPosition = window.pageYOffset;
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollPosition}px`;
+  document.body.style.width = '100%';
+  
+  // Prevent wheel events
+  document.addEventListener('wheel', preventDefault, {passive: false});
+  document.addEventListener('touchmove', preventDefault, {passive: false});
+  document.addEventListener('keydown', preventDefaultForScrollKeys, {passive: false});
+}
+
 function init() {
    let avatar = document.querySelector('.avatar-container');
    let frame = document.querySelector('.frame-container');
@@ -67,8 +150,29 @@ function init() {
   //  let userInteracted = false;
   //  let autoResumeTimeout;
    
-   // Lock scrolling initially
-   document.body.style.overflow = 'hidden';
+   // Lock scrolling initially with comprehensive approach
+   lockScroll();
+   
+   // Add loading indicator
+   const loadingIndicator = document.createElement('div');
+   loadingIndicator.id = 'scroll-loading-indicator';
+   loadingIndicator.style.cssText = `
+     position: fixed;
+     bottom: 20px;
+     left: 50%;
+     transform: translateX(-50%);
+     color: rgba(255, 255, 255, 0.8);
+     font-size: 12px;
+     font-family: var(--font-family-mono, monospace);
+     z-index: 1001;
+     background: rgba(0, 0, 0, 0.7);
+     padding: 8px 16px;
+     border-radius: 20px;
+     backdrop-filter: blur(10px);
+     animation: pulse 2s ease-in-out infinite;
+   `;
+   loadingIndicator.textContent = '⏳ Loading experience...';
+   document.body.appendChild(loadingIndicator);
    
    // Avatar positioning - Use GSAP-only approach for all browsers (cohesive positioning)
    const avatarContainer = document.querySelector('.avatar-container');
@@ -91,6 +195,15 @@ function init() {
      
   //    console.log('Avatar initial position set:', window.innerWidth > 768 ? 'xPercent: -50' : 'yPercent: -50');
   //  }
+   
+   // Verify critical elements exist before starting animations
+   const requiredElements = ['#blur-filter', '#xray', '.spark', '#tube-ball'];
+   requiredElements.forEach(selector => {
+     const element = document.querySelector(selector);
+     if (!element) {
+       console.warn(`GSAP target ${selector} not found in DOM`);
+     }
+   });
    
    tl
     .set('.frame-container', { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%", force3D: true })
@@ -128,7 +241,6 @@ function init() {
       )
     }, 'glow')
     .from('#blur-filter', { duration: 1, attr:{ "stdDeviation": 0 }, ease: 'cubic.out' }, 'glow')
-    .from('.helmet-glow', {duration: 1, autoAlpha: 0, ease: 'cubic.out' }, 'glow')
     
     .to('#xray', { duration: 0.1, autoAlpha: 1, ease: 'rough({ template: none.out  , strength: 1, points: 1000, taper: none, randomize: true, clamp: false})', repeat: 5, yoyo: true }, 'glow')
     .to('.frame-container', { duration: 0.5, autoAlpha: 1, scale: 1, ease: 'sine.inOut', transformOrigin: "50% 50%", force3D: true }, 'glow')
@@ -152,8 +264,7 @@ function init() {
     .call(() => {
       // Animation complete - enable scrolling after banners are loaded
       console.log('Main animation complete - waiting for banners to load...');
-      // Initialize CTA buttons
-      initCaseStudyCTAs();
+      // CTA buttons will be initialized by DOMContentLoaded event listener
     }, null, 'sparks+=2')
 
 //Mouse cooridinates positioning and implementation
@@ -170,61 +281,6 @@ let h = window.innerHeight * 2;
 
 function percentage(partialValue, totalValue) {
   return (100 * partialValue) / totalValue;
-}
-
-// Case Study CTA Functionality
-function initCaseStudyCTAs() {
-  const ctaBtns = document.querySelectorAll('.case-cta-btn');
-  
-  ctaBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const caseId = this.dataset.case;
-      const expandedContent = document.getElementById(`${caseId}-expanded`);
-      const caseStudy = document.getElementById(`${caseId}-case`);
-      
-      if (!expandedContent || !caseStudy) return;
-      
-      const isExpanded = this.classList.contains('expanded');
-      
-      if (isExpanded) {
-        // Collapse
-        this.classList.remove('expanded');
-        expandedContent.classList.remove('expanded');
-        
-        // Update button text
-        this.querySelector('.cta-text').textContent = 'Learn More';
-        
-        // Remove expanded state from case study
-        caseStudy.classList.remove('case-expanded');
-        
-      } else {
-        // First, collapse any other expanded cases
-        document.querySelectorAll('.case-cta-btn.expanded').forEach(otherBtn => {
-          if (otherBtn !== this) {
-            otherBtn.click(); // This will trigger the collapse
-          }
-        });
-        
-        // Expand this case
-        this.classList.add('expanded');
-        expandedContent.classList.add('expanded');
-        
-        // Update button text
-        this.querySelector('.cta-text').textContent = 'Show';
-        
-        // Add expanded state to case study
-        caseStudy.classList.add('case-expanded');
-        
-        // Scroll the case study into view after animation
-        setTimeout(() => {
-          caseStudy.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
-        }, 300);
-      }
-    });
-  });
 }
 
 let animationPlaying;
@@ -730,7 +786,24 @@ function reloadAllIframes() {
 // Function to enable scrolling once everything is ready
 function enableScrolling() {
   console.log('All banners loaded - enabling scrolling');
-  document.body.style.overflow = 'auto';
+  
+  // Remove event listeners
+  document.removeEventListener('wheel', preventDefault, {passive: false});
+  document.removeEventListener('touchmove', preventDefault, {passive: false});
+  document.removeEventListener('keydown', preventDefaultForScrollKeys, {passive: false});
+  
+  // Restore scroll position and body styles
+  document.body.style.removeProperty('overflow');
+  document.body.style.removeProperty('position');
+  document.body.style.removeProperty('top');
+  document.body.style.removeProperty('width');
+  window.scrollTo(0, scrollPosition);
+  
+  // Remove loading indicator
+  const loadingIndicator = document.getElementById('scroll-loading-indicator');
+  if (loadingIndicator) {
+    loadingIndicator.remove();
+  }
   
   // Add a subtle visual indicator that scrolling is now available
   const scrollIndicator = document.createElement('div');
@@ -867,28 +940,28 @@ function startGtechAnimations() {
     .addLabel('trendsIn', 6)
     .addLabel('complete', 7.5)
     // Data icons animate in sequence
-    .fromTo('#interactive-ad-container', {duration: 0, autoAlpha: 0, immediateRender: true}, {duration: 0.5, autoAlpha: 1})
+    .fromTo('#interactive-analytics-container', {duration: 0, autoAlpha: 0, immediateRender: true}, {duration: 0.5, autoAlpha: 1})
     .fromTo('#data-icon-user', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'userIn')
-    .from("#ad-bg", {duration: 0.7, autoAlpha: 0, scale: 0, transformOrigin:"center center",ease: "back.out(1.7)"}, 'userIn')
+    .from("#content-bg", {duration: 0.7, autoAlpha: 0, scale: 0, transformOrigin:"center center",ease: "back.out(1.7)"}, 'userIn')
     .from('#user-product', {duration: 0.5, y: 30, autoAlpha: 0, ease: "power2.out"}, 'userIn+=0.3')
     .from('#user-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'userIn+=0.5')
     .from('#user-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'userIn+=0.8')
     .to(['#user-product', '#user-txt', '#user-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'userOut')
     .fromTo('#data-icon-location', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'locationIn')
-    .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#location-bg", type: "rotational"}, fill:gRed, ease: "back.out(1.7)"}, 'locationIn')
+    .to('#content-bg', {duration: 0.5, morphSVG: {shape:"#location-bg", type: "rotational"}, fill:gRed, ease: "back.out(1.7)"}, 'locationIn')
     .from('#location-product', {duration: 0.5, y: 30, autoAlpha: 0, ease: "power2.out"}, 'locationIn+=0.3')
     .from('#location-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'locationIn+=0.5')
     .from('.star', {duration: 0.3, scale: 0, rotation: 180, stagger: 0.15, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'locationIn+=0.6')
     .from('#location-cta', {duration: 0.5, scale: 0, autoAlpha: 0, ease: "power2.out"}, 'locationIn+=0.8')
     .to(['#location-product', '#location-txt', '.star', '#location-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'locationOut')
     .fromTo('#data-icon-behavior', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'behaviourIn')
-    .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#behaviour-bg", type: "rotational"}, fill:gGreen, ease: "back.out(1.7)"}, 'behaviourIn')
+    .to('#content-bg', {duration: 0.5, morphSVG: {shape:"#behaviour-bg", type: "rotational"}, fill:gGreen, ease: "back.out(1.7)"}, 'behaviourIn')
     .from('.behaviour-product', {duration: 0.5, y: 30, autoAlpha: 0, stagger: 0.2, ease: "power2.out"}, 'behaviourIn+=0.3')
     .from('.behaviour-txt', {duration: 0.5, scaleX: 0, transformOrigin: "left center", stagger: 0.2, ease: "power2.out"}, 'behaviourIn+=0.5')
     .from('.behaviour-cta', {duration: 0.5, scale: 0, autoAlpha: 0, stagger: 0.2,ease: "power2.out"}, 'behaviourIn+=0.8')
     .to(['.behaviour-product', '.behaviour-txt', '.behaviour-cta'], {duration: 0.5, autoAlpha: 0, ease: "power2.in"}, 'behaviourOut')
     .fromTo('#data-icon-trending', { duration: 0.5, autoAlpha: 0, scale: 0, transformOrigin:"center center", rotation: -45 }, {autoAlpha: 1, scale: 1, rotation: 0, ease: "power2.out"}, 'trendsIn')
-    .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#trending-bg", type: "rotational"}, fill:gYellow, ease: "back.out(1.7)"}, 'trendsIn')
+    .to('#content-bg', {duration: 0.5, morphSVG: {shape:"#trending-bg", type: "rotational"}, fill:gYellow, ease: "back.out(1.7)"}, 'trendsIn')
     .from('#trending-screen', {duration: 0.5, scale: 0, autoAlpha: 0, transformOrigin: "0% 50%", ease: "power2.out"}, 'trendsIn+=0.3')
     .from('#trending-icon', {duration: 0.5, scale: 0, transformOrigin: "50% 50%", ease: "back.out(1.7)"}, 'trendsIn+=0.4')
     .from('#trending-title', {duration: 0.5, scaleX: 0, transformOrigin: "left center", ease: "power2.out"}, 'trendsIn+=0.5')
@@ -1056,7 +1129,7 @@ function animateAdElements(type, onComplete) {
       onComplete: onComplete // Call the callback when animation completes
     });
     userTL
-      .to('#ad-bg', {
+      .to('#content-bg', {
         duration: 0.5, 
         morphSVG: {shape:"#user-bg", type: "rotational"}, 
         fill: gBlue, 
@@ -1087,7 +1160,7 @@ function animateAdElements(type, onComplete) {
       onComplete: onComplete // Call the callback when animation completes
     });
     locationTL
-      .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#location-bg", type: "rotational"}, fill: gRed, ease: "back.out(1.7)"}, 0)
+      .to('#content-bg', {duration: 0.5, morphSVG: {shape:"#location-bg", type: "rotational"}, fill: gRed, ease: "back.out(1.7)"}, 0)
       .fromTo('#location-product', {y: 30, autoAlpha: 0}, {duration: 0.5, y: 0, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.3)
       .fromTo('#location-txt', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.5)
       .fromTo('.star', {scale: 0, rotation: 180, transformOrigin: "50% 50%"}, {duration: 0.3, scale: 1, rotation: 0, autoAlpha: 1, stagger: 0.15, ease: "back.out(1.7)", immediateRender: true}, 0.6)
@@ -1114,7 +1187,7 @@ function animateAdElements(type, onComplete) {
       onComplete: onComplete // Call the callback when animation completes
     });
     behaviourTL
-      .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#behaviour-bg", type: "rotational"}, fill: gGreen, ease: "back.out(1.7)"}, 0)
+      .to('#content-bg', {duration: 0.5, morphSVG: {shape:"#behaviour-bg", type: "rotational"}, fill: gGreen, ease: "back.out(1.7)"}, 0)
       .fromTo('.behaviour-product', {y: 30, autoAlpha: 0}, {duration: 0.5, y: 0, autoAlpha: 1, stagger: 0.2, ease: "power2.out", immediateRender: true}, 0.3)
       .fromTo('.behaviour-txt', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, stagger: 0.2, ease: "power2.out", immediateRender: true}, 0.5)
       .fromTo('.behaviour-cta', {scale: 0, autoAlpha: 0}, {duration: 0.5, scale: 1, autoAlpha: 1, stagger: 0.2, ease: "power2.out", immediateRender: true}, 0.8);
@@ -1140,7 +1213,7 @@ function animateAdElements(type, onComplete) {
       onComplete: onComplete // Call the callback when animation completes
     });
     trendsTL
-      .to('#ad-bg', {duration: 0.5, morphSVG: {shape:"#trending-bg", type: "rotational"}, fill: gYellow, ease: "back.out(1.7)"}, 0)
+      .to('#content-bg', {duration: 0.5, morphSVG: {shape:"#trending-bg", type: "rotational"}, fill: gYellow, ease: "back.out(1.7)"}, 0)
       .fromTo('#trending-screen', {scale: 0, autoAlpha: 0, transformOrigin: "50% 0%" }, {duration: 0.5, scale: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.3)
       .fromTo('#trending-icon', {scale: 0, autoAlpha: 0, transformOrigin: "50% 50%"}, {duration: 0.5, scale: 1, autoAlpha: 1, ease: "back.out(1.7)", immediateRender: true}, 0.4)
       .fromTo('#trending-title', {scaleX: 0, transformOrigin: "left center"}, {duration: 0.5, scaleX: 1, autoAlpha: 1, ease: "power2.out", immediateRender: true}, 0.5)
@@ -1419,6 +1492,22 @@ function startHuaweiAnimations() {
 // Note: init() is called from HTML's window.onload event
 
 // Initialize CTA functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  initCaseStudyCTAs();
-});
+// Using a safer approach to ensure the function is available
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded event fired, checking if initCaseStudyCTAs exists:', typeof initCaseStudyCTAs);
+    try {
+      initCaseStudyCTAs();
+    } catch (error) {
+      console.error('Error initializing CTA functionality:', error);
+    }
+  });
+} else {
+  // Document is already loaded
+  console.log('Document already loaded, checking if initCaseStudyCTAs exists:', typeof initCaseStudyCTAs);
+  try {
+    initCaseStudyCTAs();
+  } catch (error) {
+    console.error('Error initializing CTA functionality:', error);
+  }
+}

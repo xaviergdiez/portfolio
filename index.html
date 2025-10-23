@@ -2,10 +2,109 @@
 <html>
 
 <head>
+  <!-- Basic Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xavier Garcia</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- SEO Meta Tags -->
+  <title>Xavier Garcia - Creative Developer | Web Development, Digital Campaigns & UI/UX Design</title>
+  <meta name="description" content="Xavier Garcia is a creative developer specializing in web development, digital campaigns, UI/UX design, and mobile apps. 15+ years of experience delivering innovative digital solutions for global brands including BMW, MINI, GTECH, and more.">
+  <meta name="keywords" content="Xavier Garcia, creative developer, web development, digital campaigns, UI/UX design, mobile apps, HTML5 banners, GSAP animations, React, Vue.js, Node.js, TypeScript, portfolio">
+  <meta name="author" content="Xavier Garcia">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="en">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="logox.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yMTcuNiwzNi45QzE5My4yLDEyLjksMTYxLDAsMTI2LjkuMmgwczAsMCwwLDBjLTM0LjEuMy02Ni4xLDEzLjktOTAsMzguMkMxMi45LDYyLjgsMCw5NS4yLDEyOS4xYy4zLDM0LjEsMTMuOSw2Ni4xLDM4LjIsOTAsMjQuMywyMy45LDU2LjUsMzYuOSw5MC43LDM2LjYsMCwwLDAsMCwwLDAsNzAuNC0uNiwxMjcuMi01OC40LDEyNi42LTEyOC45LS4zLTM0LjEtMTMuOS02Ni4xLTM4LjItOTBaTTEyOC44LDIxNi44czAsMCwwLDBjLTIzLjcuMi00Ni4xLTguOC02My0yNS41LTE2LjktMTYuNi0yNi4zLTM4LjgtMjYuNS02Mi41LS4yLTIzLjcsOC44LTQ2LjEsMjUuNS02MywxNi42LTE2LjksMzguOC0yNi4zLDYyLjUtMjYuNSwwLDAsMCwwLDAsMGgwYzIzLjctLjIsNDYuMSw4LjgsNjMsMjUuNSwxNi45LDE2LjYsMjYuMywzOC44LDI2LjUsNjIuNi40LDQ4LjktMzksODkuMS04OCw4OS41WiIgZmlsbD0iIzdhZTNmYyIvPjxwb2x5Z29uIHBvaW50cz0iMTg0LjggOTguNyAxNTcuMiA3MS4yIDEyOCAxMDAuNCA5OC43IDcxLjIgNzEuMiA5OC43IDEwMC40IDEyOCAxMDAuNCAxMjggOTEuOCAxMzYuNiA3MS4yIDE1Ny4yIDk4LjcgMTg0LjggMTE3LjEgMTY2LjQgMTE3LjEgMTY2LjQgMTI4IDE1NS42IDE1Ny4yIDE4NC44IDE4NC44IDE1Ny4yIDE1NS42IDEyOCAxODQuOCA5OC43IiBmaWxsPSIjN2FlM2ZjIi8+PC9zdmc+">
+  <link rel="icon" type="image/png" sizes="16x16" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yMTcuNiwzNi45QzE5My4yLDEyLjksMTYxLDAsMTI2LjkuMmgwczAsMCwwLDBjLTM0LjEuMy02Ni4xLDEzLjktOTAsMzguMkMxMi45LDYyLjgsMCw5NS4yLDEyOS4xYy4zLDM0LjEsMTMuOSw2Ni4xLDM4LjIsOTAsMjQuMywyMy45LDU2LjUsMzYuOSw5MC43LDM2LjYsMCwwLDAsMCwwLDAsNzAuNC0uNiwxMjcuMi01OC40LDEyNi42LTEyOC45LS4zLTM0LjEtMTMuOS02Ni4xLTM4LjItOTBaTTEyOC44LDIxNi44czAsMCwwLDBjLTIzLjcuMi00Ni4xLTguOC02My0yNS41LTE2LjktMTYuNi0yNi4zLTM4LjgtMjYuNS02Mi41LS4yLTIzLjcsOC44LTQ2LjEsMjUuNS02MywxNi42LTE2LjksMzguOC0yNi4zLDYyLjUtMjYuNSwwLDAsMCwwLDAsMGgwYzIzLjctLjIsNDYuMSw4LjgsNjMsMjUuNSwxNi45LDE2LjYsMjYuMywzOC44LDI2LjUsNjIuNi40LDQ4LjktMzksODkuMS04OCw4OS41WiIgZmlsbD0iIzdhZTNmYyIvPjxwb2x5Z29uIHBvaW50cz0iMTg0LjggOTguNyAxNTcuMiA3MS4yIDEyOCAxMDAuNCA5OC43IDcxLjIgNzEuMiA5OC43IDEwMC40IDEyOCAxMDAuNCAxMjggOTEuOCAxMzYuNiA3MS4yIDE1Ny4yIDk4LjcgMTg0LjggMTE3LjEgMTY2LjQgMTE3LjEgMTY2LjQgMTI4IDE1NS42IDE1Ny4yIDE4NC44IDE4NC44IDE1Ny4yIDE1NS42IDEyOCAxODQuOCA5OC43IiBmaWxsPSIjN2FlM2ZjIi8+PC9zdmc+">
+  <link rel="apple-touch-icon" sizes="180x180" href="logox.svg">
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Open Graph Meta Tags (for social media sharing) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Xavier Garcia - Creative Developer">
+  <meta property="og:description" content="Creative developer specializing in web development, digital campaigns, UI/UX design, and mobile apps. 15+ years of experience with global brands.">
+  <meta property="og:url" content="https://whoisxavier.com">
+  <meta property="og:site_name" content="Xavier Garcia Portfolio">
+  <meta property="og:image" content="https://whoisxavier.com/logox.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Xavier Garcia Creative Developer Logo">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Xavier Garcia - Creative Developer">
+  <meta name="twitter:description" content="Creative developer specializing in web development, digital campaigns, UI/UX design, and mobile apps. 15+ years of experience with global brands.">
+  <meta name="twitter:image" content="https://whoisxavier.com/logox.svg">
+  <meta name="twitter:image:alt" content="Xavier Garcia Creative Developer Logo">
+  <meta name="twitter:creator" content="@xaviergarcia">
+  <meta name="twitter:site" content="@xaviergarcia">
+  
+  <!-- Additional SEO Meta Tags -->
+  <meta name="theme-color" content="#7ae3fc">
+  <meta name="msapplication-TileColor" content="#1f2121">
+  <meta name="msapplication-config" content="browserconfig.xml">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://whoisxavier.com">
+  
+  <!-- Preconnect to external domains for performance -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Xavier Garcia",
+    "jobTitle": "Creative Developer",
+    "description": "Creative developer specializing in web development, digital campaigns, UI/UX design, and mobile apps",
+    "url": "https://whoisxavier.com",
+    "image": "https://whoisxavier.com/logox.svg",
+    "sameAs": [
+      "https://linkedin.com/in/xaviergarcia",
+      "https://github.com/xaviergarcia",
+      "https://dribbble.com/xaviergarcia"
+    ],
+    "knowsAbout": [
+      "Web Development",
+      "Digital Campaigns",
+      "UI/UX Design",
+      "Mobile App Development",
+      "HTML5 Banners",
+      "GSAP Animations",
+      "React",
+      "Vue.js",
+      "Node.js",
+      "TypeScript"
+    ],
+    "alumniOf": {
+      "@type": "Organization",
+      "name": "gTech"
+    },
+    "workExample": [
+      {
+        "@type": "CreativeWork",
+        "name": "BMW/MINI Global Campaign",
+        "description": "Global assets at scale for BMW and MINI brands"
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "GTECH Data-to-Creative Pipeline",
+        "description": "Advanced data integration for dynamic creative optimization"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css">
+  
+  <!-- GSAP Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
@@ -44,7 +143,7 @@
         <defs>
           <!-- Original glow filter for non-Safari browsers -->
           <filter id="glow" x="-200%" y="-200%" width="400%" height="400%" filterUnits="objectBoundingBox">
-            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feGaussianBlur id="blur-filter" stdDeviation="3" result="blur" />
             <feFlood flood-color="#7ae3fc" flood-opacity="1" result="sharp" />
             <feComposite in="sharp" in2="SourceGraphic" operator="in" result="sharpStroke" />
             <feMerge>
@@ -435,9 +534,9 @@
     </div>
   </div>
   <div id="gtech-case" class="case-study">
-    <!-- Interactive Ad Unit -->
-    <div class="interactive-ad-container">
-      <svg id="ads" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1228.08 976.55">
+    <!-- Interactive Analytics Unit -->
+    <div id="interactive-analytics-container">
+      <svg id="analytics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1228.08 976.55">
         <defs>
           <path id="user-bg"
             d="M857.24,867.75h-486.4c-8.84,0-16-7.16-16-16V124.79c0-8.84,7.16-16,16-16h486.4c8.84,0,16,7.16,16,16v726.96c0,8.84-7.16,16-16,16Z"
@@ -451,10 +550,10 @@
           <rect id="trending-bg" x="355.41" y=".57" width="517.26" height="975.41" rx="23.43" ry="23.43"
             fill="#fbbc04" />
         </defs>
-        <path id="ad-bg"
+        <path id="content-bg"
           d="M857.24,867.75h-486.4c-8.84,0-16-7.16-16-16V124.79c0-8.84,7.16-16,16-16h486.4c8.84,0,16,7.16,16,16v726.96c0,8.84-7.16,16-16,16Z"
           fill="#4285f4" />
-        <g id="user-ad">
+        <g id="user-content">
           <path id="user-product"
             d="M850.57,604.52h-473.06V147.46c0-8.84,7.16-16,16-16h441.06c8.84,0,16,7.16,16,16v457.06Z" fill="#fff" />
           <path id="user-txt"
@@ -462,7 +561,7 @@
             fill="#fff" />
           <rect id="user-cta" x="377.26" y="796.6" width="187.39" height="52.91" rx="26.45" ry="26.45" fill="#fff" />
         </g>
-        <g id="location-ad">
+        <g id="location-content">
           <rect id="location-product" x="22.67" y="252.15" width="472.24" height="472.24" rx="16" ry="16" fill="#fff" />
           <path id="location-txt"
             d="M1156.27,321.49h-569.94s0-45.09,0-45.09h569.94s0,45.09,0,45.09ZM998.08,345.85h-411.74s0,45.09,0,45.09h411.74s0-45.09,0-45.09ZM932.15,415.29h-345.81s0,45.09,0,45.09h345.81s0-45.09,0-45.09Z"
@@ -482,7 +581,7 @@
             points="886.4 529.14 912.82 529.14 891.44 544.67 899.61 569.8 878.23 554.27 856.86 569.8 865.02 544.67 843.65 529.14 870.07 529.14 878.23 504.01 886.4 529.14"
             fill="#fff" />
         </g>
-        <g id="behaviour-ad">
+        <g id="behaviour-content">
           <g id="behaviour-products">
             <rect id="behaviour_product1" class="behaviour-product" x="18.4" y="262.22" width="284.26" height="284.26"
               fill="#fff" />
@@ -518,7 +617,7 @@
               rx="21.39" ry="21.39" fill="#fff" />
           </g>
         </g>
-        <g id="trending-ad">
+        <g id="trending-content">
           <rect id="trending-screen" x="374.18" y="22.66" width="479.72" height="931.22" rx="22" ry="22" fill="#fff" />
           <rect id="trending-product" x="396.69" y="55.64" width="433.69" height="673.86" fill="#fbbc04" />
           <path id="trending-title"
@@ -979,7 +1078,7 @@
               </div>
               <div class="contact-details">
                 <h3>Email</h3>
-                <a href="mailto:hello@whoisxavier.com">hello@xwhoisxavier.com</a>
+                <a href="mailto:hello@whoisxavier.com">hello@whoisxavier.com</a>
               </div>
             </div>
 
@@ -1010,7 +1109,8 @@
         </div>
 
         <div class="contact-form-wrapper">
-          <form class="contact-form" id="contactForm">
+          
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/movkojez" method="POST">
             <div class="form-group">
               <input type="text" id="name" name="name" required>
               <label for="name">Full Name</label>
@@ -1030,6 +1130,13 @@
               <textarea id="message" name="message" rows="5" required></textarea>
               <label for="message">Project Details</label>
             </div>
+
+            <!-- Hidden honeypot field for spam protection -->
+            <input type="text" name="_gotcha" style="display:none !important">
+            
+            <!-- Formspree configuration (hidden fields) -->
+            <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
+            <input type="hidden" name="_replyto" value="">
 
             <button type="submit" class="submit-btn">
               <span>Send Message</span>
@@ -1125,6 +1232,355 @@
         setTimeout(ensureVisibility, 500); // Additional safety check
       }
     })();
+    
+    // Contact Form Functionality
+    class ContactForm {
+      constructor() {
+        this.form = document.getElementById('contactForm');
+        this.submitBtn = this.form.querySelector('.submit-btn');
+        this.submitBtnText = this.submitBtn.querySelector('span');
+        this.submitBtnIcon = this.submitBtn.querySelector('svg');
+        this.isSubmitting = false;
+        
+        this.init();
+      }
+      
+      init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        this.addInputValidation();
+        this.addFloatingLabels();
+      }
+      
+      addInputValidation() {
+        const inputs = this.form.querySelectorAll('input, textarea');
+        
+        inputs.forEach(input => {
+          input.addEventListener('blur', () => this.validateField(input));
+          input.addEventListener('input', () => this.clearFieldError(input));
+        });
+      }
+      
+      addFloatingLabels() {
+        const formGroups = this.form.querySelectorAll('.form-group');
+        
+        formGroups.forEach(group => {
+          const input = group.querySelector('input, textarea');
+          const label = group.querySelector('label');
+          
+          if (input && label) {
+            // Check if input has content on page load
+            this.updateLabelState(input, label);
+            
+            input.addEventListener('focus', () => {
+              label.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', () => {
+              this.updateLabelState(input, label);
+            });
+            
+            input.addEventListener('input', () => {
+              this.updateLabelState(input, label);
+            });
+          }
+        });
+      }
+      
+      updateLabelState(input, label) {
+        if (input.value.trim() !== '' || input === document.activeElement) {
+          label.classList.add('active');
+        } else {
+          label.classList.remove('active', 'focused');
+        }
+      }
+      
+      validateField(field) {
+        const value = field.value.trim();
+        const fieldName = field.name;
+        let isValid = true;
+        let errorMessage = '';
+        
+        // Remove existing error styling
+        this.clearFieldError(field);
+        
+        // Required field validation
+        if (field.hasAttribute('required') && !value) {
+          isValid = false;
+          errorMessage = `${this.getFieldDisplayName(fieldName)} is required`;
+        }
+        
+        // Email validation
+        if (fieldName === 'email' && value) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid email address';
+          }
+        }
+        
+        // Name validation
+        if (fieldName === 'name' && value) {
+          if (value.length < 2) {
+            isValid = false;
+            errorMessage = 'Name must be at least 2 characters long';
+          }
+        }
+        
+        // Message validation
+        if (fieldName === 'message' && value) {
+          if (value.length < 10) {
+            isValid = false;
+            errorMessage = 'Please provide more details (at least 10 characters)';
+          }
+        }
+        
+        if (!isValid) {
+          this.showFieldError(field, errorMessage);
+        }
+        
+        return isValid;
+      }
+      
+      validateForm() {
+        const requiredFields = this.form.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+          if (!this.validateField(field)) {
+            isValid = false;
+          }
+        });
+        
+        return isValid;
+      }
+      
+      showFieldError(field, message) {
+        const formGroup = field.closest('.form-group');
+        formGroup.classList.add('error');
+        
+        // Remove existing error message
+        const existingError = formGroup.querySelector('.error-message');
+        if (existingError) {
+          existingError.remove();
+        }
+        
+        // Add new error message
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        formGroup.appendChild(errorDiv);
+      }
+      
+      clearFieldError(field) {
+        const formGroup = field.closest('.form-group');
+        formGroup.classList.remove('error');
+        
+        const errorMessage = formGroup.querySelector('.error-message');
+        if (errorMessage) {
+          errorMessage.remove();
+        }
+      }
+      
+      getFieldDisplayName(fieldName) {
+        const displayNames = {
+          name: 'Full Name',
+          email: 'Email Address',
+          company: 'Company',
+          message: 'Project Details'
+        };
+        return displayNames[fieldName] || fieldName;
+      }
+      
+      async handleSubmit(e) {
+        e.preventDefault();
+        
+        if (this.isSubmitting) return;
+        
+        // Validate form
+        if (!this.validateForm()) {
+          this.showMessage('Please fix the errors above and try again.', 'error');
+          return;
+        }
+        
+        this.setSubmittingState(true);
+        
+        try {
+          const formData = new FormData(this.form);
+          const data = Object.fromEntries(formData.entries());
+          
+          // For demonstration, we'll simulate a form submission
+          // In production, replace this with your actual form endpoint
+          const success = await this.submitForm(data);
+          
+          if (success) {
+            this.showSuccessState();
+            this.form.reset();
+            this.resetFloatingLabels();
+          } else {
+            throw new Error('Submission failed');
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          this.showMessage('Sorry, there was a problem sending your message. Please try again or contact me directly.', 'error');
+        } finally {
+          this.setSubmittingState(false);
+        }
+      }
+      
+      async submitForm(data) {
+        // Check if form has a real action URL (like Formspree)
+        const formAction = this.form.getAttribute('action');
+        const isExternalService = formAction && !formAction.includes('YOUR_FORM_ID');
+        
+        if (isExternalService) {
+          // Use the external service (like Formspree)
+          try {
+            const response = await fetch(formAction, {
+              method: 'POST',
+              body: new FormData(this.form),
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+            
+            if (response.ok) {
+              return true;
+            } else {
+              const errorData = await response.json();
+              console.error('Form service error:', errorData);
+              return false;
+            }
+          } catch (error) {
+            console.error('Network error:', error);
+            return false;
+          }
+        } else {
+          // Simulate local submission for demo purposes
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              console.log('Form data to submit:', data);
+              
+              // For demonstration purposes, we'll show the data in console
+              // Replace with your preferred form handling method:
+              
+              // Option 1: Formspree.io
+              // 1. Sign up at https://formspree.io
+              // 2. Replace 'YOUR_FORM_ID' in the form action with your actual form ID
+              // 3. The form will automatically work with their service
+              
+              // Option 2: Netlify Forms (if hosted on Netlify)
+              // 1. Add 'data-netlify="true"' attribute to the form
+              // 2. Deploy to Netlify and forms will be handled automatically
+              
+              // Option 3: EmailJS (client-side email service)
+              // 1. Set up EmailJS account and get service/template IDs
+              // 2. Use emailjs.sendForm() method here
+              
+              // Option 4: Your own backend API
+              // 1. Replace this simulation with a fetch() call to your API endpoint
+              // 2. Handle the response appropriately
+              
+              resolve(true); // Simulate successful submission
+            }, 2000); // Simulate network delay
+          });
+        }
+      }
+      
+      setSubmittingState(isSubmitting) {
+        this.isSubmitting = isSubmitting;
+        
+        if (isSubmitting) {
+          this.submitBtn.disabled = true;
+          this.submitBtn.classList.add('submitting');
+          this.submitBtnText.textContent = 'Sending...';
+          this.submitBtnIcon.style.display = 'none';
+          
+          // Add loading spinner
+          const spinner = document.createElement('div');
+          spinner.className = 'submit-spinner';
+          spinner.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="60" stroke-dashoffset="60">
+                <animate attributeName="stroke-dashoffset" dur="2s" values="60;0" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          `;
+          this.submitBtn.appendChild(spinner);
+        } else {
+          this.submitBtn.disabled = false;
+          this.submitBtn.classList.remove('submitting');
+          this.submitBtnText.textContent = 'Send Message';
+          this.submitBtnIcon.style.display = 'block';
+          
+          const spinner = this.submitBtn.querySelector('.submit-spinner');
+          if (spinner) {
+            spinner.remove();
+          }
+        }
+      }
+      
+      showSuccessState() {
+        this.showMessage('Thank you! Your message has been sent successfully. I\'ll get back to you soon.', 'success');
+        
+        // Temporarily change button state
+        setTimeout(() => {
+          this.submitBtnText.textContent = 'Message Sent!';
+          this.submitBtn.classList.add('success');
+          
+          setTimeout(() => {
+            this.submitBtn.classList.remove('success');
+            this.submitBtnText.textContent = 'Send Message';
+          }, 3000);
+        }, 100);
+      }
+      
+      showMessage(text, type = 'info') {
+        // Remove existing messages
+        const existingMessage = this.form.querySelector('.form-message');
+        if (existingMessage) {
+          existingMessage.remove();
+        }
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message ${type}`;
+        messageDiv.textContent = text;
+        
+        this.form.appendChild(messageDiv);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+          messageDiv.remove();
+        }, 5000);
+      }
+      
+      resetFloatingLabels() {
+        const labels = this.form.querySelectorAll('.form-group label');
+        labels.forEach(label => {
+          label.classList.remove('active', 'focused');
+        });
+      }
+    }
+    
+    // Initialize form when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      new ContactForm();
+    });
+    
+    // Apply immediate scroll lock to prevent scrolling before animations start
+    function applyImmediateScrollLock() {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = '0';
+      console.log('Immediate scroll lock applied');
+    }
+    
+    // Apply scroll lock as soon as possible
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyImmediateScrollLock);
+    } else {
+      applyImmediateScrollLock();
+    }
     
     function pageLoaded() {
       init(); // Only initialize the hero animation

@@ -1311,8 +1311,8 @@ body {
     50% { background-position: 100% 50%; }
 }
 
-/* Interactive Ad Unit */
-.interactive-ad-container {
+/* Interactive Analytics Unit */
+#interactive-analytics-container {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1561,7 +1561,7 @@ body {
   box-shadow: 0 8px 32px rgba(251, 188, 4, 0.6);
 }
 
-.interactive-ad-container {
+#interactive-analytics-container {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1574,7 +1574,7 @@ body {
   justify-content: center;
 }
 
-#ads {
+#analytics {
   position: relative;
   container-type: inline-size;
   height: clamp(300px, 60vh, 70vh);
@@ -1617,7 +1617,7 @@ body {
 
 /* Media queries for layout changes */
 @media (max-width: 768px) {
-  #ads {
+  #analytics {
     height: clamp(250px, 50vh, 60vh);
     width: clamp(280px, 85vw, 90vw);
     margin: clamp(1rem, 8vh, 6rem) auto clamp(6rem, 12vh, 10rem);
@@ -1626,7 +1626,7 @@ body {
     overflow: visible;
   }
   
-  .interactive-ad-container {
+  #interactive-analytics-container {
     position: static;
     transform: none;
     margin: 2rem auto;
@@ -1654,7 +1654,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  #ads {
+  #analytics {
     height: clamp(200px, 45vh, 50vh);
     width: clamp(250px, 90vw, 95vw);
     margin: clamp(0.5rem, 6vh, 4rem) auto clamp(4rem, 10vh, 8rem);
@@ -1663,7 +1663,7 @@ body {
     overflow: visible;
   }
   
-  .interactive-ad-container {
+  #interactive-analytics-container {
     position: static;
     transform: none;
     margin: 1rem auto;
@@ -3698,4 +3698,15 @@ body {
     flex-direction: column !important;
     text-align: center;
   }
+}
+
+/* Loading indicator animations */
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes scrollHint {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
+  50% { transform: translateX(-50%) translateY(-5px); opacity: 1; }
 }
