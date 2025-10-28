@@ -195,6 +195,9 @@ body {
     gap: var(--space-32);
     padding: var(--space-24);
     transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Add container context for responsive queries */
+    container-type: inline-size;
+    container-name: case-study;
 }
 
 .hero-container {
@@ -215,12 +218,7 @@ body {
     }
 }
 
-.case-study.case-expanded {
-    height: auto;
-    min-height: 100vh;
-    justify-content: flex-start;
-    padding-bottom: 0;
-}
+/* Removed .case-study.case-expanded styles - using absolute overlay instead */
 
 .hero-container {
     background: var(--color-charcoal-800);
@@ -695,7 +693,7 @@ body {
 }
 
 /* Responsive adjustments for titles */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .case-study-title {
         font-size: clamp(2.5rem, 12vw, 6rem);
         bottom: clamp(3rem, 10vh, 6rem);
@@ -707,26 +705,30 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .case-study-title {
-        font-size: clamp(2rem, 15vw, 4rem);
-        bottom: clamp(5.5rem, 14vh, 7rem); /* Moved up for better spacing */
-        left: clamp(1rem, 4vw, 2rem);
+@media screen and (max-width: 480px) {
+    .case-study .case-study-title,
+    .hero-container .case-study-title {
+        font-size: clamp(2rem, 15vw, 4rem) !important;
+        bottom: clamp(8rem, 20vh, 10rem) !important;
+        left: clamp(1rem, 4vw, 2rem) !important;
     }
     
-    .case-study-subtitle {
-        font-size: clamp(0.8rem, 5vw, 1.5rem);
-        bottom: clamp(3.75rem, 12vh, 5.5rem); /* Moved up to maintain equal spacing */
-        left: clamp(1rem, 4vw, 2rem);
-        margin-top: 0; /* Remove margin-top on mobile to control spacing precisely */
+    .case-study .case-study-subtitle,
+    .hero-container .case-study-subtitle {
+        font-size: clamp(0.8rem, 5vw, 1.5rem) !important;
+        bottom: clamp(6rem, 16vh, 7.5rem) !important;
+        left: clamp(1rem, 4vw, 2rem) !important;
+        margin-top: 0 !important;
     }
 }
 
 /* Case Study CTA Button */
 .case-cta-btn {
     position: absolute;
+    /* Default desktop positioning */
     bottom: clamp(1rem, 4vh, 2rem);
     right: clamp(2rem, 5vw, 4rem);
+    left: auto;
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50px;
@@ -738,12 +740,40 @@ body {
     cursor: pointer;
     backdrop-filter: blur(10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 20;
+    z-index: 60; /* Higher than overlay z-index of 50 */
     display: flex;
     align-items: center;
     gap: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+/* Mobile-first responsive approach with high specificity */
+@media screen and (max-width: 480px) {
+    .case-study .case-cta-btn,
+    .hero-container .case-cta-btn {
+        bottom: clamp(2rem, 8vh, 3rem) !important;
+        left: clamp(1rem, 4vw, 2rem) !important;
+        right: auto !important;
+        width: auto !important;
+        min-width: 120px !important;
+        border-radius: 25px !important;
+        justify-content: flex-start !important;
+        padding: 0.875rem 1.5rem !important;
+        transform: none !important;
+    }
+}
+
+/* Tablet positioning with high specificity */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .case-study .case-cta-btn,
+    .hero-container .case-cta-btn {
+        bottom: clamp(0.5rem, 2vh, 1rem) !important;
+        right: clamp(1rem, 3vw, 2rem) !important;
+        left: auto !important;
+        padding: 0.75rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
 }
 
 .case-cta-btn:hover {
@@ -766,13 +796,13 @@ body {
     transform: rotate(180deg);
 }
 
-.case-cta-btn.expanded .cta-text::after {
-    content: " Less";
-}
-
 /* Expandable Content */
 .case-expanded-content {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     background: linear-gradient(
         to top,
         rgba(0, 0, 0, 0.95) 0%,
@@ -782,23 +812,47 @@ body {
     backdrop-filter: blur(20px);
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 15;
+    z-index: 50;
     padding: 0;
-    height: 0;
     opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
 }
 
 .case-expanded-content.expanded {
-    height: auto;
-    min-height: 50vh;
     opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
     padding: clamp(2rem, 5vw, 4rem);
 }
 
 .expanded-inner {
     color: white;
+    width: 100%;
     height: 100%;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(122, 227, 252, 0.3) transparent; /* Firefox */
+    padding: 0.5rem 0; /* Add some internal padding */
+}
+
+/* Custom scrollbar for webkit browsers */
+.expanded-inner::-webkit-scrollbar {
+    width: 6px;
+}
+
+.expanded-inner::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.expanded-inner::-webkit-scrollbar-thumb {
+    background: rgba(122, 227, 252, 0.3);
+    border-radius: 3px;
+}
+
+.expanded-inner::-webkit-scrollbar-thumb:hover {
+    background: rgba(122, 227, 252, 0.5);
 }
 
 .case-details {
@@ -893,14 +947,7 @@ body {
 }
 
 /* Mobile Adjustments */
-@media (max-width: 768px) {
-    .case-cta-btn {
-        bottom: clamp(0.5rem, 2vh, 1rem);
-        right: clamp(1rem, 3vw, 2rem);
-        padding: 0.75rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
+@media screen and (min-width: 481px) and (max-width: 768px) {
     .case-details {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -908,31 +955,38 @@ body {
     
     .case-expanded-content.expanded {
         padding: 1.5rem;
-        max-height: 70vh;
+    }
+    
+    .expanded-inner {
+        height: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     }
 }
 
-@media (max-width: 480px) {
-    .case-cta-btn {
-        position: absolute;
-        bottom: 1.5rem; /* Bottom element with least space */
-        left: clamp(1rem, 4vw, 2rem); /* Align with title and subtitle */
-        right: auto; /* Remove right positioning */
-        width: auto; /* Allow natural width */
-        min-width: 120px; /* Minimum width for button */
-        border-radius: 25px;
-        justify-content: center;
-        z-index: 20;
-        padding: 0.875rem 1.5rem; /* Touch-friendly padding */
-    }
-    
+@media screen and (max-width: 480px) {
     .case-expanded-content.expanded {
-        max-height: 60vh;
         padding: 1rem;
     }
     
-    .case-study.case-expanded {
-        padding-bottom: 6rem; /* Account for fixed CTA button */
+    .expanded-inner {
+        height: 100%;
+        max-height: 75vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        padding-bottom: 2rem; /* Extra space at bottom for better UX */
+    }
+    
+    /* Ensure case sections don't get cut off */
+    .case-detail-section {
+        margin-bottom: clamp(1rem, 4vw, 1.5rem);
+    }
+    
+    .case-tech-stack {
+        margin-top: clamp(1rem, 4vw, 1.5rem);
+        padding-top: clamp(1rem, 4vw, 1.5rem);
+        margin-bottom: 1rem; /* Ensure bottom spacing */
     }
 }
 

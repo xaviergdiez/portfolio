@@ -37,7 +37,7 @@ function initCaseStudyCTAs() {
         expandedContent.classList.add('expanded');
         
         // Update button text
-        this.querySelector('.cta-text').textContent = 'Show';
+        this.querySelector('.cta-text').textContent = 'Show Less';
         
         // Add expanded state to case study
         caseStudy.classList.add('case-expanded');
