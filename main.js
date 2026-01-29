@@ -153,26 +153,6 @@ function init() {
    // Lock scrolling initially with comprehensive approach
    lockScroll();
    
-   // Add loading indicator
-   const loadingIndicator = document.createElement('div');
-   loadingIndicator.id = 'scroll-loading-indicator';
-   loadingIndicator.style.cssText = `
-     position: fixed;
-     bottom: 20px;
-     left: 50%;
-     transform: translateX(-50%);
-     color: rgba(255, 255, 255, 0.8);
-     font-size: 12px;
-     font-family: var(--font-family-mono, monospace);
-     z-index: 1001;
-     background: rgba(0, 0, 0, 0.7);
-     padding: 8px 16px;
-     border-radius: 20px;
-     backdrop-filter: blur(10px);
-     animation: pulse 2s ease-in-out infinite;
-   `;
-   loadingIndicator.textContent = '⏳ Loading experience...';
-   document.body.appendChild(loadingIndicator);
    
    // Avatar positioning - Use GSAP-only approach for all browsers (cohesive positioning)
    const avatarContainer = document.querySelector('.avatar-container');
@@ -262,9 +242,9 @@ function init() {
       animateSkillLevels();
     }, null, 'sparks+=0.5')
     .call(() => {
-      // Animation complete - enable scrolling after banners are loaded
-      console.log('Main animation complete - waiting for banners to load...');
-      // CTA buttons will be initialized by DOMContentLoaded event listener
+      // Animation complete - enable scrolling immediately
+      console.log('Main animation complete - enabling scrolling');
+      enableScrolling();
     }, null, 'sparks+=2')
 
 //Mouse cooridinates positioning and implementation
@@ -441,27 +421,19 @@ function updateWindowSize() {
       gsap.to('.skills-footer', { duration: 0.5, autoAlpha: 1, ease: 'power2.out', delay: skillLevels.length * 0.1 + 0.5, repeat: -1, yoyo: true })
     });
     
-    // Initialize masonry grid after hero animation completes
-    setTimeout(() => {
-      loadMasonryGrid();
-      
-      // Initialize GTECH animation
-      initGtechAnimation();
-      addGtechBackgroundParticles();
-      
-      // Initialize FBTO animation
-      initFbtoAnimation();
-      
-      // Initialize HUAWEI animation
-      initHuaweiAnimation();
-    }, 2500); // Reduced from 3000 to 2500 to start loading earlier
+    // Initialize masonry grid immediately
+    loadMasonryGrid();
+
+    // Initialize case study animations (ScrollTrigger-based, lazy by design)
+    initGtechAnimation();
+    addGtechBackgroundParticles();
+    initFbtoAnimation();
+    initHuaweiAnimation();
   }
   
 } // End of init() function
 
 // Masonry Grid for Case Study Banners
-let iframeReloadInterval = null;
-let isCaseStudyVisible = false;
 
 async function loadMasonryGrid() {
   try {
@@ -507,19 +479,9 @@ async function loadMasonryGrid() {
       requestAnimationFrame(() => {
         masonryGrid.classList.add('loaded');
         
-        // Load actual iframes after grid is visible
-        loadIframesProgressively(sortedBanners);
-        
-        // Fallback: Enable scrolling after maximum wait time (10 seconds)
-        setTimeout(() => {
-          if (document.body.style.overflow === 'hidden') {
-            console.log('Fallback: Enabling scrolling after timeout');
-            enableScrolling();
-          }
-        }, 10000);
-        
-        // Setup iframe reloading and viewport detection
-        setupIframeReloading();
+        // Lazy-load iframes as they enter the viewport
+        loadIframesLazily(sortedBanners);
+
         setupViewportObserver();
       });
     });
@@ -701,91 +663,51 @@ function createBannerElementWithPlaceholder(banner, index) {
   return bannerItem;
 }
 
-function loadIframesProgressively(banners) {
-  let loadedCount = 0;
-  const totalBanners = banners.length;
-  
-  // Load iframes with staggered timing to avoid overwhelming the browser
-  banners.forEach((banner, index) => {
-    setTimeout(() => {
-      const bannerItem = document.querySelector(`[data-banner-index="${index}"]`);
-      if (bannerItem) {
+function loadIframesLazily(banners) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bannerItem = entry.target;
+        const index = parseInt(bannerItem.dataset.bannerIndex);
+        const banner = banners[index];
+        if (!banner) return;
+
         const placeholder = bannerItem.querySelector('.banner-placeholder');
-        
+
         const iframe = document.createElement('iframe');
         iframe.src = banner.path;
+        iframe.loading = 'lazy';
         iframe.style.border = 'none';
         iframe.style.borderRadius = '4px';
         iframe.style.width = '100%';
         iframe.style.height = '100%';
         iframe.style.display = 'block';
-        
+
         iframe.onload = () => {
           if (placeholder && placeholder.parentNode) {
             placeholder.parentNode.removeChild(placeholder);
           }
-          
-          loadedCount++;
-          console.log(`Banner ${loadedCount}/${totalBanners} loaded`);
-          
-          // Enable scrolling when all banners are loaded
-          if (loadedCount === totalBanners) {
-            setTimeout(() => {
-              enableScrolling();
-            }, 500); // Small delay to ensure everything is settled
-          }
+          console.log(`Banner ${index} loaded`);
         };
-        
-        // Handle iframe load errors
-        iframe.onerror = () => {
-          loadedCount++;
-          console.log(`Banner ${loadedCount}/${totalBanners} failed to load`);
-          
-          if (loadedCount === totalBanners) {
-            setTimeout(() => {
-              enableScrolling();
-            }, 500);
-          }
-        };
-        
-        bannerItem.appendChild(iframe);
-      }
-    }, index * 20); // Stagger by 20ms
-  });
-}
 
-// Helper functions for iframe reloading and viewport detection
-function setupIframeReloading() {
-  if (iframeReloadInterval) {
-    clearInterval(iframeReloadInterval);
-  }
-  
-  iframeReloadInterval = setInterval(() => {
-    if (isCaseStudyVisible) {
-      reloadAllIframes();
-    }
-  }, 20000);
+        bannerItem.appendChild(iframe);
+        observer.unobserve(bannerItem);
+      }
+    });
+  }, { rootMargin: '200px' });
+
+  document.querySelectorAll('.banner-item').forEach(item => {
+    observer.observe(item);
+  });
 }
 
 function setupViewportObserver() {
-  // Note: Removed .case-study ScrollTrigger - only tracking for iframe reloading
-  // The GTECH section has its own ScrollTrigger with timeline completion logic
-}
-
-function reloadAllIframes() {
-  const iframes = document.querySelectorAll('#masonry-grid iframe');
-  iframes.forEach(iframe => {
-    const currentSrc = iframe.src;
-    iframe.src = '';
-    setTimeout(() => {
-      iframe.src = currentSrc;
-    }, 50);
-  });
+  // No-op: viewport detection handled by IntersectionObserver in loadIframesLazily
 }
 
 // Function to enable scrolling once everything is ready
 function enableScrolling() {
-  console.log('All banners loaded - enabling scrolling');
+  console.log('Hero animation complete - enabling scrolling');
   
   // Remove event listeners
   document.removeEventListener('wheel', preventDefault, {passive: false});
@@ -798,12 +720,6 @@ function enableScrolling() {
   document.body.style.removeProperty('top');
   document.body.style.removeProperty('width');
   window.scrollTo(0, scrollPosition);
-  
-  // Remove loading indicator
-  const loadingIndicator = document.getElementById('scroll-loading-indicator');
-  if (loadingIndicator) {
-    loadingIndicator.remove();
-  }
   
   // Add a subtle visual indicator that scrolling is now available
   const scrollIndicator = document.createElement('div');
