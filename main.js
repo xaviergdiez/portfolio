@@ -682,14 +682,12 @@ function loadIframesLazily(banners) {
     iframe.style.display = 'block';
     iframe.style.overflow = 'hidden';
 
-    iframe.onload = () => {
-      if (placeholder && placeholder.parentNode) {
-        placeholder.parentNode.removeChild(placeholder);
-      }
-      console.log(`Banner ${index} loaded`);
-    };
-
     bannerItem.appendChild(iframe);
+
+    // Remove placeholder immediately — iframe content will paint over it
+    if (placeholder) {
+      placeholder.remove();
+    }
   });
 }
 
