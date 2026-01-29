@@ -618,6 +618,7 @@ function createBannerElementWithPlaceholder(banner, index) {
   const bannerItem = document.createElement('div');
   bannerItem.className = 'banner-item';
   bannerItem.style.position = 'absolute';
+  bannerItem.style.overflow = 'hidden';
   bannerItem.dataset.bannerIndex = index;
   bannerItem.dataset.bannerPath = banner.path;
   
@@ -664,40 +665,31 @@ function createBannerElementWithPlaceholder(banner, index) {
 }
 
 function loadIframesLazily(banners) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bannerItem = entry.target;
-        const index = parseInt(bannerItem.dataset.bannerIndex);
-        const banner = banners[index];
-        if (!banner) return;
+  banners.forEach((banner, index) => {
+    const bannerItem = document.querySelector(`[data-banner-index="${index}"]`);
+    if (!bannerItem) return;
 
-        const placeholder = bannerItem.querySelector('.banner-placeholder');
+    const placeholder = bannerItem.querySelector('.banner-placeholder');
 
-        const iframe = document.createElement('iframe');
-        iframe.src = banner.path;
-        iframe.loading = 'lazy';
-        iframe.style.border = 'none';
-        iframe.style.borderRadius = '4px';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.display = 'block';
+    const iframe = document.createElement('iframe');
+    iframe.src = banner.path;
+    iframe.loading = 'lazy';
+    iframe.scrolling = 'no';
+    iframe.style.border = 'none';
+    iframe.style.borderRadius = '4px';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.display = 'block';
+    iframe.style.overflow = 'hidden';
 
-        iframe.onload = () => {
-          if (placeholder && placeholder.parentNode) {
-            placeholder.parentNode.removeChild(placeholder);
-          }
-          console.log(`Banner ${index} loaded`);
-        };
-
-        bannerItem.appendChild(iframe);
-        observer.unobserve(bannerItem);
+    iframe.onload = () => {
+      if (placeholder && placeholder.parentNode) {
+        placeholder.parentNode.removeChild(placeholder);
       }
-    });
-  }, { rootMargin: '200px' });
+      console.log(`Banner ${index} loaded`);
+    };
 
-  document.querySelectorAll('.banner-item').forEach(item => {
-    observer.observe(item);
+    bannerItem.appendChild(iframe);
   });
 }
 
